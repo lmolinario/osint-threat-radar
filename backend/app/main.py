@@ -158,3 +158,70 @@ async def startup_event():
 
     # avvia scheduler
     asyncio.create_task(_rss_scheduler())
+
+
+
+
+
+from datetime import datetime, timezone
+from typing import List, Dict
+
+from sgp4.api import Satrec, jday
+
+from app.collectors.celestrak_satellites import TLECache
+
+tle_cache = TLECache(ttl_seconds=900)  # 15 minuti
+
+
+def eci_to_geodetic_simple(x_km: float, y_km: float, z_km: float):
+    """
+    Conversione ECI->lat/lon approssimata (MVP).
+    """
+    import math
+    r = math.sqrt(x_km * x_km + y_km * y_km + z_km * z_km)
+    lat = math.degrees(math.asin(z_km / r))
+    lon = math.degrees(math.atan2(y_km, x_km))
+    alt = r - 6371.0
+    return lat, lon, alt
+
+
+
+@app.get("/satellites")
+def satellites(
+    group: str = Query("stations"),
+    lamin: float | None = Query(default=None),
+    lamax: float | None = Query(default=None),
+    lomin: float | None = Query(default=None),
+    lomax: float | None = Query(default=None),
+) -> Dict:
+    tles = tle_cache.get(group=group)
+
+    now = datetime.now(timezone.utc)
+    jd, fr = jday(
+        now.year, now.month, now.day,
+        now.hour, now.minute,
+        now.second + now.microsecond / 1e6
+    )
+
+    items: List[Dict] = []
+    for t in tles:
+        sat = Satrec.twoline2rv(t["line1"], t["line2"])
+        e, r, _v = sat.sgp4(jd, fr)
+        if e != 0 or r is None:
+            continue
+
+        lat, lon, alt_km = eci_to_geodetic_simple(r[0], r[1], r[2])
+
+        # filtro bbox (viewport)
+        if None not in (lamin, lamax, lomin, lomax):
+            if not (lamin <= lat <= lamax and lomin <= lon <= lomax):
+                continue
+
+        items.append({"name": t["name"], "lat": lat, "lon": lon, "alt_km": alt_km})
+
+    return {
+        "generated_at": now_iso(),
+        "group": group,
+        "count": len(items),
+        "items": items,
+    }

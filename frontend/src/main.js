@@ -144,8 +144,78 @@ async function loadEvents() {
   }
 }
 
+const satellitesToggle = document.getElementById("satellitesToggle");
+const satellitesLayer = L.layerGroup().addTo(map);
+let satellitesTimer = null;
+
+function clearSatellites() {
+  satellitesLayer.clearLayers();
+}
+
+function addSatelliteMarker(s) {
+  const m = L.circleMarker([s.lat, s.lon], {
+    radius: 5,
+    weight: 1,
+    fillOpacity: 0.7,
+  }).bindPopup(
+    `<b>${esc(s.name)}</b><br/>Lat: ${s.lat.toFixed(3)}<br/>Lon: ${s.lon.toFixed(
+      3
+    )}<br/>Alt: ${Number(s.alt_km).toFixed(1)} km`
+  );
+
+  m.addTo(satellitesLayer);
+}
+
+async function refreshSatellites() {
+  try {
+    satellitesLayer.clearLayers();
+
+    const b = map.getBounds();
+    const lamin = b.getSouth();
+    const lamax = b.getNorth();
+    const lomin = b.getWest();
+    const lomax = b.getEast();
+
+    const url = `/api/satellites?group=stations&lamin=${lamin}&lamax=${lamax}&lomin=${lomin}&lomax=${lomax}`;
+
+    const r = await fetch(url, { cache: "no-store" });
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    const data = await r.json();
+
+    for (const s of data.items || []) addSatelliteMarker(s);
+
+    setStatus(`Satelliti (viewport): ${data.count}`);
+  } catch (e) {
+    console.error(e);
+    setStatus(`Satelliti: errore (${e.message})`);
+  }
+}
 
 
+function startSatellites(intervalMs = 30000) {
+  stopSatellites();
+  refreshSatellites();
+  satellitesTimer = setInterval(refreshSatellites, intervalMs);
+}
+
+function stopSatellites() {
+  if (satellitesTimer) {
+    clearInterval(satellitesTimer);
+    satellitesTimer = null;
+  }
+  clearSatellites();
+}
+
+satellitesToggle?.addEventListener("change", async (e) => {
+  if (e.target.checked) {
+    await refreshSatellites();
+    satellitesTimer = setInterval(refreshSatellites, 30000);
+  } else {
+    if (satellitesTimer) clearInterval(satellitesTimer);
+    satellitesTimer = null;
+    satellitesLayer.clearLayers();
+  }
+});
 
 
 refreshBtn.addEventListener("click", loadEvents);
@@ -172,6 +242,7 @@ aircraftToggle.addEventListener("change", async () => {
 
 map.on("moveend", () => {
   if (aircraftToggle.checked) loadAircraft();
+  if (satellitesToggle?.checked) refreshSatellites();
 });
 
 
