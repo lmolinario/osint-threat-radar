@@ -18,7 +18,7 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 const markersLayer = L.layerGroup().addTo(map);
 const aircraftLayer = L.layerGroup().addTo(map);
 let aircraftTimer = null;
-
+let didAutoFitEvents = false;
 
 function setStatus(msg) {
   statusEl.textContent = msg;
@@ -139,14 +139,20 @@ async function loadEvents() {
     }
   }
 
-  if (bounds.length > 0) {
-    map.fitBounds(bounds, { padding: [30, 30] });
-  }
+    if (!didAutoFitEvents && bounds.length > 0) {
+      didAutoFitEvents = true;
+      map.fitBounds(bounds, { padding: [30, 30] });
+    }
 }
 
 const satellitesToggle = document.getElementById("satellitesToggle");
 const satellitesLayer = L.layerGroup().addTo(map);
 let satellitesTimer = null;
+const satGroupEl = document.getElementById("satGroup");
+
+satGroupEl?.addEventListener("change", () => {
+  if (satellitesToggle?.checked) refreshSatellites();
+});
 
 function clearSatellites() {
   satellitesLayer.clearLayers();
@@ -158,9 +164,12 @@ function addSatelliteMarker(s) {
     weight: 1,
     fillOpacity: 0.7,
   }).bindPopup(
-    `<b>${esc(s.name)}</b><br/>Lat: ${s.lat.toFixed(3)}<br/>Lon: ${s.lon.toFixed(
-      3
-    )}<br/>Alt: ${Number(s.alt_km).toFixed(1)} km`
+    `<b>${esc(s.name)}</b><br/>
+    NORAD: ${esc(String(s.norad_id ?? ""))}<br/>
+    Lat: ${s.lat.toFixed(3)}<br/>
+    Lon: ${s.lon.toFixed(3)}<br/>
+    Alt: ${Number(s.alt_km).toFixed(1)} km<br/>
+    Vel: ${Number(s.speed_kms).toFixed(2)} km/s`
   );
 
   m.addTo(satellitesLayer);
@@ -170,13 +179,14 @@ async function refreshSatellites() {
   try {
     satellitesLayer.clearLayers();
 
+    const group = satGroupEl?.value || "stations";
     const b = map.getBounds();
     const lamin = b.getSouth();
     const lamax = b.getNorth();
     const lomin = b.getWest();
     const lomax = b.getEast();
 
-    const url = `/api/satellites?group=stations&lamin=${lamin}&lamax=${lamax}&lomin=${lomin}&lomax=${lomax}`;
+    const url = `/api/satellites?group=${encodeURIComponent(group)}&lamin=${lamin}&lamax=${lamax}&lomin=${lomin}&lomax=${lomax}`;
 
     const r = await fetch(url, { cache: "no-store" });
     if (!r.ok) throw new Error(`HTTP ${r.status}`);
@@ -206,15 +216,9 @@ function stopSatellites() {
   clearSatellites();
 }
 
-satellitesToggle?.addEventListener("change", async (e) => {
-  if (e.target.checked) {
-    await refreshSatellites();
-    satellitesTimer = setInterval(refreshSatellites, 30000);
-  } else {
-    if (satellitesTimer) clearInterval(satellitesTimer);
-    satellitesTimer = null;
-    satellitesLayer.clearLayers();
-  }
+satellitesToggle?.addEventListener("change", (e) => {
+  if (e.target.checked) startSatellites(30000);
+  else stopSatellites();
 });
 
 

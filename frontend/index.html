@@ -51,11 +51,17 @@
             <input type="checkbox" id="shipsToggle" />
             Navi (AIS)
           </label>
-
           <label style="display:flex; gap:.5rem; align-items:center;">
             <input type="checkbox" id="satellitesToggle" />
             Satelliti
           </label>
+
+          <select id="satGroup">
+            <option value="stations">stations (ISS ecc.)</option>
+            <option value="active">active (tutti)</option>
+            <option value="starlink">starlink</option>
+            <option value="gps-ops">GPS</option>
+          </select>
 
           <label style="display:flex; gap:8px; align-items:center;">
             <input type="checkbox" id="milToggle" />

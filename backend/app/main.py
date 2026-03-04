@@ -206,18 +206,29 @@ def satellites(
     items: List[Dict] = []
     for t in tles:
         sat = Satrec.twoline2rv(t["line1"], t["line2"])
-        e, r, _v = sat.sgp4(jd, fr)
+        e, r, v = sat.sgp4(jd, fr)
         if e != 0 or r is None:
             continue
 
         lat, lon, alt_km = eci_to_geodetic_simple(r[0], r[1], r[2])
+
+
 
         # filtro bbox (viewport)
         if None not in (lamin, lamax, lomin, lomax):
             if not (lamin <= lat <= lamax and lomin <= lon <= lomax):
                 continue
 
-        items.append({"name": t["name"], "lat": lat, "lon": lon, "alt_km": alt_km})
+        speed_kms = (v[0] ** 2 + v[1] ** 2 + v[2] ** 2) ** 0.5
+
+        items.append({
+            "name": t["name"],
+            "norad_id": sat.satnum,
+            "lat": lat,
+            "lon": lon,
+            "alt_km": alt_km,
+            "speed_kms": speed_kms
+        })
 
     return {
         "generated_at": now_iso(),
