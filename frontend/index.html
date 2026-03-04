@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OSINT Threat Radar</title>
+
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+    <style>
+      html, body { height: 100%; margin: 0; }
+      #app { height: 100%; display: grid; grid-template-columns: 360px 1fr; }
+      #sidebar { border-right: 1px solid #ddd; padding: 10px; overflow: auto; font-family: system-ui, sans-serif; }
+      #map { height: 100%; }
+      .event { padding: 8px; border: 1px solid #eee; border-radius: 8px; margin-bottom: 8px; }
+      .event h4 { margin: 0 0 6px 0; font-size: 14px; }
+      .event small { color: #666; }
+      .controls { display: grid; gap: 8px; margin-bottom: 10px; }
+      input, select { padding: 8px; border: 1px solid #ccc; border-radius: 8px; }
+      @media (max-width: 900px) { #app { grid-template-columns: 1fr; grid-template-rows: 320px 1fr; } #sidebar { border-right: none; border-top: 1px solid #ddd; } }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div id="sidebar">
+        <h3 style="margin: 6px 0 10px 0;">OSINT Threat Radar</h3>
+
+        <div class="controls">
+          <input id="q" placeholder="Cerca (testo)..." />
+          <select id="type">
+            <option value="">Tutti i tipi</option>
+            <option value="news">news</option>
+          </select>
+          <select id="source">
+            <option value="">Tutte le fonti</option>
+            <option value="rss">rss</option>
+          </select>
+        </div>
+
+        <div style="display:flex; gap:8px; margin-bottom:10px;">
+          <button id="refresh" style="padding:8px 10px; border-radius:8px; border:1px solid #ccc; background:#fff; cursor:pointer;">
+            Aggiorna
+          </button>
+          <small id="status" style="align-self:center; color:#666;"></small>
+        </div>
+
+        <div id="events"></div>
+      </div>
+
+      <div id="map"></div>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
+  </body>
+</html>
