@@ -1,21 +1,24 @@
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
-/* global L */
 const statusEl = document.getElementById("status");
 const eventsEl = document.getElementById("events");
 const qEl = document.getElementById("q");
 const typeEl = document.getElementById("type");
 const sourceEl = document.getElementById("source");
 const refreshBtn = document.getElementById("refresh");
+const aircraftToggle = document.getElementById("aircraftToggle");
 
-const map = L.map("map").setView([41.9, 12.5], 5); // Italia
+const map = L.map("map").setView([41.9, 12.5], 5);
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   maxZoom: 18,
   attribution: "&copy; OpenStreetMap contributors",
 }).addTo(map);
 
 const markersLayer = L.layerGroup().addTo(map);
+const aircraftLayer = L.layerGroup().addTo(map);
+let aircraftTimer = null;
+
 
 function setStatus(msg) {
   statusEl.textContent = msg;
@@ -39,6 +42,57 @@ function buildQuery() {
   params.set("limit", "200");
   return params.toString();
 }
+
+
+async function loadAircraft() {
+  aircraftLayer.clearLayers();
+
+  const b = map.getBounds();
+  const lamin = b.getSouth();
+  const lamax = b.getNorth();
+  const lomin = b.getWest();
+  const lomax = b.getEast();
+
+  const url = `/api/aircraft?lamin=${lamin}&lamax=${lamax}&lomin=${lomin}&lomax=${lomax}`;
+
+  const res = await fetch(url);
+  if (!res.ok) return;
+
+  const data = await res.json();
+  const features = data.features || [];
+
+  for (const f of features) {
+      if (!f.geometry || f.geometry.type !== "Point") continue;
+
+      const [lon, lat] = f.geometry.coordinates;
+      const p = f.properties || {};
+
+      const callsign = (p.callsign || "").trim() || f.id;
+      const alt = p.geo_altitude != null ? Math.round(p.geo_altitude) : "n/a";
+      const spd = p.velocity != null ? Math.round(p.velocity) : "n/a";
+      const trk = p.track != null ? Number(p.track) : 0;
+
+      const icon = L.divIcon({
+        className: "aircraft-icon",
+        html: `<div style="
+          transform: rotate(${trk}deg);
+          transform-origin: center;
+          font-size: 16px;
+          line-height: 16px;
+          ">✈</div>`,
+        iconSize: [16, 16],
+        iconAnchor: [8, 8],
+      });
+
+      const m = L.marker([lat, lon], { icon });
+      m.bindPopup(
+        `<b>${callsign}</b><br/>Alt: ${alt} m<br/>Vel: ${spd} m/s<br/>Track: ${Math.round(trk)}°<br/>${p.country || ""}`
+      );
+      m.addTo(aircraftLayer);
+    }
+}
+
+
 
 async function loadEvents() {
   setStatus("Caricamento...");
@@ -90,8 +144,36 @@ async function loadEvents() {
   }
 }
 
+
+
+
+
 refreshBtn.addEventListener("click", loadEvents);
 [qEl, typeEl, sourceEl].forEach((el) => el.addEventListener("change", loadEvents));
+
+aircraftToggle.addEventListener("change", async () => {
+
+  if (aircraftToggle.checked) {
+
+    await loadAircraft();
+
+    aircraftTimer = setInterval(loadAircraft, 10000);
+
+  } else {
+
+    if (aircraftTimer) clearInterval(aircraftTimer);
+
+    aircraftTimer = null;
+
+    aircraftLayer.clearLayers();
+  }
+
+});
+
+map.on("moveend", () => {
+  if (aircraftToggle.checked) loadAircraft();
+});
+
 
 loadEvents();
 setInterval(loadEvents, 60_000);

@@ -31,15 +31,41 @@
 
         <div class="controls">
           <input id="q" placeholder="Cerca (testo)..." />
+
           <select id="type">
             <option value="">Tutti i tipi</option>
             <option value="news">news</option>
           </select>
+
           <select id="source">
             <option value="">Tutte le fonti</option>
             <option value="rss">rss</option>
           </select>
+
+          <label style="display:flex; gap:8px; align-items:center; margin-top:6px;">
+            <input type="checkbox" id="aircraftToggle" />
+            Aerei live (OpenSky)
+          </label>
+
+          <label style="display:flex; gap:8px; align-items:center;">
+            <input type="checkbox" id="shipsToggle" />
+            Navi (AIS)
+          </label>
+
+          <label style="display:flex; gap:8px; align-items:center;">
+            <input type="checkbox" id="satToggle" />
+            Satelliti
+          </label>
+
+          <label style="display:flex; gap:8px; align-items:center;">
+            <input type="checkbox" id="milToggle" />
+            Eventi militari
+          </label>
+
         </div>
+
+
+
 
         <div style="display:flex; gap:8px; margin-bottom:10px;">
           <button id="refresh" style="padding:8px 10px; border-radius:8px; border:1px solid #ccc; background:#fff; cursor:pointer;">
