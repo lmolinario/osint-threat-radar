@@ -7,23 +7,20 @@ import httpx
 
 OPENSKY_URL = "https://opensky-network.org/api/states/all"
 
-# bbox default Europa (fallback)
-EU_BBOX: Tuple[float, float, float, float] = (34.0, 72.0, -12.0, 35.0)  # (lat_min, lat_max, lon_min, lon_max)
+EU_BBOX: Tuple[float, float, float, float] = (34.0, 72.0, -12.0, 35.0)   # Europa
+IT_BBOX: Tuple[float, float, float, float] = (35.0, 48.0, 6.0, 19.0)     # Italia (default consigliato)
 
-# cache per bbox_key -> {"ts": float, "data": dict}
 _CACHE: Dict[str, Dict[str, Any]] = {}
 CACHE_TTL_SECONDS = 10
 
-# timeout (più aggressivo sul connect, più permissivo sul read)
-OPENSKY_TIMEOUT = httpx.Timeout(connect=5.0, read=12.0, write=5.0, pool=5.0)
+OPENSKY_TIMEOUT = httpx.Timeout(connect=6.0, read=20.0, write=6.0, pool=6.0)
 OPENSKY_HEADERS = {"User-Agent": "osint-threat-radar/1.0"}
 
-# Client riusabile (meno handshake => meno timeout)
 _CLIENT = httpx.Client(
     timeout=OPENSKY_TIMEOUT,
     headers=OPENSKY_HEADERS,
     follow_redirects=True,
-    trust_env=True,   # IMPORTANT: su alcuni hosting serve usare proxy env. Mettilo True.
+    trust_env=True,
 )
 
 
@@ -41,7 +38,7 @@ def _empty(error: str) -> Dict[str, Any]:
 
 
 def fetch_aircraft(bbox: Optional[Tuple[float, float, float, float]] = None) -> Dict[str, Any]:
-    bbox = bbox or EU_BBOX
+    bbox = bbox or IT_BBOX
     key = _bbox_key(bbox)
 
     hit = _CACHE.get(key)
@@ -51,8 +48,7 @@ def fetch_aircraft(bbox: Optional[Tuple[float, float, float, float]] = None) -> 
     lat_min, lat_max, lon_min, lon_max = bbox
     params = {"lamin": lat_min, "lamax": lat_max, "lomin": lon_min, "lomax": lon_max}
 
-    # retry con backoff (utile per 429/5xx/timeout)
-    delays = [0.0, 0.8, 1.6]  # 3 tentativi
+    delays = [0.0, 0.8, 1.6]  # retry con backoff
     last_err: Optional[str] = None
 
     for d in delays:
@@ -75,15 +71,14 @@ def fetch_aircraft(bbox: Optional[Tuple[float, float, float, float]] = None) -> 
 
                 data.setdefault("time", None)
                 data.setdefault("states", [])
+
                 _CACHE[key] = {"ts": _now(), "data": data}
                 return data
 
-            # Rate limit / server busy: retry
             if r.status_code in (429, 502, 503, 504):
                 last_err = f"opensky_http_{r.status_code}"
                 continue
 
-            # altri errori: niente retry aggressivo
             last_err = f"opensky_http_{r.status_code}"
             break
 
@@ -94,7 +89,6 @@ def fetch_aircraft(bbox: Optional[Tuple[float, float, float, float]] = None) -> 
             last_err = f"opensky_http_error_{type(e).__name__}"
             continue
 
-    # fallback: stale se disponibile
     if hit:
         stale = dict(hit["data"])
         stale["error"] = f"{last_err}_stale" if last_err else "opensky_error_stale"
