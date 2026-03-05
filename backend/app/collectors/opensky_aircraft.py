@@ -43,22 +43,23 @@ import httpx
 OPENSKY_TIMEOUT = httpx.Timeout(connect=8.0, read=12.0, write=8.0, pool=8.0)
 OPENSKY_HEADERS = {"User-Agent": "osint-threat-radar/1.0"}
 
-def fetch_aircraft(bbox=None):
+def fetch_aircraft(bbox: Optional[Tuple[float, float, float, float]] = None) -> Dict[str, Any]:
     bbox = bbox or EU_BBOX
     key = _bbox_key(bbox)
 
     hit = _CACHE.get(key)
-    if hit and (_now() - hit["ts"]) < CACHE_TTL_SECONDS:
+    fresh = hit and (_now() - hit["ts"]) < CACHE_TTL_SECONDS
+    if fresh:
         return hit["data"]
 
     lat_min, lat_max, lon_min, lon_max = bbox
     params = {"lamin": lat_min, "lamax": lat_max, "lomin": lon_min, "lomax": lon_max}
 
-    def _request():
+    def _request() -> httpx.Response:
         with httpx.Client(
             timeout=OPENSKY_TIMEOUT,
             headers=OPENSKY_HEADERS,
-            trust_env=False,   # evita proxy env “strani”
+            trust_env=False,
         ) as client:
             return client.get(OPENSKY_URL, params=params)
 
@@ -66,29 +67,40 @@ def fetch_aircraft(bbox=None):
         try:
             r = _request()
         except httpx.TimeoutException:
-            _t.sleep(0.4)
+            time.sleep(0.5)
             r = _request()
 
         if r.status_code != 200:
+            # se ho cache (anche scaduta), preferisco mostrare dati vecchi
+            if hit:
+                stale = dict(hit["data"])
+                stale["error"] = f"opensky_http_{r.status_code}_stale"
+                return stale
             return _empty(f"opensky_http_{r.status_code}")
 
         try:
             data = r.json()
         except ValueError:
+            if hit:
+                stale = dict(hit["data"])
+                stale["error"] = "opensky_invalid_json_stale"
+                return stale
             return _empty("opensky_invalid_json")
 
         if not isinstance(data, dict):
+            if hit:
+                stale = dict(hit["data"])
+                stale["error"] = "opensky_bad_payload_stale"
+                return stale
             return _empty("opensky_bad_payload")
 
         data.setdefault("time", None)
         data.setdefault("states", [])
 
-        # Cache solo su success
         _CACHE[key] = {"ts": _now(), "data": data}
         return data
 
     except httpx.TimeoutException:
-        # stale cache fallback
         if hit:
             stale = dict(hit["data"])
             stale["error"] = "opensky_timeout_stale"
