@@ -141,6 +141,7 @@ def aircraft(
         "generated_at": now_iso(),
         "opensky_time": ts,
         "count": len(features),
+        "error": raw.get("error"),          # <-- QUESTA è la differenza
         "features": features,
     }
 
