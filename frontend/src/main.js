@@ -159,11 +159,14 @@ function clearSatellites() {
 }
 
 function addSatelliteMarker(s) {
-  const m = L.circleMarker([s.lat, s.lon], {
-    radius: 5,
-    weight: 1,
-    fillOpacity: 0.7,
-  }).bindPopup(
+  const icon = L.divIcon({
+  className: "sat-icon",
+  html: "🛰️",
+  iconSize: [20,20],
+  iconAnchor: [10,10]
+  });
+
+  const m = L.marker([s.lat, s.lon], { icon }).bindPopup(
     `<b>${esc(s.name)}</b><br/>
     NORAD: ${esc(String(s.norad_id ?? ""))}<br/>
     Lat: ${s.lat.toFixed(3)}<br/>
