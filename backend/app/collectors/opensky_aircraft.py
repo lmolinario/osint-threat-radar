@@ -37,14 +37,13 @@ def _empty(error: str) -> Dict[str, Any]:
     # Payload “safe”: compatibile con OpenSky (time/states)
     return {"time": None, "states": [], "error": error}
 
+import time as _t
+import httpx
 
-def fetch_aircraft(bbox: Optional[Tuple[float, float, float, float]] = None) -> Dict[str, Any]:
-    """
-    Fetch aircraft states from OpenSky, optionally filtered by bbox:
-      bbox = (lat_min, lat_max, lon_min, lon_max)
+OPENSKY_TIMEOUT = httpx.Timeout(connect=8.0, read=12.0, write=8.0, pool=8.0)
+OPENSKY_HEADERS = {"User-Agent": "osint-threat-radar/1.0"}
 
-    Cached per-bbox for CACHE_TTL_SECONDS (solo su success).
-    """
+def fetch_aircraft(bbox=None):
     bbox = bbox or EU_BBOX
     key = _bbox_key(bbox)
 
@@ -53,18 +52,22 @@ def fetch_aircraft(bbox: Optional[Tuple[float, float, float, float]] = None) -> 
         return hit["data"]
 
     lat_min, lat_max, lon_min, lon_max = bbox
+    params = {"lamin": lat_min, "lamax": lat_max, "lomin": lon_min, "lomax": lon_max}
 
-    # OpenSky expects lamin/lamax/lomin/lomax
-    params = {
-        "lamin": lat_min,
-        "lamax": lat_max,
-        "lomin": lon_min,
-        "lomax": lon_max,
-    }
+    def _request():
+        with httpx.Client(
+            timeout=OPENSKY_TIMEOUT,
+            headers=OPENSKY_HEADERS,
+            trust_env=False,   # evita proxy env “strani”
+        ) as client:
+            return client.get(OPENSKY_URL, params=params)
 
     try:
-        with httpx.Client(timeout=OPENSKY_TIMEOUT, headers=OPENSKY_HEADERS) as client:
-            r = client.get(OPENSKY_URL, params=params)
+        try:
+            r = _request()
+        except httpx.TimeoutException:
+            _t.sleep(0.4)
+            r = _request()
 
         if r.status_code != 200:
             return _empty(f"opensky_http_{r.status_code}")
@@ -77,18 +80,24 @@ def fetch_aircraft(bbox: Optional[Tuple[float, float, float, float]] = None) -> 
         if not isinstance(data, dict):
             return _empty("opensky_bad_payload")
 
-        # Normalizza campi minimi
         data.setdefault("time", None)
         data.setdefault("states", [])
 
-        # Cache SOLO su risposta valida (evita cache di timeout/errori)
+        # Cache solo su success
         _CACHE[key] = {"ts": _now(), "data": data}
         return data
 
     except httpx.TimeoutException:
+        # stale cache fallback
+        if hit:
+            stale = dict(hit["data"])
+            stale["error"] = "opensky_timeout_stale"
+            return stale
         return _empty("opensky_timeout")
+
     except httpx.HTTPError as e:
+        if hit:
+            stale = dict(hit["data"])
+            stale["error"] = f"opensky_http_error_{type(e).__name__}_stale"
+            return stale
         return _empty(f"opensky_http_error_{type(e).__name__}")
-    except Exception:
-        # ultima rete di sicurezza: mai 500 per collector
-        return _empty("opensky_unexpected_error")
