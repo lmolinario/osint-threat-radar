@@ -1,97 +1,100 @@
-from __future__ import annotations
-
+import os
 import time
-from typing import Any, Dict, Optional, Tuple
+from typing import Any, Dict, Optional, Tuple, List
 
-import httpx
+from opensky_api import OpenSkyApi
 
-OPENSKY_URL = "https://opensky-network.org/api/states/all"
-
-EU_BBOX: Tuple[float, float, float, float] = (34.0, 72.0, -12.0, 35.0)   # Europa
-IT_BBOX: Tuple[float, float, float, float] = (35.0, 48.0, 6.0, 19.0)     # Italia (default consigliato)
+IT_BBOX: Tuple[float, float, float, float] = (35.0, 48.0, 6.0, 19.0)
 
 _CACHE: Dict[str, Dict[str, Any]] = {}
-CACHE_TTL_SECONDS = 10
+TTL = 10
 
-OPENSKY_TIMEOUT = httpx.Timeout(connect=6.0, read=20.0, write=6.0, pool=6.0)
-OPENSKY_HEADERS = {"User-Agent": "osint-threat-radar/1.0"}
 
-_CLIENT = httpx.Client(
-    timeout=OPENSKY_TIMEOUT,
-    headers=OPENSKY_HEADERS,
-    follow_redirects=True,
-    trust_env=True,
-)
+def _bbox_key(b: Tuple[float, float, float, float]) -> str:
+    return f"{b[0]:.2f},{b[1]:.2f},{b[2]:.2f},{b[3]:.2f}"
 
 
 def _now() -> float:
     return time.time()
 
 
-def _bbox_key(bbox: Tuple[float, float, float, float]) -> str:
-    la1, la2, lo1, lo2 = bbox
-    return f"{la1:.2f},{la2:.2f},{lo1:.2f},{lo2:.2f}"
-
-
 def _empty(error: str) -> Dict[str, Any]:
-    return {"time": None, "states": [], "error": error}
+    return {
+        "type": "FeatureCollection",
+        "generated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+        "opensky_time": None,
+        "count": 0,
+        "error": error,
+        "features": [],
+    }
 
 
-def fetch_aircraft(bbox: Optional[Tuple[float, float, float, float]] = None) -> Dict[str, Any]:
+def fetch_aircraft_geojson(bbox: Optional[Tuple[float, float, float, float]] = None) -> Dict[str, Any]:
     bbox = bbox or IT_BBOX
     key = _bbox_key(bbox)
 
     hit = _CACHE.get(key)
-    if hit and (_now() - hit["ts"]) < CACHE_TTL_SECONDS:
+    if hit and (_now() - hit["ts"]) < TTL:
         return hit["data"]
 
-    lat_min, lat_max, lon_min, lon_max = bbox
-    params = {"lamin": lat_min, "lamax": lat_max, "lomin": lon_min, "lomax": lon_max}
+    user = os.getenv("OPENSKY_USERNAME")
+    pwd = os.getenv("OPENSKY_PASSWORD")
 
-    delays = [0.0, 0.8, 1.6]  # retry con backoff
-    last_err: Optional[str] = None
+    api = OpenSkyApi(user, pwd) if (user and pwd) else OpenSkyApi()
 
-    for d in delays:
-        if d:
-            time.sleep(d)
+    try:
+        # bbox = (min_lat, max_lat, min_lon, max_lon)
+        states = api.get_states(bbox=bbox)
+        if not states or not states.states:
+            data = _empty("opensky_no_states")
+            _CACHE[key] = {"ts": _now(), "data": data}
+            return data
 
-        try:
-            r = _CLIENT.get(OPENSKY_URL, params=params)
-
-            if r.status_code == 200:
-                try:
-                    data = r.json()
-                except ValueError:
-                    last_err = "opensky_invalid_json"
-                    continue
-
-                if not isinstance(data, dict):
-                    last_err = "opensky_bad_payload"
-                    continue
-
-                data.setdefault("time", None)
-                data.setdefault("states", [])
-
-                _CACHE[key] = {"ts": _now(), "data": data}
-                return data
-
-            if r.status_code in (429, 502, 503, 504):
-                last_err = f"opensky_http_{r.status_code}"
+        features: List[Dict[str, Any]] = []
+        for s in states.states:
+            # s.latitude / s.longitude possono essere None
+            if s.latitude is None or s.longitude is None:
                 continue
 
-            last_err = f"opensky_http_{r.status_code}"
-            break
+            props = {
+                "icao24": s.icao24,
+                "callsign": (s.callsign or "").strip() or None,
+                "origin_country": s.origin_country,
+                "on_ground": s.on_ground,
+                "velocity": s.velocity,
+                "true_track": s.true_track,
+                "baro_altitude": s.baro_altitude,
+                "geo_altitude": s.geo_altitude,
+                "vertical_rate": s.vertical_rate,
+                "squawk": s.squawk,
+                "position_source": s.position_source,
+                "last_contact": s.last_contact,
+                "time_position": s.time_position,
+                "category": getattr(s, "category", None),
+            }
 
-        except httpx.TimeoutException:
-            last_err = "opensky_timeout"
-            continue
-        except httpx.HTTPError as e:
-            last_err = f"opensky_http_error_{type(e).__name__}"
-            continue
+            features.append({
+                "type": "Feature",
+                "geometry": {"type": "Point", "coordinates": [s.longitude, s.latitude]},
+                "properties": props,
+            })
 
-    if hit:
-        stale = dict(hit["data"])
-        stale["error"] = f"{last_err}_stale" if last_err else "opensky_error_stale"
-        return stale
+        data = {
+            "type": "FeatureCollection",
+            "generated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+            "opensky_time": getattr(states, "time", None),
+            "count": len(features),
+            "error": None,
+            "features": features,
+        }
 
-    return _empty(last_err or "opensky_error")
+        _CACHE[key] = {"ts": _now(), "data": data}
+        return data
+
+    except Exception as e:
+        # fallback su stale se esiste
+        if hit:
+            stale = dict(hit["data"])
+            stale["error"] = f"opensky_error_{type(e).__name__}_stale"
+            return stale
+        return _empty(f"opensky_error_{type(e).__name__}")
