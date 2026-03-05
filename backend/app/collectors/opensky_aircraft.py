@@ -16,6 +16,12 @@ CACHE_TTL_SECONDS = 10
 # Bbox default Europa (fallback)
 EU_BBOX = (34.0, 72.0, -12.0, 35.0)  # (lat_min, lat_max, lon_min, lon_max)
 
+# Timeout esplicito (evita hang e 500 su Render/proxy)
+OPENSKY_TIMEOUT = httpx.Timeout(connect=8.0, read=12.0, write=8.0, pool=8.0)
+
+# Header UA “pulito” (alcuni edge/proxy apprezzano)
+OPENSKY_HEADERS = {"User-Agent": "osint-threat-radar/1.0"}
+
 
 def _now() -> float:
     return time.time()
@@ -27,12 +33,17 @@ def _bbox_key(bbox: Tuple[float, float, float, float]) -> str:
     return f"{la1:.2f},{la2:.2f},{lo1:.2f},{lo2:.2f}"
 
 
+def _empty(error: str) -> Dict[str, Any]:
+    # Payload “safe”: compatibile con OpenSky (time/states)
+    return {"time": None, "states": [], "error": error}
+
+
 def fetch_aircraft(bbox: Optional[Tuple[float, float, float, float]] = None) -> Dict[str, Any]:
     """
     Fetch aircraft states from OpenSky, optionally filtered by bbox:
       bbox = (lat_min, lat_max, lon_min, lon_max)
 
-    Cached per-bbox for CACHE_TTL_SECONDS.
+    Cached per-bbox for CACHE_TTL_SECONDS (solo su success).
     """
     bbox = bbox or EU_BBOX
     key = _bbox_key(bbox)
@@ -51,10 +62,33 @@ def fetch_aircraft(bbox: Optional[Tuple[float, float, float, float]] = None) -> 
         "lomax": lon_max,
     }
 
-    with httpx.Client(timeout=15.0) as client:
-        r = client.get(OPENSKY_URL, params=params)
-        r.raise_for_status()
-        data = r.json()
+    try:
+        with httpx.Client(timeout=OPENSKY_TIMEOUT, headers=OPENSKY_HEADERS) as client:
+            r = client.get(OPENSKY_URL, params=params)
 
-    _CACHE[key] = {"ts": _now(), "data": data}
-    return data
+        if r.status_code != 200:
+            return _empty(f"opensky_http_{r.status_code}")
+
+        try:
+            data = r.json()
+        except ValueError:
+            return _empty("opensky_invalid_json")
+
+        if not isinstance(data, dict):
+            return _empty("opensky_bad_payload")
+
+        # Normalizza campi minimi
+        data.setdefault("time", None)
+        data.setdefault("states", [])
+
+        # Cache SOLO su risposta valida (evita cache di timeout/errori)
+        _CACHE[key] = {"ts": _now(), "data": data}
+        return data
+
+    except httpx.TimeoutException:
+        return _empty("opensky_timeout")
+    except httpx.HTTPError as e:
+        return _empty(f"opensky_http_error_{type(e).__name__}")
+    except Exception:
+        # ultima rete di sicurezza: mai 500 per collector
+        return _empty("opensky_unexpected_error")
