@@ -1,6 +1,14 @@
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
+
+const API_BASE = "https://osint-threat-radar.onrender.com";
+
+function api(path) {
+  return `${API_BASE}${path}`;
+}
+
+
 const statusEl = document.getElementById("status");
 const eventsEl = document.getElementById("events");
 const qEl = document.getElementById("q");
@@ -53,8 +61,7 @@ async function loadAircraft() {
   const lomin = b.getWest();
   const lomax = b.getEast();
 
-  const url = `/api/aircraft?lamin=${lamin}&lamax=${lamax}&lomin=${lomin}&lomax=${lomax}`;
-
+  const url = api(`/aircraft?lamin=${lamin}&lamax=${lamax}&lomin=${lomin}&lomax=${lomax}`);
   const res = await fetch(url);
   if (!res.ok) return;
 
@@ -100,9 +107,10 @@ async function loadEvents() {
   eventsEl.innerHTML = "";
 
   const qs = buildQuery();
-  const url = `/api/events${qs ? `?${qs}` : ""}`;
-
+  const url = api(`/events${qs ? `?${qs}` : ""}`);
   const res = await fetch(url);
+
+
   if (!res.ok) {
     setStatus(`Errore HTTP ${res.status}`);
     return;
@@ -189,9 +197,9 @@ async function refreshSatellites() {
     const lomin = b.getWest();
     const lomax = b.getEast();
 
-    const url = `/api/satellites?group=${encodeURIComponent(group)}&lamin=${lamin}&lamax=${lamax}&lomin=${lomin}&lomax=${lomax}`;
-
+    const url = api(`/satellites?group=${encodeURIComponent(group)}&lamin=${lamin}&lamax=${lamax}&lomin=${lomin}&lomax=${lomax}`);
     const r = await fetch(url, { cache: "no-store" });
+
     if (!r.ok) throw new Error(`HTTP ${r.status}`);
     const data = await r.json();
 
