@@ -16,11 +16,19 @@ from app.services.store import STORE, now_iso
 
 app = FastAPI(title="OSINT Threat Radar")
 
+
+
 from fastapi.middleware.cors import CORSMiddleware
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://127.0.0.1:5173", "http://localhost:5173"],
+    allow_origins=[
+        "http://127.0.0.1:5173",
+        "http://localhost:5173",
+        "https://dfaas.it",
+        "https://www.dfaas.it",
+        "https://osint-threat-radar.onrender.com",
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
