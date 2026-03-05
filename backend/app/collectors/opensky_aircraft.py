@@ -29,7 +29,7 @@ def _empty(error: str) -> Dict[str, Any]:
     }
 
 
-def fetch_aircraft_geojson(bbox: Optional[Tuple[float, float, float, float]] = None) -> Dict[str, Any]:
+def fetch_aircraft(bbox: Optional[Tuple[float, float, float, float]] = None) -> Dict[str, Any]:
     bbox = bbox or IT_BBOX
     key = _bbox_key(bbox)
 
