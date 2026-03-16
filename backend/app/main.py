@@ -27,6 +27,7 @@ app.add_middleware(
         "http://localhost:5173",
         "https://dfaas.it",
         "https://www.dfaas.it",
+        "https://lmolinario.github.io",
         "https://osint-threat-radar.onrender.com",
     ],
     allow_credentials=True,
