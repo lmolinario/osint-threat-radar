@@ -1,5 +1,6 @@
 import os
 import time
+import threading
 from typing import Any, Dict, Optional, Tuple, List
 
 from opensky_api import OpenSkyApi
@@ -7,7 +8,10 @@ from opensky_api import OpenSkyApi
 IT_BBOX: Tuple[float, float, float, float] = (35.0, 48.0, 6.0, 19.0)
 
 _CACHE: Dict[str, Dict[str, Any]] = {}
-TTL = 10
+_CACHE_LOCK = threading.Lock()
+
+TTL_OK = 10
+TTL_ERROR = 5
 
 
 def _bbox_key(b: Tuple[float, float, float, float]) -> str:
@@ -18,23 +22,48 @@ def _now() -> float:
     return time.time()
 
 
-def _empty(error: str) -> Dict[str, Any]:
+def _iso_now() -> str:
+    return time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+
+
+def _empty(error: str, stale: bool = False) -> Dict[str, Any]:
     return {
         "type": "FeatureCollection",
-        "generated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+        "generated_at": _iso_now(),
         "opensky_time": None,
         "count": 0,
         "error": error,
+        "stale": stale,
         "features": [],
     }
 
 
-def fetch_aircraft(bbox: Optional[Tuple[float, float, float, float]] = None) -> Dict[str, Any]:
+def _get_cache(key: str) -> Optional[Dict[str, Any]]:
+    with _CACHE_LOCK:
+        return _CACHE.get(key)
+
+
+def _set_cache(key: str, data: Dict[str, Any], ttl: int) -> None:
+    with _CACHE_LOCK:
+        _CACHE[key] = {
+            "ts": _now(),
+            "ttl": ttl,
+            "data": data,
+        }
+
+
+def _is_cache_valid(hit: Dict[str, Any]) -> bool:
+    return (_now() - hit["ts"]) < hit["ttl"]
+
+
+def fetch_aircraft(
+    bbox: Optional[Tuple[float, float, float, float]] = None,
+) -> Dict[str, Any]:
     bbox = bbox or IT_BBOX
     key = _bbox_key(bbox)
 
-    hit = _CACHE.get(key)
-    if hit and (_now() - hit["ts"]) < TTL:
+    hit = _get_cache(key)
+    if hit and _is_cache_valid(hit):
         return hit["data"]
 
     user = os.getenv("OPENSKY_USERNAME")
@@ -43,16 +72,16 @@ def fetch_aircraft(bbox: Optional[Tuple[float, float, float, float]] = None) -> 
     api = OpenSkyApi(user, pwd) if (user and pwd) else OpenSkyApi()
 
     try:
-        # bbox = (min_lat, max_lat, min_lon, max_lon)
         states = api.get_states(bbox=bbox)
+
         if not states or not states.states:
             data = _empty("opensky_no_states")
-            _CACHE[key] = {"ts": _now(), "data": data}
+            _set_cache(key, data, TTL_ERROR)
             return data
 
         features: List[Dict[str, Any]] = []
+
         for s in states.states:
-            # s.latitude / s.longitude possono essere None
             if s.latitude is None or s.longitude is None:
                 continue
 
@@ -75,26 +104,34 @@ def fetch_aircraft(bbox: Optional[Tuple[float, float, float, float]] = None) -> 
 
             features.append({
                 "type": "Feature",
-                "geometry": {"type": "Point", "coordinates": [s.longitude, s.latitude]},
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [s.longitude, s.latitude],
+                },
                 "properties": props,
             })
 
         data = {
             "type": "FeatureCollection",
-            "generated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+            "generated_at": _iso_now(),
             "opensky_time": getattr(states, "time", None),
             "count": len(features),
             "error": None,
+            "stale": False,
             "features": features,
         }
 
-        _CACHE[key] = {"ts": _now(), "data": data}
+        _set_cache(key, data, TTL_OK)
         return data
 
     except Exception as e:
-        # fallback su stale se esiste
         if hit:
             stale = dict(hit["data"])
+            stale["generated_at"] = _iso_now()
             stale["error"] = f"opensky_error_{type(e).__name__}_stale"
+            stale["stale"] = True
             return stale
-        return _empty(f"opensky_error_{type(e).__name__}")
+
+        data = _empty(f"opensky_error_{type(e).__name__}")
+        _set_cache(key, data, TTL_ERROR)
+        return data
