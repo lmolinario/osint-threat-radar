@@ -5,6 +5,8 @@ from typing import Any, Dict, Optional, Tuple, List
 
 import httpx
 
+from app.collectors.static_provider_cache import fetch_cached_aircraft_italy
+
 # (min_lat, max_lat, min_lon, max_lon)
 IT_BBOX: Tuple[float, float, float, float] = (35.0, 48.0, 6.0, 19.0)
 
@@ -73,6 +75,10 @@ def _is_cache_valid(hit: Dict[str, Any]) -> bool:
     return (_now() - hit["ts"]) < hit["ttl"]
 
 
+def _is_default_italy_bbox(bbox: Tuple[float, float, float, float]) -> bool:
+    return all(abs(a - b) < 0.0001 for a, b in zip(bbox, IT_BBOX))
+
+
 def _get_oauth_token() -> Optional[str]:
     client_id = os.getenv("OPENSKY_CLIENT_ID")
     client_secret = os.getenv("OPENSKY_CLIENT_SECRET")
@@ -120,9 +126,7 @@ def _build_headers() -> Dict[str, str]:
 
 
 def _state_to_feature(row: List[Any]) -> Optional[Dict[str, Any]]:
-    """
-    Map the OpenSky state-vector array to a GeoJSON Feature.
-    """
+    """Map the OpenSky state-vector array to a GeoJSON Feature."""
     if not isinstance(row, list) or len(row) < 17:
         return None
 
@@ -250,6 +254,12 @@ def fetch_aircraft(
             stale["stale"] = True
             _set_cache(key, stale, TTL_ERROR)
             return stale
+
+        if _is_default_italy_bbox(bbox):
+            fallback = fetch_cached_aircraft_italy()
+            if fallback:
+                _set_cache(key, fallback, TTL_ERROR)
+                return fallback
 
         data = _empty(f"opensky_error_{type(e).__name__}")
         _set_cache(key, data, TTL_ERROR)
