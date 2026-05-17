@@ -1,0 +1,71 @@
+name: Update provider cache
+
+on:
+  schedule:
+    # GitHub Actions supports a minimum scheduled cadence of about 5 minutes.
+    # Actual execution can be delayed depending on GitHub load.
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: provider-cache
+  cancel-in-progress: true
+
+jobs:
+  update-provider-cache:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install lightweight dependencies
+        run: python -m pip install --upgrade requests
+
+      - name: Fetch provider data
+        run: |
+          python scripts/update_provider_cache.py \
+            --out /tmp/provider-cache \
+            --timeout 20
+
+      - name: Publish cache branch
+        run: |
+          set -euo pipefail
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git fetch origin provider-cache || true
+
+          if git show-ref --verify --quiet refs/remotes/origin/provider-cache; then
+            git checkout provider-cache
+            git reset --hard origin/provider-cache
+          else
+            git checkout --orphan provider-cache
+            git rm -rf . || true
+          fi
+
+          find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
+          cp -R /tmp/provider-cache/. .
+          touch .nojekyll
+
+          git add .
+
+          if git diff --cached --quiet; then
+            echo "No provider cache changes to commit."
+            exit 0
+          fi
+
+          git commit -m "Update provider cache"
+          git push origin provider-cache
