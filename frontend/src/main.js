@@ -1,13 +1,11 @@
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
-
 const API_BASE = "https://osint-threat-radar.onrender.com";
 
 function api(path) {
   return `${API_BASE}${path}`;
 }
-
 
 const statusEl = document.getElementById("status");
 const eventsEl = document.getElementById("events");
@@ -16,6 +14,7 @@ const typeEl = document.getElementById("type");
 const sourceEl = document.getElementById("source");
 const refreshBtn = document.getElementById("refresh");
 const aircraftToggle = document.getElementById("aircraftToggle");
+const earthIntelBtn = document.getElementById("earthIntelBtn");
 
 const map = L.map("map").setView([41.9, 12.5], 5);
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -34,7 +33,11 @@ function setStatus(msg) {
 
 function esc(s) {
   return (s ?? "").replace(/[&<>"']/g, (c) => ({
-    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;",
   }[c]));
 }
 
@@ -51,6 +54,29 @@ function buildQuery() {
   return params.toString();
 }
 
+function eventIcon(type, severity = 20) {
+  const glyphByType = {
+    earthquake: "●",
+    flood: "≈",
+    wildfire: "▲",
+    cyclone: "◎",
+    volcano: "◆",
+    drought: "□",
+    severe_weather: "✦",
+    disaster: "■",
+    news: "•",
+  };
+
+  const size = severity >= 75 ? 18 : severity >= 55 ? 15 : 12;
+  const glyph = glyphByType[type] || "•";
+
+  return L.divIcon({
+    className: "event-icon",
+    html: `<div style="font-size:${size}px; line-height:${size}px; filter: drop-shadow(0 1px 2px rgba(0,0,0,.45));">${glyph}</div>`,
+    iconSize: [size, size],
+    iconAnchor: [size / 2, size / 2],
+  });
+}
 
 async function loadAircraft() {
   aircraftLayer.clearLayers();
@@ -69,37 +95,35 @@ async function loadAircraft() {
   const features = data.features || [];
 
   for (const f of features) {
-      if (!f.geometry || f.geometry.type !== "Point") continue;
+    if (!f.geometry || f.geometry.type !== "Point") continue;
 
-      const [lon, lat] = f.geometry.coordinates;
-      const p = f.properties || {};
+    const [lon, lat] = f.geometry.coordinates;
+    const p = f.properties || {};
 
-      const callsign = (p.callsign || "").trim() || f.id;
-      const alt = p.geo_altitude != null ? Math.round(p.geo_altitude) : "n/a";
-      const spd = p.velocity != null ? Math.round(p.velocity) : "n/a";
-      const trk = p.track != null ? Number(p.track) : 0;
+    const callsign = (p.callsign || "").trim() || f.id;
+    const alt = p.geo_altitude != null ? Math.round(p.geo_altitude) : "n/a";
+    const spd = p.velocity != null ? Math.round(p.velocity) : "n/a";
+    const trk = p.track != null ? Number(p.track) : 0;
 
-      const icon = L.divIcon({
-        className: "aircraft-icon",
-        html: `<div style="
-          transform: rotate(${trk}deg);
-          transform-origin: center;
-          font-size: 16px;
-          line-height: 16px;
-          ">✈</div>`,
-        iconSize: [16, 16],
-        iconAnchor: [8, 8],
-      });
+    const icon = L.divIcon({
+      className: "aircraft-icon",
+      html: `<div style="
+        transform: rotate(${trk}deg);
+        transform-origin: center;
+        font-size: 16px;
+        line-height: 16px;
+        ">✈</div>`,
+      iconSize: [16, 16],
+      iconAnchor: [8, 8],
+    });
 
-      const m = L.marker([lat, lon], { icon });
-      m.bindPopup(
-        `<b>${callsign}</b><br/>Alt: ${alt} m<br/>Vel: ${spd} m/s<br/>Track: ${Math.round(trk)}°<br/>${p.country || ""}`
-      );
-      m.addTo(aircraftLayer);
-    }
+    const m = L.marker([lat, lon], { icon });
+    m.bindPopup(
+      `<b>${esc(callsign)}</b><br/>Alt: ${alt} m<br/>Vel: ${spd} m/s<br/>Track: ${Math.round(trk)}°<br/>${esc(p.country || "")}`
+    );
+    m.addTo(aircraftLayer);
+  }
 }
-
-
 
 async function loadEvents() {
   setStatus("Caricamento...");
@@ -110,14 +134,13 @@ async function loadEvents() {
   const url = api(`/events${qs ? `?${qs}` : ""}`);
   const res = await fetch(url);
 
-
   if (!res.ok) {
     setStatus(`Errore HTTP ${res.status}`);
     return;
   }
+
   const data = await res.json();
   const features = data.features || [];
-
   setStatus(`Eventi: ${features.length}`);
 
   const bounds = [];
@@ -127,30 +150,49 @@ async function loadEvents() {
     const title = p.title || "(no title)";
     const ts = p.ts || "";
     const url = p.url || "";
+    const summary = p.summary || "";
+    const severity = Number(p.severity || 20);
 
-    // Sidebar card
     const div = document.createElement("div");
     div.className = "event";
     div.innerHTML = `
       <h4>${esc(title)}</h4>
-      <small>${esc(p.source)} • ${esc(p.type)} • ${esc(ts)}</small>
+      <small>${esc(p.source)} • ${esc(p.type)} • severity ${severity} • ${esc(ts)}</small>
+      ${summary ? `<div class="summary">${esc(summary).slice(0, 260)}</div>` : ""}
       ${url ? `<div style="margin-top:6px;"><a href="${esc(url)}" target="_blank" rel="noreferrer">Apri fonte</a></div>` : ""}
     `;
     eventsEl.appendChild(div);
 
-    // Map marker (solo se c'è geometry)
     if (f.geometry && f.geometry.type === "Point") {
       const [lon, lat] = f.geometry.coordinates;
-      const m = L.marker([lat, lon]).addTo(markersLayer);
-      m.bindPopup(`<b>${esc(title)}</b><br/><small>${esc(ts)}</small>`);
+      const m = L.marker([lat, lon], { icon: eventIcon(p.type, severity) }).addTo(markersLayer);
+      m.bindPopup(
+        `<b>${esc(title)}</b><br/><small>${esc(p.source)} • ${esc(p.type)} • severity ${severity}</small><br/><small>${esc(ts)}</small>`
+      );
       bounds.push([lat, lon]);
     }
   }
 
-    if (!didAutoFitEvents && bounds.length > 0) {
-      didAutoFitEvents = true;
-      map.fitBounds(bounds, { padding: [30, 30] });
-    }
+  if (!didAutoFitEvents && bounds.length > 0) {
+    didAutoFitEvents = true;
+    map.fitBounds(bounds, { padding: [30, 30] });
+  }
+}
+
+async function showEarthIntel() {
+  setStatus("Aggiornamento Earth/Disaster Intelligence...");
+
+  try {
+    await fetch(api("/refresh/earth-intel"), { method: "POST", cache: "no-store" });
+  } catch (e) {
+    console.warn("Earth intel manual refresh failed, showing cached events", e);
+  }
+
+  sourceEl.value = "";
+  typeEl.value = "";
+  qEl.value = "";
+  didAutoFitEvents = false;
+  await loadEvents();
 }
 
 const satellitesToggle = document.getElementById("satellitesToggle");
@@ -168,10 +210,10 @@ function clearSatellites() {
 
 function addSatelliteMarker(s) {
   const icon = L.divIcon({
-  className: "sat-icon",
-  html: "🛰️",
-  iconSize: [20,20],
-  iconAnchor: [10,10]
+    className: "sat-icon",
+    html: "🛰️",
+    iconSize: [20, 20],
+    iconAnchor: [10, 10],
   });
 
   const m = L.marker([s.lat, s.lon], { icon }).bindPopup(
@@ -212,7 +254,6 @@ async function refreshSatellites() {
   }
 }
 
-
 function startSatellites(intervalMs = 30000) {
   stopSatellites();
   refreshSatellites();
@@ -232,34 +273,25 @@ satellitesToggle?.addEventListener("change", (e) => {
   else stopSatellites();
 });
 
-
 refreshBtn.addEventListener("click", loadEvents);
+earthIntelBtn?.addEventListener("click", showEarthIntel);
 [qEl, typeEl, sourceEl].forEach((el) => el.addEventListener("change", loadEvents));
 
 aircraftToggle.addEventListener("change", async () => {
-
   if (aircraftToggle.checked) {
-
     await loadAircraft();
-
     aircraftTimer = setInterval(loadAircraft, 10000);
-
   } else {
-
     if (aircraftTimer) clearInterval(aircraftTimer);
-
     aircraftTimer = null;
-
     aircraftLayer.clearLayers();
   }
-
 });
 
 map.on("moveend", () => {
   if (aircraftToggle.checked) loadAircraft();
   if (satellitesToggle?.checked) refreshSatellites();
 });
-
 
 loadEvents();
 setInterval(loadEvents, 60_000);
