@@ -113,52 +113,66 @@ def aircraft(
 ):
     """
     Live aircraft layer from OpenSky, optionally filtered by viewport bbox.
+
+    The OpenSky collector already returns normalized GeoJSON features. This
+    endpoint adapts property names for the frontend while preserving collector
+    metadata such as errors, stale responses and rate-limit hints.
     """
     bbox = None
     if None not in (lamin, lamax, lomin, lomax):
         bbox = (lamin, lamax, lomin, lomax)
 
     raw = fetch_aircraft(bbox=bbox)
-    states = raw.get("states") or []
-    ts = raw.get("time")
+    raw_features = raw.get("features") or []
 
     features = []
-    for state in states:
-        icao24 = state[0]
-        callsign = (state[1] or "").strip() if len(state) > 1 else ""
-        country = state[2] if len(state) > 2 else ""
-        lon = state[5] if len(state) > 5 else None
-        lat = state[6] if len(state) > 6 else None
-        on_ground = state[8] if len(state) > 8 else None
-        velocity = state[9] if len(state) > 9 else None
-        track = state[10] if len(state) > 10 else None
-        geo_alt = state[13] if len(state) > 13 else None
+    for feature in raw_features:
+        geometry = feature.get("geometry") or {}
+        properties = feature.get("properties") or {}
+        coordinates = geometry.get("coordinates") or []
 
-        if lat is None or lon is None:
+        if geometry.get("type") != "Point" or len(coordinates) < 2:
             continue
+
+        icao24 = properties.get("icao24") or feature.get("id")
+        callsign = (properties.get("callsign") or "").strip() if properties.get("callsign") else ""
 
         features.append(
             {
                 "type": "Feature",
                 "id": icao24,
-                "geometry": {"type": "Point", "coordinates": [lon, lat]},
+                "geometry": geometry,
                 "properties": {
+                    "icao24": icao24,
                     "callsign": callsign,
-                    "country": country,
-                    "on_ground": on_ground,
-                    "velocity": velocity,
-                    "track": track,
-                    "geo_altitude": geo_alt,
+                    "country": properties.get("origin_country"),
+                    "origin_country": properties.get("origin_country"),
+                    "time_position": properties.get("time_position"),
+                    "last_contact": properties.get("last_contact"),
+                    "baro_altitude": properties.get("baro_altitude"),
+                    "on_ground": properties.get("on_ground"),
+                    "velocity": properties.get("velocity"),
+                    "track": properties.get("true_track"),
+                    "true_track": properties.get("true_track"),
+                    "vertical_rate": properties.get("vertical_rate"),
+                    "geo_altitude": properties.get("geo_altitude"),
+                    "squawk": properties.get("squawk"),
+                    "spi": properties.get("spi"),
+                    "position_source": properties.get("position_source"),
+                    "category": properties.get("category"),
                 },
             }
         )
 
     return {
         "type": "FeatureCollection",
-        "generated_at": now_iso(),
-        "opensky_time": ts,
+        "generated_at": raw.get("generated_at") or now_iso(),
+        "opensky_time": raw.get("opensky_time"),
         "count": len(features),
         "error": raw.get("error"),
+        "stale": raw.get("stale"),
+        "rate_limit_remaining": raw.get("rate_limit_remaining"),
+        "retry_after_seconds": raw.get("retry_after_seconds"),
         "features": features,
     }
 
@@ -221,6 +235,7 @@ def satellites(
     lamax: float | None = Query(default=None),
     lomin: float | None = Query(default=None),
     lomax: float | None = Query(default=None),
+    limit: int = Query(default=1500, ge=1, le=20000),
 ) -> Dict:
     tles = tle_cache.get(group=group)
 
@@ -235,6 +250,7 @@ def satellites(
     )
 
     items: List[Dict] = []
+    total_visible = 0
     for tle in tles:
         sat = Satrec.twoline2rv(tle["line1"], tle["line2"])
         error_code, position, velocity = sat.sgp4(jd, fr)
@@ -246,6 +262,10 @@ def satellites(
         if None not in (lamin, lamax, lomin, lomax):
             if not (lamin <= lat <= lamax and lomin <= lon <= lomax):
                 continue
+
+        total_visible += 1
+        if len(items) >= limit:
+            continue
 
         speed_kms = (velocity[0] ** 2 + velocity[1] ** 2 + velocity[2] ** 2) ** 0.5
 
@@ -264,5 +284,8 @@ def satellites(
         "generated_at": now_iso(),
         "group": group,
         "count": len(items),
+        "total_visible": total_visible,
+        "truncated": total_visible > len(items),
+        "limit": limit,
         "items": items,
     }
