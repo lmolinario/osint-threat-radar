@@ -14,8 +14,9 @@ OPENSKY_TOKEN_URL = (
     "protocol/openid-connect/token"
 )
 
-TTL_OK = 10
-TTL_ERROR = 5
+TTL_OK = int(os.getenv("OPENSKY_CACHE_TTL_OK", "15"))
+TTL_ERROR = int(os.getenv("OPENSKY_CACHE_TTL_ERROR", "90"))
+OPENSKY_TIMEOUT = float(os.getenv("OPENSKY_TIMEOUT", "8"))
 TOKEN_REFRESH_MARGIN = 30
 
 _CACHE: Dict[str, Dict[str, Any]] = {}
@@ -86,7 +87,7 @@ def _get_oauth_token() -> Optional[str]:
         if cached_token and _now() < expires_at:
             return cached_token
 
-        with httpx.Client(timeout=15.0, follow_redirects=True) as client:
+        with httpx.Client(timeout=OPENSKY_TIMEOUT, follow_redirects=True) as client:
             resp = client.post(
                 OPENSKY_TOKEN_URL,
                 data={
@@ -109,7 +110,9 @@ def _get_oauth_token() -> Optional[str]:
 
 
 def _build_headers() -> Dict[str, str]:
-    headers: Dict[str, str] = {}
+    headers: Dict[str, str] = {
+        "User-Agent": "OSINT-Threat-Radar/0.1 (+https://www.dfaas.it)",
+    }
     token = _get_oauth_token()
     if token:
         headers["Authorization"] = f"Bearer {token}"
@@ -118,25 +121,7 @@ def _build_headers() -> Dict[str, str]:
 
 def _state_to_feature(row: List[Any]) -> Optional[Dict[str, Any]]:
     """
-    Mappa l'array OpenSky in GeoJSON Feature.
-    Indici principali:
-      0 icao24
-      1 callsign
-      2 origin_country
-      3 time_position
-      4 last_contact
-      5 longitude
-      6 latitude
-      7 baro_altitude
-      8 on_ground
-      9 velocity
-      10 true_track
-      11 vertical_rate
-      13 geo_altitude
-      14 squawk
-      15 spi
-      16 position_source
-      17 category
+    Map the OpenSky state-vector array to a GeoJSON Feature.
     """
     if not isinstance(row, list) or len(row) < 17:
         return None
@@ -197,7 +182,7 @@ def fetch_aircraft(
     try:
         headers = _build_headers()
 
-        with httpx.Client(timeout=20.0, follow_redirects=True) as client:
+        with httpx.Client(timeout=OPENSKY_TIMEOUT, follow_redirects=True) as client:
             r = client.get(OPENSKY_STATES_URL, params=params, headers=headers)
 
             if r.status_code == 429:
@@ -208,6 +193,7 @@ def fetch_aircraft(
                     stale["error"] = "opensky_rate_limited_stale"
                     stale["stale"] = True
                     stale["retry_after_seconds"] = retry_after
+                    _set_cache(key, stale, TTL_ERROR)
                     return stale
 
                 data = _empty("opensky_rate_limited")
@@ -221,6 +207,7 @@ def fetch_aircraft(
                     stale["generated_at"] = _iso_now()
                     stale["error"] = "opensky_unauthorized_stale"
                     stale["stale"] = True
+                    _set_cache(key, stale, TTL_ERROR)
                     return stale
 
                 data = _empty("opensky_unauthorized")
@@ -254,11 +241,14 @@ def fetch_aircraft(
         return data
 
     except Exception as e:
+        print(f"[opensky] provider error={type(e).__name__} bbox={key}")
+
         if hit:
             stale = dict(hit["data"])
             stale["generated_at"] = _iso_now()
             stale["error"] = f"opensky_error_{type(e).__name__}_stale"
             stale["stale"] = True
+            _set_cache(key, stale, TTL_ERROR)
             return stale
 
         data = _empty(f"opensky_error_{type(e).__name__}")
