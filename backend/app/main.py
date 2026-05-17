@@ -228,6 +228,20 @@ def eci_to_geodetic_simple(x_km: float, y_km: float, z_km: float):
     return lat, lon, alt
 
 
+def _empty_satellite_response(group: str, limit: int, error: str) -> Dict:
+    return {
+        "generated_at": now_iso(),
+        "group": group,
+        "count": 0,
+        "total_visible": 0,
+        "total_available": 0,
+        "truncated": False,
+        "limit": limit,
+        "error": error,
+        "items": [],
+    }
+
+
 @app.get("/satellites")
 def satellites(
     group: str = Query("stations"),
@@ -237,7 +251,10 @@ def satellites(
     lomax: float | None = Query(default=None),
     limit: int = Query(default=1500, ge=1, le=20000),
 ) -> Dict:
-    tles = tle_cache.get(group=group)
+    try:
+        tles = tle_cache.get(group=group)
+    except Exception as exc:
+        return _empty_satellite_response(group, limit, f"celestrak_error_{type(exc).__name__}")
 
     now = datetime.now(timezone.utc)
     jd, fr = jday(
@@ -249,43 +266,59 @@ def satellites(
         now.second + now.microsecond / 1e6,
     )
 
+    has_bbox = None not in (lamin, lamax, lomin, lomax)
+    total_available = len(tles)
     items: List[Dict] = []
     total_visible = 0
-    for tle in tles:
-        sat = Satrec.twoline2rv(tle["line1"], tle["line2"])
-        error_code, position, velocity = sat.sgp4(jd, fr)
-        if error_code != 0 or position is None:
-            continue
 
-        lat, lon, alt_km = eci_to_geodetic_simple(position[0], position[1], position[2])
+    # Without a viewport filter, avoid propagating very large constellations
+    # just to discard most records later. This keeps Starlink queries small
+    # and predictable while still reporting the total catalog size.
+    iterable = tles if has_bbox else tles[:limit]
 
-        if None not in (lamin, lamax, lomin, lomax):
-            if not (lamin <= lat <= lamax and lomin <= lon <= lomax):
+    for tle in iterable:
+        try:
+            sat = Satrec.twoline2rv(tle["line1"], tle["line2"])
+            error_code, position, velocity = sat.sgp4(jd, fr)
+            if error_code != 0 or position is None:
                 continue
 
-        total_visible += 1
-        if len(items) >= limit:
+            lat, lon, alt_km = eci_to_geodetic_simple(position[0], position[1], position[2])
+
+            if has_bbox:
+                if not (lamin <= lat <= lamax and lomin <= lon <= lomax):
+                    continue
+
+            total_visible += 1
+            if len(items) >= limit:
+                continue
+
+            speed_kms = (velocity[0] ** 2 + velocity[1] ** 2 + velocity[2] ** 2) ** 0.5
+
+            items.append(
+                {
+                    "name": tle["name"],
+                    "norad_id": sat.satnum,
+                    "lat": lat,
+                    "lon": lon,
+                    "alt_km": alt_km,
+                    "speed_kms": speed_kms,
+                }
+            )
+        except Exception:
             continue
 
-        speed_kms = (velocity[0] ** 2 + velocity[1] ** 2 + velocity[2] ** 2) ** 0.5
-
-        items.append(
-            {
-                "name": tle["name"],
-                "norad_id": sat.satnum,
-                "lat": lat,
-                "lon": lon,
-                "alt_km": alt_km,
-                "speed_kms": speed_kms,
-            }
-        )
+    if not has_bbox:
+        total_visible = total_available
 
     return {
         "generated_at": now_iso(),
         "group": group,
         "count": len(items),
         "total_visible": total_visible,
+        "total_available": total_available,
         "truncated": total_visible > len(items),
         "limit": limit,
+        "error": None,
         "items": items,
     }
