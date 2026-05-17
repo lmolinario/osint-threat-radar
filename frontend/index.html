@@ -13,15 +13,18 @@
     />
     <style>
       html, body { height: 100%; margin: 0; }
-      #app { height: 100%; display: grid; grid-template-columns: 360px 1fr; }
+      #app { height: 100%; display: grid; grid-template-columns: 380px 1fr; }
       #sidebar { border-right: 1px solid #ddd; padding: 10px; overflow: auto; font-family: system-ui, sans-serif; }
       #map { height: 100%; }
       .event { padding: 8px; border: 1px solid #eee; border-radius: 8px; margin-bottom: 8px; }
       .event h4 { margin: 0 0 6px 0; font-size: 14px; }
       .event small { color: #666; }
+      .event .summary { margin-top: 6px; color: #444; font-size: 12px; line-height: 1.35; }
       .controls { display: grid; gap: 8px; margin-bottom: 10px; }
       input, select { padding: 8px; border: 1px solid #ccc; border-radius: 8px; }
-      @media (max-width: 900px) { #app { grid-template-columns: 1fr; grid-template-rows: 320px 1fr; } #sidebar { border-right: none; border-top: 1px solid #ddd; } }
+      .layer-group { border: 1px solid #eee; border-radius: 10px; padding: 8px; display: grid; gap: 6px; }
+      .layer-title { font-size: 12px; font-weight: 700; color: #444; text-transform: uppercase; letter-spacing: .04em; }
+      @media (max-width: 900px) { #app { grid-template-columns: 1fr; grid-template-rows: 340px 1fr; } #sidebar { border-right: none; border-top: 1px solid #ddd; } }
     </style>
   </head>
   <body>
@@ -35,43 +38,61 @@
           <select id="type">
             <option value="">Tutti i tipi</option>
             <option value="news">news</option>
+            <option value="earthquake">earthquake</option>
+            <option value="disaster">disaster</option>
+            <option value="flood">flood</option>
+            <option value="wildfire">wildfire</option>
+            <option value="cyclone">cyclone</option>
+            <option value="volcano">volcano</option>
+            <option value="drought">drought</option>
+            <option value="severe_weather">severe_weather</option>
           </select>
 
           <select id="source">
             <option value="">Tutte le fonti</option>
             <option value="rss">rss</option>
+            <option value="usgs">usgs</option>
+            <option value="gdacs">gdacs</option>
           </select>
 
-          <label style="display:flex; gap:8px; align-items:center; margin-top:6px;">
-            <input type="checkbox" id="aircraftToggle" />
-            Aerei live (OpenSky)
-          </label>
+          <div class="layer-group">
+            <div class="layer-title">Live mobility / space</div>
+            <label style="display:flex; gap:8px; align-items:center;">
+              <input type="checkbox" id="aircraftToggle" />
+              Aerei live (OpenSky)
+            </label>
 
-          <label style="display:flex; gap:8px; align-items:center;">
-            <input type="checkbox" id="shipsToggle" />
-            Navi (AIS)
-          </label>
-          <label style="display:flex; gap:.5rem; align-items:center;">
-            <input type="checkbox" id="satellitesToggle" />
-            Satelliti
-          </label>
+            <label style="display:flex; gap:8px; align-items:center;">
+              <input type="checkbox" id="shipsToggle" />
+              Navi (AIS)
+            </label>
 
-          <select id="satGroup">
-            <option value="stations">stations (ISS ecc.)</option>
-            <option value="active">active (tutti)</option>
-            <option value="starlink">starlink</option>
-            <option value="gps-ops">GPS</option>
-          </select>
+            <label style="display:flex; gap:.5rem; align-items:center;">
+              <input type="checkbox" id="satellitesToggle" />
+              Satelliti
+            </label>
+
+            <select id="satGroup">
+              <option value="stations">stations (ISS ecc.)</option>
+              <option value="active">active (tutti)</option>
+              <option value="starlink">starlink</option>
+              <option value="gps-ops">GPS</option>
+            </select>
+          </div>
+
+          <div class="layer-group">
+            <div class="layer-title">Earth / disaster intelligence</div>
+            <button id="earthIntelBtn" style="padding:8px 10px; border-radius:8px; border:1px solid #ccc; background:#fff; cursor:pointer;">
+              Mostra terremoti e disastri
+            </button>
+            <small style="color:#666;">Fonti: USGS + GDACS</small>
+          </div>
 
           <label style="display:flex; gap:8px; align-items:center;">
             <input type="checkbox" id="milToggle" />
             Eventi militari
           </label>
-
         </div>
-
-
-
 
         <div style="display:flex; gap:8px; margin-bottom:10px;">
           <button id="refresh" style="padding:8px 10px; border-radius:8px; border:1px solid #ccc; background:#fff; cursor:pointer;">
