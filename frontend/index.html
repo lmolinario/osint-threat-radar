@@ -48,11 +48,13 @@
         position: relative;
         z-index: 500;
         overflow: auto;
-        padding: 18px;
+        padding: 0;
         border-right: 1px solid var(--border);
         background: linear-gradient(180deg, rgba(8, 20, 36, 0.98), rgba(4, 10, 20, 0.98));
         box-shadow: var(--shadow);
       }
+
+      .sidebar-inner { padding: 18px; }
 
       #map { height: 100%; background: #06111f; }
       .leaflet-control-attribution { background: rgba(4, 10, 20, 0.75) !important; color: var(--muted) !important; }
@@ -65,6 +67,18 @@
       }
       .leaflet-popup-content { font-size: 12px; line-height: 1.45; }
       .leaflet-popup-content small { color: var(--muted); }
+
+      .topbar {
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 16px;
+        border-bottom: 1px solid var(--border);
+        background: rgba(4, 10, 20, 0.92);
+      }
+      .topbar-title { font-weight: 900; font-size: 15px; letter-spacing: .04em; }
+      .topbar-close { width: 32px; height: 32px; border-radius: 0; display: grid; place-items: center; padding: 0; color: var(--muted); }
 
       .brand { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 14px; }
       .brand h1 { margin: 0; font-size: 20px; letter-spacing: -0.03em; line-height: 1.05; }
@@ -80,6 +94,38 @@
       .status-card { border: 1px solid var(--border); background: var(--panel-2); border-radius: 14px; padding: 10px; }
       .status-label { color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: .08em; }
       .status-value { margin-top: 4px; font-weight: 800; font-size: 14px; }
+
+      .active-maps {
+        border: 1px solid rgba(148, 163, 184, .34);
+        background: rgba(18, 28, 42, .86);
+        margin-bottom: 16px;
+      }
+      .active-header {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 14px;
+        border-bottom: 1px solid rgba(148, 163, 184, .24);
+      }
+      .active-header h2 { margin: 0; font-size: 15px; letter-spacing: .02em; }
+      #clearMapsBtn { width: auto; border-radius: 0; padding: 9px 12px; font-size: 11px; background: rgba(5, 10, 18, .7); }
+      .active-list { display: grid; }
+      .active-map-row {
+        min-height: 46px;
+        display: grid;
+        grid-template-columns: 34px 1fr 34px;
+        align-items: center;
+        border-bottom: 1px solid rgba(148, 163, 184, .16);
+        color: #cbd5e1;
+      }
+      .active-map-row:last-child { border-bottom: 0; }
+      .active-icon { display: grid; place-items: center; color: var(--muted); font-size: 13px; }
+      .active-name { font-size: 12px; text-align: center; line-height: 1.25; padding: 8px; }
+      .active-remove { width: 28px; height: 28px; border-radius: 0; padding: 0; display: grid; place-items: center; color: var(--muted); background: rgba(4, 10, 20, .65); }
+      .active-empty { padding: 16px; text-align: center; color: var(--muted); font-size: 12px; }
+      .maps-counter { text-align: center; font-size: 26px; font-weight: 300; color: #e5eefb; margin: 6px 0 16px; }
+      .maps-counter small { display: block; margin-top: 2px; color: var(--muted); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
 
       .controls { display: grid; gap: 10px; margin-bottom: 12px; }
       input, select, button {
@@ -97,7 +143,7 @@
       .layer-catalog { display: grid; gap: 8px; }
       .layer-category {
         border: 1px solid var(--border);
-        border-radius: 18px;
+        border-radius: 0;
         background: rgba(15, 31, 54, 0.74);
         overflow: hidden;
       }
@@ -106,19 +152,21 @@
         cursor: pointer;
         padding: 12px;
         display: grid;
-        grid-template-columns: 1fr auto;
+        grid-template-columns: 1fr auto auto;
         align-items: center;
         gap: 8px;
         background: rgba(20, 42, 70, 0.56);
+        border-left: 3px solid rgba(56, 189, 248, .85);
       }
       .layer-category summary::-webkit-details-marker { display: none; }
       .category-title { display: flex; align-items: center; gap: 8px; font-weight: 900; font-size: 13px; }
       .category-desc { margin-top: 3px; color: var(--muted); font-size: 11px; line-height: 1.35; }
+      .category-count { padding: 7px 9px; background: rgba(4,10,20,.76); color: var(--text); font-size: 11px; font-weight: 900; }
       .chevron { color: var(--muted); font-size: 13px; transition: transform .15s ease; }
       .layer-category[open] .chevron { transform: rotate(90deg); }
       .category-body { display: grid; gap: 8px; padding: 10px; }
 
-      .layer-card { border: 1px solid var(--border); border-radius: 15px; background: var(--panel-2); padding: 10px; transition: border-color .12s ease, background .12s ease; }
+      .layer-card { border: 1px solid var(--border); border-radius: 0; background: var(--panel-2); padding: 10px; transition: border-color .12s ease, background .12s ease; }
       .layer-card:hover { border-color: rgba(148, 163, 184, 0.38); background: var(--panel-3); }
       .layer-card label { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 10px; cursor: pointer; }
       .layer-card input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--accent); }
@@ -143,7 +191,7 @@
       .action-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 12px 0; }
       #status { display: block; min-height: 18px; color: var(--muted); font-size: 11px; margin-bottom: 10px; }
 
-      .event { border: 1px solid var(--border); border-left: 3px solid rgba(56,189,248,0.75); border-radius: 14px; background: rgba(15, 31, 54, 0.72); padding: 10px; margin-bottom: 8px; }
+      .event { border: 1px solid var(--border); border-left: 3px solid rgba(56,189,248,0.75); border-radius: 0; background: rgba(15, 31, 54, 0.72); padding: 10px; margin-bottom: 8px; }
       .event h4 { margin: 0 0 6px 0; font-size: 13px; line-height: 1.25; }
       .event small { color: var(--muted); }
       .event .summary { margin-top: 7px; color: #bfd0e5; font-size: 12px; line-height: 1.4; }
@@ -182,169 +230,188 @@
   <body>
     <div id="app">
       <aside id="sidebar">
-        <div class="brand">
-          <div>
-            <h1>OSINT Threat Radar</h1>
-            <p>DFAAS geospatial intelligence dashboard for cyber, earth, mobility, space and conflict signals.</p>
+        <div class="topbar">
+          <div class="topbar-title">MAP LIST</div>
+          <button class="topbar-close" onclick="window.location.reload()">×</button>
+        </div>
+
+        <div class="sidebar-inner">
+          <div class="brand">
+            <div>
+              <h1>OSINT Threat Radar</h1>
+              <p>DFAAS geospatial intelligence dashboard for cyber, earth, mobility, space and conflict signals.</p>
+            </div>
+            <div class="brand-mark">R</div>
           </div>
-          <div class="brand-mark">R</div>
-        </div>
 
-        <div class="status-row">
-          <div class="status-card"><div class="status-label">API</div><div class="status-value">LIVE</div></div>
-          <div class="status-card"><div class="status-label">Mode</div><div class="status-value">MVP</div></div>
-          <div class="status-card"><div class="status-label">AIS</div><div class="status-value">DEMO</div></div>
-        </div>
+          <div class="status-row">
+            <div class="status-card"><div class="status-label">API</div><div class="status-value">LIVE</div></div>
+            <div class="status-card"><div class="status-label">Mode</div><div class="status-value">MVP</div></div>
+            <div class="status-card"><div class="status-label">AIS</div><div class="status-value">DEMO</div></div>
+          </div>
 
-        <div class="section-title">Search & filters</div>
-        <div class="controls">
-          <input id="q" placeholder="Cerca evento, paese, fonte..." />
-          <select id="type">
-            <option value="">Tutti i tipi</option>
-            <option value="news">news</option>
-            <option value="military_event">military_event</option>
-            <option value="earthquake">earthquake</option>
-            <option value="disaster">disaster</option>
-            <option value="flood">flood</option>
-            <option value="wildfire">wildfire</option>
-            <option value="cyclone">cyclone</option>
-            <option value="volcano">volcano</option>
-            <option value="drought">drought</option>
-            <option value="severe_weather">severe_weather</option>
-          </select>
-          <select id="source">
-            <option value="">Tutte le fonti</option>
-            <option value="rss">rss</option>
-            <option value="military_osint">military_osint</option>
-            <option value="usgs">usgs</option>
-            <option value="gdacs">gdacs</option>
-          </select>
-        </div>
-
-        <div class="quick-grid">
-          <button class="quick-filter" data-source="" data-type="">All</button>
-          <button class="quick-filter" data-source="military_osint" data-type="">Military</button>
-          <button class="quick-filter" data-source="usgs" data-type="earthquake">Earthquake</button>
-          <button class="quick-filter" data-source="gdacs" data-type="">GDACS</button>
-          <button id="quickSpaceBtn">Space</button>
-          <button id="quickMobilityBtn">Mobility</button>
-        </div>
-
-        <div class="section-title">Layer catalog</div>
-        <div class="layer-catalog">
-          <details class="layer-category" open>
-            <summary>
-              <div><div class="category-title">▣ Cyber & News</div><div class="category-desc">RSS intelligence and searchable public signals.</div></div>
-              <span class="chevron">›</span>
-            </summary>
-            <div class="category-body">
-              <div class="layer-card">
-                <div class="layer-main"><span class="layer-name">RSS News</span><span class="layer-desc">General RSS events already shown in the event stream.</span></div>
-                <div class="layer-actions"><button class="quick-filter" data-source="rss" data-type="">Show RSS</button><button class="quick-filter" data-source="" data-type="news">News type</button></div>
-              </div>
+          <section class="active-maps">
+            <div class="active-header">
+              <h2>ACTIVE MAPS</h2>
+              <button id="clearMapsBtn">Clear Maps</button>
             </div>
-          </details>
-
-          <details class="layer-category" open>
-            <summary>
-              <div><div class="category-title">▣ Earth Intelligence</div><div class="category-desc">Earthquakes, floods, wildfires and disaster alerts.</div></div>
-              <span class="chevron">›</span>
-            </summary>
-            <div class="category-body">
-              <div class="layer-card">
-                <button id="earthIntelBtn">Mostra terremoti e disastri</button>
-                <div class="layer-desc" style="margin-top:8px;">USGS + GDACS. Marker verdi quando disponibili.</div>
-                <div class="layer-actions"><button class="quick-filter" data-source="usgs" data-type="earthquake">USGS</button><button class="quick-filter" data-source="gdacs" data-type="">GDACS</button></div>
-              </div>
+            <div id="activeMapsList" class="active-list">
+              <div class="active-empty">No active maps selected.</div>
             </div>
-          </details>
+          </section>
 
-          <details class="layer-category" open>
-            <summary>
-              <div><div class="category-title">▣ Mobility Intelligence</div><div class="category-desc">Live air traffic and AIS-ready vessel layer.</div></div>
-              <span class="chevron">›</span>
-            </summary>
-            <div class="category-body">
-              <div class="layer-card">
-                <label>
-                  <input type="checkbox" id="aircraftToggle" />
-                  <span class="layer-main"><span class="layer-name">Aerei live</span><span class="layer-desc">OpenSky viewport layer, aggiornamento rapido.</span></span>
-                  <span class="badge badge-live">live</span>
-                </label>
-              </div>
-              <div class="layer-card">
-                <label>
-                  <input type="checkbox" id="shipsToggle" />
-                  <span class="layer-main"><span class="layer-name">Navi AIS</span><span class="layer-desc">Demo locale, pronto per provider AIS reale.</span></span>
-                  <span class="badge badge-demo">demo</span>
-                </label>
-              </div>
-            </div>
-          </details>
+          <div class="maps-counter"><span id="totalMapsCount">18</span> MAPS<small>available layers / roadmap</small></div>
 
-          <details class="layer-category" open>
-            <summary>
-              <div><div class="category-title">▣ Space Intelligence</div><div class="category-desc">CelesTrak orbital layers with SGP4 propagation.</div></div>
-              <span class="chevron">›</span>
-            </summary>
-            <div class="category-body">
-              <div class="layer-card">
-                <label>
-                  <input type="checkbox" id="satellitesToggle" />
-                  <span class="layer-main"><span class="layer-name">Satelliti</span><span class="layer-desc">Stations, GPS, Starlink and active catalog.</span></span>
-                  <span class="badge badge-space">space</span>
-                </label>
-                <select id="satGroup" style="margin-top:9px;">
-                  <option value="stations">stations (ISS ecc.)</option>
-                  <option value="active">active (tutti)</option>
-                  <option value="starlink">starlink</option>
-                  <option value="gps-ops">GPS</option>
-                </select>
-              </div>
-            </div>
-          </details>
+          <div class="section-title">Search & filters</div>
+          <div class="controls">
+            <input id="q" placeholder="Cerca evento, paese, fonte..." />
+            <select id="type">
+              <option value="">Tutti i tipi</option>
+              <option value="news">news</option>
+              <option value="military_event">military_event</option>
+              <option value="earthquake">earthquake</option>
+              <option value="disaster">disaster</option>
+              <option value="flood">flood</option>
+              <option value="wildfire">wildfire</option>
+              <option value="cyclone">cyclone</option>
+              <option value="volcano">volcano</option>
+              <option value="drought">drought</option>
+              <option value="severe_weather">severe_weather</option>
+            </select>
+            <select id="source">
+              <option value="">Tutte le fonti</option>
+              <option value="rss">rss</option>
+              <option value="military_osint">military_osint</option>
+              <option value="usgs">usgs</option>
+              <option value="gdacs">gdacs</option>
+            </select>
+          </div>
 
-          <details class="layer-category" open>
-            <summary>
-              <div><div class="category-title">▣ Military OSINT</div><div class="category-desc">Conflict-related RSS filtering with source verification links.</div></div>
-              <span class="chevron">›</span>
-            </summary>
-            <div class="category-body">
-              <div class="layer-card">
-                <label>
-                  <input type="checkbox" id="milToggle" />
-                  <span class="layer-main"><span class="layer-name">Eventi militari OSINT</span><span class="layer-desc">Conflitti, missili, droni, difesa e guerra.</span></span>
-                  <span class="badge badge-osint">osint</span>
-                </label>
-              </div>
-            </div>
-          </details>
+          <div class="quick-grid">
+            <button class="quick-filter" data-source="" data-type="">All</button>
+            <button class="quick-filter" data-source="military_osint" data-type="">Military</button>
+            <button class="quick-filter" data-source="usgs" data-type="earthquake">Earthquake</button>
+            <button class="quick-filter" data-source="gdacs" data-type="">GDACS</button>
+            <button id="quickSpaceBtn">Space</button>
+            <button id="quickMobilityBtn">Mobility</button>
+          </div>
 
-          <details class="layer-category">
-            <summary>
-              <div><div class="category-title">▣ Future / 3D Globe</div><div class="category-desc">Prepared roadmap for a CesiumJS experimental globe.</div></div>
-              <span class="chevron">›</span>
-            </summary>
-            <div class="category-body">
-              <div class="layer-card disabled-card">
-                <div class="layer-main"><span class="layer-name">3D Globe experimental</span><span class="layer-desc">Next step: separate CesiumJS view, not replacing this stable 2D radar.</span></div>
-                <div style="margin-top:8px;"><span class="badge badge-future">planned</span></div>
+          <div class="section-title">Layer catalog</div>
+          <div class="layer-catalog">
+            <details class="layer-category" open>
+              <summary>
+                <div><div class="category-title">▣ Cyber & News</div><div class="category-desc">RSS intelligence and searchable public signals.</div></div>
+                <span class="category-count">2 Maps</span><span class="chevron">›</span>
+              </summary>
+              <div class="category-body">
+                <div class="layer-card">
+                  <div class="layer-main"><span class="layer-name">RSS News</span><span class="layer-desc">General RSS events already shown in the event stream.</span></div>
+                  <div class="layer-actions"><button class="quick-filter" data-source="rss" data-type="">Show RSS</button><button class="quick-filter" data-source="" data-type="news">News type</button></div>
+                </div>
               </div>
-              <div class="layer-card disabled-card">
-                <div class="layer-main"><span class="layer-name">Critical Infrastructure</span><span class="layer-desc">Ports, airports, cables and facilities. Future static/reference layer.</span></div>
-                <div style="margin-top:8px;"><span class="badge badge-future">planned</span></div>
+            </details>
+
+            <details class="layer-category" open>
+              <summary>
+                <div><div class="category-title">▣ Earth Intelligence</div><div class="category-desc">Earthquakes, floods, wildfires and disaster alerts.</div></div>
+                <span class="category-count">8 Maps</span><span class="chevron">›</span>
+              </summary>
+              <div class="category-body">
+                <div class="layer-card">
+                  <button id="earthIntelBtn">Mostra terremoti e disastri</button>
+                  <div class="layer-desc" style="margin-top:8px;">USGS + GDACS. Marker verdi quando disponibili.</div>
+                  <div class="layer-actions"><button class="quick-filter" data-source="usgs" data-type="earthquake">USGS</button><button class="quick-filter" data-source="gdacs" data-type="">GDACS</button></div>
+                </div>
               </div>
-            </div>
-          </details>
+            </details>
+
+            <details class="layer-category" open>
+              <summary>
+                <div><div class="category-title">▣ Mobility Intelligence</div><div class="category-desc">Live air traffic and AIS-ready vessel layer.</div></div>
+                <span class="category-count">2 Maps</span><span class="chevron">›</span>
+              </summary>
+              <div class="category-body">
+                <div class="layer-card">
+                  <label>
+                    <input type="checkbox" id="aircraftToggle" />
+                    <span class="layer-main"><span class="layer-name">Aerei live</span><span class="layer-desc">OpenSky viewport layer, aggiornamento rapido.</span></span>
+                    <span class="badge badge-live">live</span>
+                  </label>
+                </div>
+                <div class="layer-card">
+                  <label>
+                    <input type="checkbox" id="shipsToggle" />
+                    <span class="layer-main"><span class="layer-name">Navi AIS</span><span class="layer-desc">Demo locale, pronto per provider AIS reale.</span></span>
+                    <span class="badge badge-demo">demo</span>
+                  </label>
+                </div>
+              </div>
+            </details>
+
+            <details class="layer-category" open>
+              <summary>
+                <div><div class="category-title">▣ Space Intelligence</div><div class="category-desc">CelesTrak orbital layers with SGP4 propagation.</div></div>
+                <span class="category-count">4 Maps</span><span class="chevron">›</span>
+              </summary>
+              <div class="category-body">
+                <div class="layer-card">
+                  <label>
+                    <input type="checkbox" id="satellitesToggle" />
+                    <span class="layer-main"><span class="layer-name">Satelliti</span><span class="layer-desc">Stations, GPS, Starlink and active catalog.</span></span>
+                    <span class="badge badge-space">space</span>
+                  </label>
+                  <select id="satGroup" style="margin-top:9px;">
+                    <option value="stations">stations (ISS ecc.)</option>
+                    <option value="active">active (tutti)</option>
+                    <option value="starlink">starlink</option>
+                    <option value="gps-ops">GPS</option>
+                  </select>
+                </div>
+              </div>
+            </details>
+
+            <details class="layer-category" open>
+              <summary>
+                <div><div class="category-title">▣ Military OSINT</div><div class="category-desc">Conflict-related RSS filtering with source verification links.</div></div>
+                <span class="category-count">1 Map</span><span class="chevron">›</span>
+              </summary>
+              <div class="category-body">
+                <div class="layer-card">
+                  <label>
+                    <input type="checkbox" id="milToggle" />
+                    <span class="layer-main"><span class="layer-name">Eventi militari OSINT</span><span class="layer-desc">Conflitti, missili, droni, difesa e guerra.</span></span>
+                    <span class="badge badge-osint">osint</span>
+                  </label>
+                </div>
+              </div>
+            </details>
+
+            <details class="layer-category">
+              <summary>
+                <div><div class="category-title">▣ Future / 3D Globe</div><div class="category-desc">Prepared roadmap for a CesiumJS experimental globe.</div></div>
+                <span class="category-count">3 Maps</span><span class="chevron">›</span>
+              </summary>
+              <div class="category-body">
+                <div class="layer-card disabled-card">
+                  <div class="layer-main"><span class="layer-name">3D Globe experimental</span><span class="layer-desc">Next step: separate CesiumJS view, not replacing this stable 2D radar.</span></div>
+                  <div style="margin-top:8px;"><span class="badge badge-future">planned</span></div>
+                </div>
+                <div class="layer-card disabled-card">
+                  <div class="layer-main"><span class="layer-name">Critical Infrastructure</span><span class="layer-desc">Ports, airports, cables and facilities. Future static/reference layer.</span></div>
+                  <div style="margin-top:8px;"><span class="badge badge-future">planned</span></div>
+                </div>
+              </div>
+            </details>
+          </div>
+
+          <div class="action-grid">
+            <button id="refresh">Aggiorna eventi</button>
+            <button onclick="window.location.reload()">Reload UI</button>
+          </div>
+
+          <small id="status"></small>
+          <div id="events"></div>
         </div>
-
-        <div class="action-grid">
-          <button id="refresh">Aggiorna eventi</button>
-          <button onclick="window.location.reload()">Reload UI</button>
-        </div>
-
-        <small id="status"></small>
-        <div id="events"></div>
       </aside>
 
       <main id="map"></main>
