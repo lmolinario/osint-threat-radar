@@ -8,27 +8,27 @@ import requests
 
 DEFAULT_GROUP = "stations"
 CELESTRAK_GP_URL = "https://celestrak.org/NORAD/elements/gp.php"
+CELESTRAK_SUP_STARLINK_TLE_URL = "https://celestrak.org/NORAD/elements/supplemental/starlink.txt"
 
 HEADERS = {
     "User-Agent": "OSINT-Threat-Radar/0.1 (+https://www.dfaas.it)",
 }
 
-# Starlink and other very large constellations are more robust through OMM JSON
-# because legacy fixed-width TLEs are increasingly fragile for new catalog IDs.
-JSON_FIRST_GROUPS = {"starlink"}
-
 
 def fetch_celestrak_tle(group: str = DEFAULT_GROUP, timeout: int = 20) -> str:
-    # Keep group value case as provided: CelesTrak groups are effectively
-    # case-sensitive for values such as stations, gps-ops and starlink.
     params = {"GROUP": group, "FORMAT": "TLE"}
     response = requests.get(CELESTRAK_GP_URL, params=params, headers=HEADERS, timeout=timeout)
     response.raise_for_status()
     return response.text
 
 
+def fetch_starlink_supplemental_tle(timeout: int = 30) -> str:
+    response = requests.get(CELESTRAK_SUP_STARLINK_TLE_URL, headers=HEADERS, timeout=timeout)
+    response.raise_for_status()
+    return response.text
+
+
 def fetch_celestrak_json(group: str = DEFAULT_GROUP, timeout: int = 30) -> List[Dict[str, Any]]:
-    # Keep group value case as provided: do not transform starlink to STARLINK.
     params = {"GROUP": group, "FORMAT": "JSON"}
     response = requests.get(CELESTRAK_GP_URL, params=params, headers=HEADERS, timeout=timeout)
     response.raise_for_status()
@@ -38,7 +38,7 @@ def fetch_celestrak_json(group: str = DEFAULT_GROUP, timeout: int = 30) -> List[
     return data
 
 
-def parse_tle_triplets(tle_text: str) -> List[Dict[str, Any]]:
+def parse_tle_triplets(tle_text: str, source_format: str = "tle") -> List[Dict[str, Any]]:
     """
     Parse CelesTrak TLE/3LE records into normalized catalog items.
     """
@@ -57,7 +57,7 @@ def parse_tle_triplets(tle_text: str) -> List[Dict[str, Any]]:
                     "name": name,
                     "line1": line1,
                     "line2": line2,
-                    "source_format": "tle",
+                    "source_format": source_format,
                 }
             )
             i += 3
@@ -81,8 +81,6 @@ def parse_omm_json(records: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         if not name:
             continue
 
-        # sgp4.omm.initialize expects OMM field values. Converting to strings
-        # keeps behavior stable across JSON numeric/string representations.
         omm = {key: "" if value is None else str(value) for key, value in record.items()}
 
         out.append(
@@ -100,8 +98,11 @@ def parse_omm_json(records: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
 def fetch_celestrak_catalog(group: str = DEFAULT_GROUP) -> List[Dict[str, Any]]:
     group_key = group.lower()
 
-    if group_key in JSON_FIRST_GROUPS:
-        records = parse_omm_json(fetch_celestrak_json(group=group))
+    if group_key == "starlink":
+        records = parse_tle_triplets(
+            fetch_starlink_supplemental_tle(),
+            source_format="supplemental_tle",
+        )
         if records:
             return records
 
@@ -109,7 +110,6 @@ def fetch_celestrak_catalog(group: str = DEFAULT_GROUP) -> List[Dict[str, Any]]:
     if tle_records:
         return tle_records
 
-    # Fallback for groups where TLE is empty, malformed or no longer suitable.
     return parse_omm_json(fetch_celestrak_json(group=group))
 
 
