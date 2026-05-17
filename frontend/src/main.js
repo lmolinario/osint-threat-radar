@@ -13,6 +13,8 @@ const qEl = document.getElementById("q");
 const typeEl = document.getElementById("type");
 const sourceEl = document.getElementById("source");
 const refreshBtn = document.getElementById("refresh");
+const clearMapsBtn = document.getElementById("clearMapsBtn");
+const activeMapsList = document.getElementById("activeMapsList");
 const aircraftToggle = document.getElementById("aircraftToggle");
 const shipsToggle = document.getElementById("shipsToggle");
 const milToggle = document.getElementById("milToggle");
@@ -106,6 +108,99 @@ function eventIcon(type, severity = 20) {
   });
 }
 
+function activeMaps() {
+  const active = [];
+  if (aircraftToggle?.checked) active.push({ id: "aircraft", name: "Aerei live OpenSky", icon: "✈" });
+  if (shipsToggle?.checked) active.push({ id: "ships", name: "Navi AIS demo/provider", icon: "▲" });
+  if (satellitesToggle?.checked) active.push({ id: "satellites", name: `Satelliti ${satGroupEl?.value || "stations"}`, icon: "◆" });
+  if (milToggle?.checked || sourceEl?.value === "military_osint") active.push({ id: "military", name: "Eventi militari OSINT", icon: "⚑" });
+  if (sourceEl?.value === "usgs" || sourceEl?.value === "gdacs" || ["earthquake", "disaster", "flood", "wildfire", "cyclone", "volcano", "drought", "severe_weather"].includes(typeEl?.value)) {
+    active.push({ id: "earth", name: "Earth Intelligence", icon: "●" });
+  }
+  if (!sourceEl?.value && !typeEl?.value && !qEl?.value) active.push({ id: "events", name: "All events stream", icon: "•" });
+  return active;
+}
+
+function renderActiveMaps() {
+  if (!activeMapsList) return;
+  const active = activeMaps();
+
+  if (active.length === 0) {
+    activeMapsList.innerHTML = `<div class="active-empty">No active maps selected.</div>`;
+    return;
+  }
+
+  activeMapsList.innerHTML = active.map((item) => `
+    <div class="active-map-row" data-layer="${esc(item.id)}">
+      <div class="active-icon">${esc(item.icon)}</div>
+      <div class="active-name">${esc(item.name)}</div>
+      <button class="active-remove" data-remove-layer="${esc(item.id)}">×</button>
+    </div>
+  `).join("");
+
+  activeMapsList.querySelectorAll("[data-remove-layer]").forEach((btn) => {
+    btn.addEventListener("click", async () => removeActiveLayer(btn.dataset.removeLayer));
+  });
+}
+
+async function removeActiveLayer(layerId) {
+  if (layerId === "aircraft") {
+    aircraftToggle.checked = false;
+    if (aircraftTimer) clearInterval(aircraftTimer);
+    aircraftTimer = null;
+    aircraftLayer.clearLayers();
+  }
+  if (layerId === "ships") {
+    shipsToggle.checked = false;
+    if (shipsTimer) clearInterval(shipsTimer);
+    shipsTimer = null;
+    shipsLayer.clearLayers();
+  }
+  if (layerId === "satellites") {
+    satellitesToggle.checked = false;
+    stopSatellites();
+  }
+  if (layerId === "military") {
+    milToggle.checked = false;
+    if (sourceEl.value === "military_osint") setEventFilters("", "", "");
+    await loadEvents();
+  }
+  if (layerId === "earth") {
+    if (sourceEl.value === "usgs" || sourceEl.value === "gdacs") sourceEl.value = "";
+    if (["earthquake", "disaster", "flood", "wildfire", "cyclone", "volcano", "drought", "severe_weather"].includes(typeEl.value)) typeEl.value = "";
+    await loadEvents();
+  }
+  if (layerId === "events") {
+    markersLayer.clearLayers();
+    eventsEl.innerHTML = "";
+    setStatus("Event stream cleared.");
+  }
+  renderActiveMaps();
+}
+
+async function clearAllMaps() {
+  aircraftToggle.checked = false;
+  shipsToggle.checked = false;
+  satellitesToggle.checked = false;
+  milToggle.checked = false;
+
+  if (aircraftTimer) clearInterval(aircraftTimer);
+  if (shipsTimer) clearInterval(shipsTimer);
+  if (satellitesTimer) clearInterval(satellitesTimer);
+  aircraftTimer = null;
+  shipsTimer = null;
+  satellitesTimer = null;
+
+  aircraftLayer.clearLayers();
+  shipsLayer.clearLayers();
+  satellitesLayer.clearLayers();
+  markersLayer.clearLayers();
+  eventsEl.innerHTML = "";
+  setEventFilters("", "", "");
+  setStatus("All maps cleared.");
+  renderActiveMaps();
+}
+
 async function loadAircraft() {
   aircraftLayer.clearLayers();
 
@@ -148,6 +243,7 @@ async function loadAircraft() {
   }
 
   setStatus(`Aerei: ${features.length}${data.stale ? " / stale" : ""}`);
+  renderActiveMaps();
 }
 
 async function loadShips() {
@@ -189,6 +285,7 @@ async function loadShips() {
   }
 
   setStatus(`Navi: ${features.length}${data.demo ? " / demo" : ""}`);
+  renderActiveMaps();
 }
 
 async function loadEvents() {
@@ -247,6 +344,7 @@ async function loadEvents() {
     didAutoFitEvents = true;
     map.fitBounds(bounds, { padding: [30, 30] });
   }
+  renderActiveMaps();
 }
 
 async function showEarthIntel() {
@@ -282,6 +380,7 @@ const satGroupEl = document.getElementById("satGroup");
 
 satGroupEl?.addEventListener("change", () => {
   if (satellitesToggle?.checked) refreshSatellites();
+  renderActiveMaps();
 });
 
 function clearSatellites() {
@@ -333,6 +432,7 @@ async function refreshSatellites() {
     console.error(e);
     setStatus(`Satelliti: errore (${e.message})`);
   }
+  renderActiveMaps();
 }
 
 function startSatellites(intervalMs = 30000) {
@@ -347,11 +447,13 @@ function stopSatellites() {
     satellitesTimer = null;
   }
   clearSatellites();
+  renderActiveMaps();
 }
 
 satellitesToggle?.addEventListener("change", (e) => {
   if (e.target.checked) startSatellites(30000);
   else stopSatellites();
+  renderActiveMaps();
 });
 
 shipsToggle?.addEventListener("change", async (e) => {
@@ -363,6 +465,7 @@ shipsToggle?.addEventListener("change", async (e) => {
     shipsTimer = null;
     shipsLayer.clearLayers();
   }
+  renderActiveMaps();
 });
 
 milToggle?.addEventListener("change", async (e) => {
@@ -372,16 +475,22 @@ milToggle?.addEventListener("change", async (e) => {
     setEventFilters("", "", "");
     await loadEvents();
   }
+  renderActiveMaps();
 });
 
 refreshBtn.addEventListener("click", loadEvents);
+clearMapsBtn?.addEventListener("click", clearAllMaps);
 earthIntelBtn?.addEventListener("click", showEarthIntel);
-[qEl, typeEl, sourceEl].forEach((el) => el.addEventListener("change", loadEvents));
+[qEl, typeEl, sourceEl].forEach((el) => el.addEventListener("change", async () => {
+  await loadEvents();
+  renderActiveMaps();
+}));
 
 document.querySelectorAll(".quick-filter").forEach((btn) => {
   btn.addEventListener("click", async () => {
     setEventFilters(btn.dataset.source || "", btn.dataset.type || "", "");
     await loadEvents();
+    renderActiveMaps();
   });
 });
 
@@ -389,6 +498,7 @@ quickSpaceBtn?.addEventListener("click", async () => {
   satellitesToggle.checked = true;
   satGroupEl.value = satGroupEl.value || "stations";
   startSatellites(30000);
+  renderActiveMaps();
 });
 
 quickMobilityBtn?.addEventListener("click", async () => {
@@ -398,6 +508,7 @@ quickMobilityBtn?.addEventListener("click", async () => {
   await loadShips();
   if (!aircraftTimer) aircraftTimer = setInterval(loadAircraft, 10000);
   if (!shipsTimer) shipsTimer = setInterval(loadShips, 30000);
+  renderActiveMaps();
 });
 
 aircraftToggle.addEventListener("change", async () => {
@@ -409,6 +520,7 @@ aircraftToggle.addEventListener("change", async () => {
     aircraftTimer = null;
     aircraftLayer.clearLayers();
   }
+  renderActiveMaps();
 });
 
 map.on("moveend", () => {
@@ -418,4 +530,5 @@ map.on("moveend", () => {
 });
 
 loadEvents();
+renderActiveMaps();
 setInterval(loadEvents, 60_000);
