@@ -17,6 +17,8 @@ const aircraftToggle = document.getElementById("aircraftToggle");
 const shipsToggle = document.getElementById("shipsToggle");
 const milToggle = document.getElementById("milToggle");
 const earthIntelBtn = document.getElementById("earthIntelBtn");
+const quickSpaceBtn = document.getElementById("quickSpaceBtn");
+const quickMobilityBtn = document.getElementById("quickMobilityBtn");
 
 const map = L.map("map", {
   zoomControl: false,
@@ -48,6 +50,13 @@ function esc(s) {
     '"': "&quot;",
     "'": "&#39;",
   }[c]));
+}
+
+function setEventFilters(source = "", type = "", q = "") {
+  sourceEl.value = source;
+  typeEl.value = type;
+  qEl.value = q;
+  didAutoFitEvents = false;
 }
 
 function buildQuery() {
@@ -249,10 +258,7 @@ async function showEarthIntel() {
     console.warn("Earth intel manual refresh failed, showing cached events", e);
   }
 
-  sourceEl.value = "";
-  typeEl.value = "";
-  qEl.value = "";
-  didAutoFitEvents = false;
+  setEventFilters("", "", "");
   await loadEvents();
 }
 
@@ -265,10 +271,7 @@ async function showMilitaryEvents() {
     console.warn("Military OSINT manual refresh failed, showing cached events", e);
   }
 
-  sourceEl.value = "military_osint";
-  typeEl.value = "";
-  qEl.value = "";
-  didAutoFitEvents = false;
+  setEventFilters("military_osint", "", "");
   await loadEvents();
 }
 
@@ -366,7 +369,7 @@ milToggle?.addEventListener("change", async (e) => {
   if (e.target.checked) {
     await showMilitaryEvents();
   } else if (sourceEl.value === "military_osint") {
-    sourceEl.value = "";
+    setEventFilters("", "", "");
     await loadEvents();
   }
 });
@@ -374,6 +377,28 @@ milToggle?.addEventListener("change", async (e) => {
 refreshBtn.addEventListener("click", loadEvents);
 earthIntelBtn?.addEventListener("click", showEarthIntel);
 [qEl, typeEl, sourceEl].forEach((el) => el.addEventListener("change", loadEvents));
+
+document.querySelectorAll(".quick-filter").forEach((btn) => {
+  btn.addEventListener("click", async () => {
+    setEventFilters(btn.dataset.source || "", btn.dataset.type || "", "");
+    await loadEvents();
+  });
+});
+
+quickSpaceBtn?.addEventListener("click", async () => {
+  satellitesToggle.checked = true;
+  satGroupEl.value = satGroupEl.value || "stations";
+  startSatellites(30000);
+});
+
+quickMobilityBtn?.addEventListener("click", async () => {
+  aircraftToggle.checked = true;
+  shipsToggle.checked = true;
+  await loadAircraft();
+  await loadShips();
+  if (!aircraftTimer) aircraftTimer = setInterval(loadAircraft, 10000);
+  if (!shipsTimer) shipsTimer = setInterval(loadShips, 30000);
+});
 
 aircraftToggle.addEventListener("change", async () => {
   if (aircraftToggle.checked) {
