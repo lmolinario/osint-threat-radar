@@ -18,10 +18,15 @@ const shipsToggle = document.getElementById("shipsToggle");
 const milToggle = document.getElementById("milToggle");
 const earthIntelBtn = document.getElementById("earthIntelBtn");
 
-const map = L.map("map").setView([41.9, 12.5], 5);
-L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-  maxZoom: 18,
-  attribution: "&copy; OpenStreetMap contributors",
+const map = L.map("map", {
+  zoomControl: false,
+}).setView([41.9, 12.5], 5);
+
+L.control.zoom({ position: "topright" }).addTo(map);
+
+L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
+  maxZoom: 19,
+  attribution: "&copy; OpenStreetMap contributors &copy; CARTO",
 }).addTo(map);
 
 const markersLayer = L.layerGroup().addTo(map);
@@ -58,6 +63,14 @@ function buildQuery() {
   return params.toString();
 }
 
+function eventClass(type) {
+  if (["earthquake", "disaster", "flood", "wildfire", "cyclone", "volcano", "drought", "severe_weather"].includes(type)) {
+    return "ev-earth";
+  }
+  if (type === "military_event") return "ev-mil";
+  return "ev-news";
+}
+
 function eventIcon(type, severity = 20) {
   const glyphByType = {
     earthquake: "●",
@@ -72,12 +85,13 @@ function eventIcon(type, severity = 20) {
     news: "•",
   };
 
-  const size = severity >= 75 ? 18 : severity >= 55 ? 15 : 12;
+  const size = severity >= 75 ? 20 : severity >= 55 ? 17 : 14;
   const glyph = glyphByType[type] || "•";
+  const cls = eventClass(type);
 
   return L.divIcon({
     className: "event-icon",
-    html: `<div style="font-size:${size}px; line-height:${size}px; filter: drop-shadow(0 1px 2px rgba(0,0,0,.45));">${glyph}</div>`,
+    html: `<div class="${cls}" style="font-size:${size}px; line-height:${size}px;">${glyph}</div>`,
     iconSize: [size, size],
     iconAnchor: [size / 2, size / 2],
   });
@@ -112,14 +126,9 @@ async function loadAircraft() {
 
     const icon = L.divIcon({
       className: "aircraft-icon",
-      html: `<div style="
-        transform: rotate(${trk}deg);
-        transform-origin: center;
-        font-size: 16px;
-        line-height: 16px;
-        ">✈</div>`,
-      iconSize: [16, 16],
-      iconAnchor: [8, 8],
+      html: `<div style="transform: rotate(${trk}deg); transform-origin: center; font-size: 18px; line-height: 18px;">✈</div>`,
+      iconSize: [18, 18],
+      iconAnchor: [9, 9],
     });
 
     const m = L.marker([lat, lon], { icon });
@@ -128,6 +137,8 @@ async function loadAircraft() {
     );
     m.addTo(aircraftLayer);
   }
+
+  setStatus(`Aerei: ${features.length}${data.stale ? " / stale" : ""}`);
 }
 
 async function loadShips() {
@@ -156,13 +167,7 @@ async function loadShips() {
 
     const icon = L.divIcon({
       className: "ship-icon",
-      html: `<div style="
-        transform: rotate(${course}deg);
-        transform-origin: center;
-        font-size: 17px;
-        line-height: 17px;
-        filter: drop-shadow(0 1px 2px rgba(0,0,0,.35));
-        ">▲</div>`,
+      html: `<div style="transform: rotate(${course}deg); transform-origin: center; font-size: 18px; line-height: 18px;">▲</div>`,
       iconSize: [18, 18],
       iconAnchor: [9, 9],
     });
@@ -174,11 +179,11 @@ async function loadShips() {
     m.addTo(shipsLayer);
   }
 
-  setStatus(`Navi: ${features.length}${data.demo ? " (demo)" : ""}`);
+  setStatus(`Navi: ${features.length}${data.demo ? " / demo" : ""}`);
 }
 
 async function loadEvents() {
-  setStatus("Caricamento...");
+  setStatus("Caricamento eventi...");
   markersLayer.clearLayers();
   eventsEl.innerHTML = "";
 
@@ -207,6 +212,10 @@ async function loadEvents() {
 
     const div = document.createElement("div");
     div.className = "event";
+    if (p.type === "military_event") div.style.borderLeftColor = "rgba(249,115,22,.9)";
+    if (["earthquake", "disaster", "flood", "wildfire", "cyclone", "volcano", "drought", "severe_weather"].includes(p.type)) {
+      div.style.borderLeftColor = "rgba(34,197,94,.9)";
+    }
     div.innerHTML = `
       <h4>${esc(title)}</h4>
       <small>${esc(p.source)} • ${esc(p.type)} • severity ${severity} • ${esc(ts)}</small>
@@ -232,7 +241,7 @@ async function loadEvents() {
 }
 
 async function showEarthIntel() {
-  setStatus("Aggiornamento Earth/Disaster Intelligence...");
+  setStatus("Aggiornamento Earth Intelligence...");
 
   try {
     await fetch(api("/refresh/earth-intel"), { method: "POST", cache: "no-store" });
@@ -279,9 +288,9 @@ function clearSatellites() {
 function addSatelliteMarker(s) {
   const icon = L.divIcon({
     className: "sat-icon",
-    html: "🛰️",
-    iconSize: [20, 20],
-    iconAnchor: [10, 10],
+    html: `<div style="font-size: 18px; line-height: 18px;">◆</div>`,
+    iconSize: [18, 18],
+    iconAnchor: [9, 9],
   });
 
   const m = L.marker([s.lat, s.lon], { icon }).bindPopup(
@@ -290,7 +299,8 @@ function addSatelliteMarker(s) {
     Lat: ${s.lat.toFixed(3)}<br/>
     Lon: ${s.lon.toFixed(3)}<br/>
     Alt: ${Number(s.alt_km).toFixed(1)} km<br/>
-    Vel: ${Number(s.speed_kms).toFixed(2)} km/s`
+    Vel: ${Number(s.speed_kms).toFixed(2)} km/s<br/>
+    <small>${esc(s.source_format || "")}</small>`
   );
 
   m.addTo(satellitesLayer);
@@ -315,7 +325,7 @@ async function refreshSatellites() {
 
     for (const s of data.items || []) addSatelliteMarker(s);
 
-    setStatus(`Satelliti (viewport): ${data.count}${data.truncated ? " / truncated" : ""}`);
+    setStatus(`Satelliti ${group}: ${data.count}${data.truncated ? " / truncated" : ""}`);
   } catch (e) {
     console.error(e);
     setStatus(`Satelliti: errore (${e.message})`);
