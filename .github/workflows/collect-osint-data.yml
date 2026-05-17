@@ -4,7 +4,7 @@ on:
   schedule:
     # GitHub cron runs in UTC. The job is intentionally offset from minute 0
     # to reduce scheduling delays during high-load periods.
-    - cron: "7/15 * * * *"
+    - cron: "7,22,37,52 * * * *"
   workflow_dispatch:
 
 permissions:
