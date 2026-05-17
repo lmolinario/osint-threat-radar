@@ -25,20 +25,30 @@ class Event:
 
 class InMemoryEventStore:
     """
-    MVP store: holds latest events in memory.
-    Replace later with Postgres/PostGIS.
+    MVP store: holds only a bounded set of recent normalized events in memory.
+    Replace later with Postgres/PostGIS for durable history.
     """
-    def __init__(self, max_events: int = 2000) -> None:
+    def __init__(self, max_events: int = 800) -> None:
         self._max = max_events
         self._lock = Lock()
         self._events: List[Event] = []
+
+    @staticmethod
+    def _compact_event(event: Event) -> Event:
+        """Drop provider raw payloads before storing events in RAM."""
+        event.raw = {}
+        if event.summary and len(event.summary) > 700:
+            event.summary = event.summary[:700]
+        if len(event.tags) > 12:
+            event.tags = event.tags[:12]
+        return event
 
     def upsert_many(self, events: List[Event]) -> int:
         if not events:
             return 0
         with self._lock:
             existing_ids = {e.id for e in self._events}
-            new_events = [e for e in events if e.id not in existing_ids]
+            new_events = [self._compact_event(e) for e in events if e.id not in existing_ids]
             if not new_events:
                 return 0
             self._events.extend(new_events)
@@ -67,7 +77,7 @@ class InMemoryEventStore:
             ql = q.lower()
             items = [e for e in items if ql in e.title.lower() or ql in (e.summary or "").lower()]
 
-        return items[: max(1, min(limit, 2000))]
+        return items[: max(1, min(limit, self._max))]
 
 
 STORE = InMemoryEventStore()
