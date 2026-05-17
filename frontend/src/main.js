@@ -14,6 +14,8 @@ const typeEl = document.getElementById("type");
 const sourceEl = document.getElementById("source");
 const refreshBtn = document.getElementById("refresh");
 const aircraftToggle = document.getElementById("aircraftToggle");
+const shipsToggle = document.getElementById("shipsToggle");
+const milToggle = document.getElementById("milToggle");
 const earthIntelBtn = document.getElementById("earthIntelBtn");
 
 const map = L.map("map").setView([41.9, 12.5], 5);
@@ -24,7 +26,9 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 
 const markersLayer = L.layerGroup().addTo(map);
 const aircraftLayer = L.layerGroup().addTo(map);
+const shipsLayer = L.layerGroup().addTo(map);
 let aircraftTimer = null;
+let shipsTimer = null;
 let didAutoFitEvents = false;
 
 function setStatus(msg) {
@@ -64,6 +68,7 @@ function eventIcon(type, severity = 20) {
     drought: "□",
     severe_weather: "✦",
     disaster: "■",
+    military_event: "⚑",
     news: "•",
   };
 
@@ -123,6 +128,53 @@ async function loadAircraft() {
     );
     m.addTo(aircraftLayer);
   }
+}
+
+async function loadShips() {
+  shipsLayer.clearLayers();
+
+  const b = map.getBounds();
+  const lamin = b.getSouth();
+  const lamax = b.getNorth();
+  const lomin = b.getWest();
+  const lomax = b.getEast();
+
+  const url = api(`/ships?demo=true&lamin=${lamin}&lamax=${lamax}&lomin=${lomin}&lomax=${lomax}`);
+  const res = await fetch(url, { cache: "no-store" });
+  if (!res.ok) return;
+
+  const data = await res.json();
+  const features = data.features || [];
+
+  for (const f of features) {
+    if (!f.geometry || f.geometry.type !== "Point") continue;
+
+    const [lon, lat] = f.geometry.coordinates;
+    const p = f.properties || {};
+    const course = p.course_deg != null ? Number(p.course_deg) : 0;
+    const name = p.name || f.id;
+
+    const icon = L.divIcon({
+      className: "ship-icon",
+      html: `<div style="
+        transform: rotate(${course}deg);
+        transform-origin: center;
+        font-size: 17px;
+        line-height: 17px;
+        filter: drop-shadow(0 1px 2px rgba(0,0,0,.35));
+        ">▲</div>`,
+      iconSize: [18, 18],
+      iconAnchor: [9, 9],
+    });
+
+    const m = L.marker([lat, lon], { icon });
+    m.bindPopup(
+      `<b>${esc(name)}</b><br/>Type: ${esc(p.ship_type || "n/a")}<br/>MMSI: ${esc(p.mmsi || "n/a")}<br/>Speed: ${esc(String(p.speed_kn ?? "n/a"))} kn<br/>Course: ${Math.round(course)}°<br/>Destination: ${esc(p.destination || "n/a")}<br/><small>${esc(p.source || "")}</small>`
+    );
+    m.addTo(shipsLayer);
+  }
+
+  setStatus(`Navi: ${features.length}${data.demo ? " (demo)" : ""}`);
 }
 
 async function loadEvents() {
@@ -195,6 +247,22 @@ async function showEarthIntel() {
   await loadEvents();
 }
 
+async function showMilitaryEvents() {
+  setStatus("Aggiornamento eventi militari OSINT...");
+
+  try {
+    await fetch(api("/refresh/military-events"), { method: "POST", cache: "no-store" });
+  } catch (e) {
+    console.warn("Military OSINT manual refresh failed, showing cached events", e);
+  }
+
+  sourceEl.value = "military_osint";
+  typeEl.value = "";
+  qEl.value = "";
+  didAutoFitEvents = false;
+  await loadEvents();
+}
+
 const satellitesToggle = document.getElementById("satellitesToggle");
 const satellitesLayer = L.layerGroup().addTo(map);
 let satellitesTimer = null;
@@ -239,7 +307,7 @@ async function refreshSatellites() {
     const lomin = b.getWest();
     const lomax = b.getEast();
 
-    const url = api(`/satellites?group=${encodeURIComponent(group)}&lamin=${lamin}&lamax=${lamax}&lomin=${lomin}&lomax=${lomax}`);
+    const url = api(`/satellites?group=${encodeURIComponent(group)}&limit=1000&lamin=${lamin}&lamax=${lamax}&lomin=${lomin}&lomax=${lomax}`);
     const r = await fetch(url, { cache: "no-store" });
 
     if (!r.ok) throw new Error(`HTTP ${r.status}`);
@@ -247,7 +315,7 @@ async function refreshSatellites() {
 
     for (const s of data.items || []) addSatelliteMarker(s);
 
-    setStatus(`Satelliti (viewport): ${data.count}`);
+    setStatus(`Satelliti (viewport): ${data.count}${data.truncated ? " / truncated" : ""}`);
   } catch (e) {
     console.error(e);
     setStatus(`Satelliti: errore (${e.message})`);
@@ -273,6 +341,26 @@ satellitesToggle?.addEventListener("change", (e) => {
   else stopSatellites();
 });
 
+shipsToggle?.addEventListener("change", async (e) => {
+  if (e.target.checked) {
+    await loadShips();
+    shipsTimer = setInterval(loadShips, 30000);
+  } else {
+    if (shipsTimer) clearInterval(shipsTimer);
+    shipsTimer = null;
+    shipsLayer.clearLayers();
+  }
+});
+
+milToggle?.addEventListener("change", async (e) => {
+  if (e.target.checked) {
+    await showMilitaryEvents();
+  } else if (sourceEl.value === "military_osint") {
+    sourceEl.value = "";
+    await loadEvents();
+  }
+});
+
 refreshBtn.addEventListener("click", loadEvents);
 earthIntelBtn?.addEventListener("click", showEarthIntel);
 [qEl, typeEl, sourceEl].forEach((el) => el.addEventListener("change", loadEvents));
@@ -290,6 +378,7 @@ aircraftToggle.addEventListener("change", async () => {
 
 map.on("moveend", () => {
   if (aircraftToggle.checked) loadAircraft();
+  if (shipsToggle?.checked) loadShips();
   if (satellitesToggle?.checked) refreshSatellites();
 });
 
