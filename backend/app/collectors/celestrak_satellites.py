@@ -19,14 +19,17 @@ JSON_FIRST_GROUPS = {"starlink"}
 
 
 def fetch_celestrak_tle(group: str = DEFAULT_GROUP, timeout: int = 20) -> str:
-    params = {"GROUP": group.upper(), "FORMAT": "TLE"}
+    # Keep group value case as provided: CelesTrak groups are effectively
+    # case-sensitive for values such as stations, gps-ops and starlink.
+    params = {"GROUP": group, "FORMAT": "TLE"}
     response = requests.get(CELESTRAK_GP_URL, params=params, headers=HEADERS, timeout=timeout)
     response.raise_for_status()
     return response.text
 
 
 def fetch_celestrak_json(group: str = DEFAULT_GROUP, timeout: int = 30) -> List[Dict[str, Any]]:
-    params = {"GROUP": group.upper(), "FORMAT": "JSON"}
+    # Keep group value case as provided: do not transform starlink to STARLINK.
+    params = {"GROUP": group, "FORMAT": "JSON"}
     response = requests.get(CELESTRAK_GP_URL, params=params, headers=HEADERS, timeout=timeout)
     response.raise_for_status()
     data = response.json()
