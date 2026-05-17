@@ -11,8 +11,10 @@ from sgp4.omm import initialize as initialize_omm
 
 from app.collectors.celestrak_satellites import TLECache
 from app.collectors.earth_intel_collector import fetch_earth_intel_events
+from app.collectors.military_events_collector import fetch_military_events
 from app.collectors.opensky_aircraft import fetch_aircraft
 from app.collectors.rss_collector import fetch_rss_events
+from app.collectors.ships_collector import fetch_ships
 from app.services.store import STORE, now_iso
 
 
@@ -54,9 +56,7 @@ def list_events(
     q: Optional[str] = None,
     limit: int = Query(default=200, ge=1, le=2000),
 ):
-    """
-    Return normalized events as a GeoJSON FeatureCollection.
-    """
+    """Return normalized events as a GeoJSON FeatureCollection."""
     items = STORE.list(source=source, type_=type, q=q, limit=limit)
 
     features = []
@@ -89,12 +89,7 @@ def list_events(
 
 @app.post("/refresh/earth-intel")
 def refresh_earth_intel():
-    """
-    Manually refresh Earth/disaster intelligence events.
-
-    This endpoint is useful after deployment or during demos because the MVP
-    store is still in memory and is repopulated at startup/scheduler runtime.
-    """
+    """Manually refresh Earth/disaster intelligence events."""
     events = fetch_earth_intel_events()
     inserted = STORE.upsert_many(events)
     return {
@@ -105,6 +100,34 @@ def refresh_earth_intel():
     }
 
 
+@app.post("/refresh/military-events")
+def refresh_military_events():
+    """Manually refresh OSINT military/conflict events."""
+    events = fetch_military_events()
+    inserted = STORE.upsert_many(events)
+    return {
+        "generated_at": now_iso(),
+        "fetched": len(events),
+        "inserted": inserted,
+        "source": "military_osint",
+    }
+
+
+@app.get("/ships")
+def ships(
+    lamin: Optional[float] = Query(default=None),
+    lamax: Optional[float] = Query(default=None),
+    lomin: Optional[float] = Query(default=None),
+    lomax: Optional[float] = Query(default=None),
+    demo: bool = Query(default=True),
+):
+    """Return AIS ships as GeoJSON. Demo mode is enabled unless a provider is configured."""
+    bbox = None
+    if None not in (lamin, lamax, lomin, lomax):
+        bbox = (lamin, lamax, lomin, lomax)
+    return fetch_ships(bbox=bbox, demo=demo)
+
+
 @app.get("/aircraft")
 def aircraft(
     lamin: Optional[float] = Query(default=None),
@@ -112,13 +135,7 @@ def aircraft(
     lomin: Optional[float] = Query(default=None),
     lomax: Optional[float] = Query(default=None),
 ):
-    """
-    Live aircraft layer from OpenSky, optionally filtered by viewport bbox.
-
-    The OpenSky collector already returns normalized GeoJSON features. This
-    endpoint adapts property names for the frontend while preserving collector
-    metadata such as errors, stale responses and rate-limit hints.
-    """
+    """Live aircraft layer from OpenSky, optionally filtered by viewport bbox."""
     bbox = None
     if None not in (lamin, lamax, lomin, lomax):
         bbox = (lamin, lamax, lomin, lomax)
@@ -200,6 +217,17 @@ async def _earth_intel_scheduler() -> None:
         await asyncio.sleep(300)
 
 
+async def _military_events_scheduler() -> None:
+    while True:
+        try:
+            inserted = STORE.upsert_many(fetch_military_events())
+            if inserted:
+                print(f"[military_events_scheduler] inserted={inserted}")
+        except Exception as exc:
+            print(f"[military_events_scheduler] error: {exc}")
+        await asyncio.sleep(300)
+
+
 @app.on_event("startup")
 async def startup_event():
     try:
@@ -212,14 +240,18 @@ async def startup_event():
     except Exception as exc:
         print(f"[startup] earth intel fetch error: {exc}")
 
+    try:
+        STORE.upsert_many(fetch_military_events())
+    except Exception as exc:
+        print(f"[startup] military events fetch error: {exc}")
+
     asyncio.create_task(_rss_scheduler())
     asyncio.create_task(_earth_intel_scheduler())
+    asyncio.create_task(_military_events_scheduler())
 
 
 def eci_to_geodetic_simple(x_km: float, y_km: float, z_km: float):
-    """
-    Approximate ECI-to-geodetic conversion for the MVP satellite layer.
-    """
+    """Approximate ECI-to-geodetic conversion for the MVP satellite layer."""
     import math
 
     radius_km = math.sqrt(x_km * x_km + y_km * y_km + z_km * z_km)
@@ -248,7 +280,6 @@ def _satrec_from_catalog_item(item: Dict) -> Satrec:
         sat = Satrec()
         initialize_omm(sat, item["omm"])
         return sat
-
     return Satrec.twoline2rv(item["line1"], item["line2"])
 
 
@@ -281,10 +312,6 @@ def satellites(
     items: List[Dict] = []
     total_visible = 0
     skipped = 0
-
-    # Without a viewport filter, avoid propagating very large constellations
-    # just to discard most records later. This keeps Starlink queries small
-    # and predictable while still reporting the total catalog size.
     iterable = catalog if has_bbox else catalog[:limit]
 
     for item in iterable:
