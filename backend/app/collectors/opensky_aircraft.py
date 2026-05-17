@@ -16,9 +16,11 @@ OPENSKY_TOKEN_URL = (
     "protocol/openid-connect/token"
 )
 
-TTL_OK = int(os.getenv("OPENSKY_CACHE_TTL_OK", "15"))
-TTL_ERROR = int(os.getenv("OPENSKY_CACHE_TTL_ERROR", "90"))
+# Render-friendly defaults: avoid frequent provider calls and unbounded memory growth.
+TTL_OK = int(os.getenv("OPENSKY_CACHE_TTL_OK", "60"))
+TTL_ERROR = int(os.getenv("OPENSKY_CACHE_TTL_ERROR", "180"))
 OPENSKY_TIMEOUT = float(os.getenv("OPENSKY_TIMEOUT", "8"))
+OPENSKY_MAX_CACHE_KEYS = int(os.getenv("OPENSKY_MAX_CACHE_KEYS", "24"))
 TOKEN_REFRESH_MARGIN = 30
 
 _CACHE: Dict[str, Dict[str, Any]] = {}
@@ -31,8 +33,33 @@ _TOKEN_CACHE: Dict[str, Any] = {
 _TOKEN_LOCK = threading.Lock()
 
 
+def _normalize_bbox(bbox: Tuple[float, float, float, float]) -> Tuple[float, float, float, float]:
+    """
+    Normalize viewport coordinates before using them as cache keys.
+
+    Leaflet sends slightly different decimal coordinates after every pan/zoom.
+    Without normalization, each map movement creates a new cache entry and can
+    keep increasing memory usage on small Render instances.
+    """
+    min_lat, max_lat, min_lon, max_lon = bbox
+
+    # Clamp to valid geographic bounds.
+    min_lat = max(-90.0, min(90.0, min_lat))
+    max_lat = max(-90.0, min(90.0, max_lat))
+    min_lon = max(-180.0, min(180.0, min_lon))
+    max_lon = max(-180.0, min(180.0, max_lon))
+
+    # Keep cache buckets coarse enough for reuse but precise enough for the map.
+    return (
+        round(min_lat, 1),
+        round(max_lat, 1),
+        round(min_lon, 1),
+        round(max_lon, 1),
+    )
+
+
 def _bbox_key(b: Tuple[float, float, float, float]) -> str:
-    return f"{b[0]:.4f},{b[1]:.4f},{b[2]:.4f},{b[3]:.4f}"
+    return f"{b[0]:.1f},{b[1]:.1f},{b[2]:.1f},{b[3]:.1f}"
 
 
 def _now() -> float:
@@ -62,6 +89,17 @@ def _get_cache(key: str) -> Optional[Dict[str, Any]]:
         return _CACHE.get(key)
 
 
+def _prune_cache_locked() -> None:
+    """Keep only the most recent cache buckets to avoid memory growth."""
+    if len(_CACHE) <= OPENSKY_MAX_CACHE_KEYS:
+        return
+
+    ordered_keys = sorted(_CACHE, key=lambda k: float(_CACHE[k].get("ts", 0.0)))
+    keys_to_remove = ordered_keys[: max(0, len(_CACHE) - OPENSKY_MAX_CACHE_KEYS)]
+    for key in keys_to_remove:
+        _CACHE.pop(key, None)
+
+
 def _set_cache(key: str, data: Dict[str, Any], ttl: int) -> None:
     with _CACHE_LOCK:
         _CACHE[key] = {
@@ -69,6 +107,7 @@ def _set_cache(key: str, data: Dict[str, Any], ttl: int) -> None:
             "ttl": ttl,
             "data": data,
         }
+        _prune_cache_locked()
 
 
 def _is_cache_valid(hit: Dict[str, Any]) -> bool:
@@ -167,7 +206,7 @@ def _state_to_feature(row: List[Any]) -> Optional[Dict[str, Any]]:
 def fetch_aircraft(
     bbox: Optional[Tuple[float, float, float, float]] = None,
 ) -> Dict[str, Any]:
-    bbox = bbox or IT_BBOX
+    bbox = _normalize_bbox(bbox or IT_BBOX)
     key = _bbox_key(bbox)
 
     hit = _get_cache(key)
