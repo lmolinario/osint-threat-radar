@@ -11,29 +11,270 @@
       integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
       crossorigin=""
     />
+
     <style>
-      html, body { height: 100%; margin: 0; }
-      #app { height: 100%; display: grid; grid-template-columns: 380px 1fr; }
-      #sidebar { border-right: 1px solid #ddd; padding: 10px; overflow: auto; font-family: system-ui, sans-serif; }
-      #map { height: 100%; }
-      .event { padding: 8px; border: 1px solid #eee; border-radius: 8px; margin-bottom: 8px; }
-      .event h4 { margin: 0 0 6px 0; font-size: 14px; }
-      .event small { color: #666; }
-      .event .summary { margin-top: 6px; color: #444; font-size: 12px; line-height: 1.35; }
-      .controls { display: grid; gap: 8px; margin-bottom: 10px; }
-      input, select { padding: 8px; border: 1px solid #ccc; border-radius: 8px; }
-      .layer-group { border: 1px solid #eee; border-radius: 10px; padding: 8px; display: grid; gap: 6px; }
-      .layer-title { font-size: 12px; font-weight: 700; color: #444; text-transform: uppercase; letter-spacing: .04em; }
-      @media (max-width: 900px) { #app { grid-template-columns: 1fr; grid-template-rows: 340px 1fr; } #sidebar { border-right: none; border-top: 1px solid #ddd; } }
+      :root {
+        --bg: #06111f;
+        --panel: rgba(11, 22, 38, 0.96);
+        --panel-2: rgba(15, 31, 54, 0.92);
+        --panel-3: rgba(20, 42, 70, 0.88);
+        --border: rgba(148, 163, 184, 0.20);
+        --text: #e5eefb;
+        --muted: #8ea3bd;
+        --soft: #c6d3e3;
+        --accent: #38bdf8;
+        --earth: #22c55e;
+        --air: #38bdf8;
+        --ship: #14b8a6;
+        --sat: #a78bfa;
+        --mil: #f97316;
+        --danger: #ef4444;
+        --warning: #facc15;
+        --shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
+      }
+
+      * { box-sizing: border-box; }
+      html, body { height: 100%; margin: 0; background: var(--bg); color: var(--text); }
+      body { font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+
+      #app {
+        height: 100%;
+        display: grid;
+        grid-template-columns: 410px 1fr;
+        background: radial-gradient(circle at top left, rgba(56,189,248,0.16), transparent 34%), var(--bg);
+      }
+
+      #sidebar {
+        position: relative;
+        z-index: 500;
+        overflow: auto;
+        padding: 18px;
+        border-right: 1px solid var(--border);
+        background: linear-gradient(180deg, rgba(8, 20, 36, 0.98), rgba(4, 10, 20, 0.98));
+        box-shadow: var(--shadow);
+      }
+
+      #map { height: 100%; background: #06111f; }
+      .leaflet-control-attribution { background: rgba(4, 10, 20, 0.75) !important; color: var(--muted) !important; }
+      .leaflet-control-attribution a { color: var(--accent) !important; }
+      .leaflet-popup-content-wrapper, .leaflet-popup-tip {
+        background: #0b1626;
+        color: var(--text);
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow);
+      }
+      .leaflet-popup-content { font-size: 12px; line-height: 1.45; }
+      .leaflet-popup-content small { color: var(--muted); }
+
+      .brand {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 12px;
+        margin-bottom: 14px;
+      }
+      .brand h1 {
+        margin: 0;
+        font-size: 20px;
+        letter-spacing: -0.03em;
+        line-height: 1.05;
+      }
+      .brand p {
+        margin: 6px 0 0;
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.35;
+      }
+      .brand-mark {
+        width: 42px;
+        height: 42px;
+        border-radius: 14px;
+        display: grid;
+        place-items: center;
+        color: #06111f;
+        font-weight: 900;
+        background: linear-gradient(135deg, #38bdf8, #22c55e);
+        box-shadow: 0 0 28px rgba(56, 189, 248, 0.28);
+      }
+
+      .status-row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+        margin-bottom: 14px;
+      }
+      .status-card {
+        border: 1px solid var(--border);
+        background: var(--panel-2);
+        border-radius: 14px;
+        padding: 10px;
+      }
+      .status-label { color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: .08em; }
+      .status-value { margin-top: 4px; font-weight: 800; font-size: 14px; }
+
+      .controls { display: grid; gap: 10px; margin-bottom: 12px; }
+      input, select, button {
+        width: 100%;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        background: rgba(15, 31, 54, 0.86);
+        color: var(--text);
+        padding: 10px 11px;
+        outline: none;
+      }
+      input::placeholder { color: #64748b; }
+      button { cursor: pointer; transition: transform .12s ease, border-color .12s ease, background .12s ease; }
+      button:hover { transform: translateY(-1px); border-color: rgba(56,189,248,.55); background: rgba(30, 58, 92, .92); }
+
+      .section-title {
+        margin: 16px 0 8px;
+        color: var(--soft);
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+      }
+
+      .layer-group {
+        display: grid;
+        gap: 8px;
+      }
+      .layer-card {
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        background: var(--panel-2);
+        padding: 11px;
+        transition: border-color .12s ease, background .12s ease;
+      }
+      .layer-card:hover { border-color: rgba(148, 163, 184, 0.38); background: var(--panel-3); }
+      .layer-card label {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+      }
+      .layer-card input[type="checkbox"] {
+        width: 16px;
+        height: 16px;
+        accent-color: var(--accent);
+      }
+      .layer-main { display: grid; gap: 3px; }
+      .layer-name { font-size: 13px; font-weight: 800; }
+      .layer-desc { font-size: 11px; color: var(--muted); line-height: 1.35; }
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        border-radius: 999px;
+        padding: 3px 7px;
+        font-size: 9px;
+        font-weight: 900;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+        color: #06111f;
+      }
+      .badge-live { background: var(--air); }
+      .badge-demo { background: var(--ship); }
+      .badge-osint { background: var(--mil); }
+      .badge-earth { background: var(--earth); }
+      .badge-space { background: var(--sat); }
+
+      .action-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin: 12px 0;
+      }
+      #status {
+        display: block;
+        min-height: 18px;
+        color: var(--muted);
+        font-size: 11px;
+        margin-bottom: 10px;
+      }
+
+      .event {
+        border: 1px solid var(--border);
+        border-left: 3px solid rgba(56,189,248,0.75);
+        border-radius: 14px;
+        background: rgba(15, 31, 54, 0.72);
+        padding: 10px;
+        margin-bottom: 8px;
+      }
+      .event h4 { margin: 0 0 6px 0; font-size: 13px; line-height: 1.25; }
+      .event small { color: var(--muted); }
+      .event .summary { margin-top: 7px; color: #bfd0e5; font-size: 12px; line-height: 1.4; }
+      .event a { color: var(--accent); text-decoration: none; }
+      .event a:hover { text-decoration: underline; }
+
+      .map-legend {
+        position: absolute;
+        right: 18px;
+        bottom: 18px;
+        z-index: 450;
+        display: grid;
+        gap: 7px;
+        min-width: 190px;
+        padding: 12px;
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        background: rgba(4, 10, 20, 0.84);
+        backdrop-filter: blur(12px);
+        box-shadow: var(--shadow);
+        font-size: 11px;
+      }
+      .legend-title { color: var(--soft); font-weight: 900; text-transform: uppercase; letter-spacing: .08em; font-size: 10px; }
+      .legend-item { display: flex; align-items: center; gap: 8px; color: var(--muted); }
+      .dot { width: 9px; height: 9px; border-radius: 999px; display: inline-block; box-shadow: 0 0 16px currentColor; }
+      .dot-air { color: var(--air); background: var(--air); }
+      .dot-ship { color: var(--ship); background: var(--ship); }
+      .dot-sat { color: var(--sat); background: var(--sat); }
+      .dot-mil { color: var(--mil); background: var(--mil); }
+      .dot-earth { color: var(--earth); background: var(--earth); }
+
+      .aircraft-icon div {
+        color: var(--air);
+        text-shadow: 0 0 10px rgba(56, 189, 248, 0.95), 0 0 18px rgba(56, 189, 248, 0.45);
+      }
+      .ship-icon div {
+        color: var(--ship);
+        text-shadow: 0 0 10px rgba(20, 184, 166, 0.95), 0 0 18px rgba(20, 184, 166, 0.45);
+      }
+      .sat-icon div {
+        color: var(--sat);
+        text-shadow: 0 0 10px rgba(167, 139, 250, 0.95), 0 0 18px rgba(167, 139, 250, 0.45);
+      }
+      .event-icon .ev-earth { color: var(--earth); text-shadow: 0 0 12px rgba(34,197,94,.8); }
+      .event-icon .ev-mil { color: var(--mil); text-shadow: 0 0 12px rgba(249,115,22,.8); }
+      .event-icon .ev-news { color: var(--accent); text-shadow: 0 0 12px rgba(56,189,248,.7); }
+
+      @media (max-width: 980px) {
+        #app { grid-template-columns: 1fr; grid-template-rows: 48vh 52vh; }
+        #sidebar { grid-row: 2; border-right: none; border-top: 1px solid var(--border); }
+        #map { grid-row: 1; }
+        .map-legend { display: none; }
+      }
     </style>
   </head>
   <body>
     <div id="app">
-      <div id="sidebar">
-        <h3 style="margin: 6px 0 10px 0;">OSINT Threat Radar</h3>
+      <aside id="sidebar">
+        <div class="brand">
+          <div>
+            <h1>OSINT Threat Radar</h1>
+            <p>DFAAS geospatial intelligence dashboard for cyber, earth, mobility, space and conflict signals.</p>
+          </div>
+          <div class="brand-mark">R</div>
+        </div>
+
+        <div class="status-row">
+          <div class="status-card"><div class="status-label">API</div><div class="status-value">LIVE</div></div>
+          <div class="status-card"><div class="status-label">Mode</div><div class="status-value">MVP</div></div>
+          <div class="status-card"><div class="status-label">AIS</div><div class="status-value">DEMO</div></div>
+        </div>
 
         <div class="controls">
-          <input id="q" placeholder="Cerca (testo)..." />
+          <input id="q" placeholder="Cerca evento, paese, fonte..." />
 
           <select id="type">
             <option value="">Tutti i tipi</option>
@@ -56,25 +297,33 @@
             <option value="usgs">usgs</option>
             <option value="gdacs">gdacs</option>
           </select>
+        </div>
 
-          <div class="layer-group">
-            <div class="layer-title">Live mobility / space</div>
-            <label style="display:flex; gap:8px; align-items:center;">
+        <div class="section-title">Layer console</div>
+        <div class="layer-group">
+          <div class="layer-card">
+            <label>
               <input type="checkbox" id="aircraftToggle" />
-              Aerei live (OpenSky)
+              <span class="layer-main"><span class="layer-name">Aerei live</span><span class="layer-desc">OpenSky viewport layer, aggiornamento rapido.</span></span>
+              <span class="badge badge-live">live</span>
             </label>
+          </div>
 
-            <label style="display:flex; gap:8px; align-items:center;">
+          <div class="layer-card">
+            <label>
               <input type="checkbox" id="shipsToggle" />
-              Navi (AIS demo/provider)
+              <span class="layer-main"><span class="layer-name">Navi AIS</span><span class="layer-desc">Demo locale, pronto per provider AIS reale.</span></span>
+              <span class="badge badge-demo">demo</span>
             </label>
+          </div>
 
-            <label style="display:flex; gap:.5rem; align-items:center;">
+          <div class="layer-card">
+            <label>
               <input type="checkbox" id="satellitesToggle" />
-              Satelliti
+              <span class="layer-main"><span class="layer-name">Satelliti</span><span class="layer-desc">CelesTrak + SGP4, con gruppi selezionabili.</span></span>
+              <span class="badge badge-space">space</span>
             </label>
-
-            <select id="satGroup">
+            <select id="satGroup" style="margin-top:9px;">
               <option value="stations">stations (ISS ecc.)</option>
               <option value="active">active (tutti)</option>
               <option value="starlink">starlink</option>
@@ -82,31 +331,40 @@
             </select>
           </div>
 
-          <div class="layer-group">
-            <div class="layer-title">Earth / disaster intelligence</div>
-            <button id="earthIntelBtn" style="padding:8px 10px; border-radius:8px; border:1px solid #ccc; background:#fff; cursor:pointer;">
-              Mostra terremoti e disastri
-            </button>
-            <small style="color:#666;">Fonti: USGS + GDACS</small>
+          <div class="layer-card">
+            <label>
+              <input type="checkbox" id="milToggle" />
+              <span class="layer-main"><span class="layer-name">Eventi militari OSINT</span><span class="layer-desc">RSS filtrati per conflitti, missili, droni e difesa.</span></span>
+              <span class="badge badge-osint">osint</span>
+            </label>
           </div>
-
-          <label style="display:flex; gap:8px; align-items:center;">
-            <input type="checkbox" id="milToggle" />
-            Eventi militari OSINT
-          </label>
         </div>
 
-        <div style="display:flex; gap:8px; margin-bottom:10px;">
-          <button id="refresh" style="padding:8px 10px; border-radius:8px; border:1px solid #ccc; background:#fff; cursor:pointer;">
-            Aggiorna
-          </button>
-          <small id="status" style="align-self:center; color:#666;"></small>
+        <div class="section-title">Earth intelligence</div>
+        <div class="layer-card">
+          <button id="earthIntelBtn">Mostra terremoti e disastri</button>
+          <div class="layer-desc" style="margin-top:8px;">Fonti: USGS + GDACS. Marker verdi su mappa quando disponibili.</div>
         </div>
 
+        <div class="action-grid">
+          <button id="refresh">Aggiorna eventi</button>
+          <button onclick="window.location.reload()">Reload UI</button>
+        </div>
+
+        <small id="status"></small>
         <div id="events"></div>
-      </div>
+      </aside>
 
-      <div id="map"></div>
+      <main id="map"></main>
+
+      <div class="map-legend">
+        <div class="legend-title">Layer colors</div>
+        <div class="legend-item"><span class="dot dot-air"></span>Aerei OpenSky</div>
+        <div class="legend-item"><span class="dot dot-ship"></span>Navi AIS demo/provider</div>
+        <div class="legend-item"><span class="dot dot-sat"></span>Satelliti / GPS / Starlink</div>
+        <div class="legend-item"><span class="dot dot-mil"></span>Eventi militari OSINT</div>
+        <div class="legend-item"><span class="dot dot-earth"></span>Earth intelligence</div>
+      </div>
     </div>
 
     <script type="module" src="/src/main.js"></script>
