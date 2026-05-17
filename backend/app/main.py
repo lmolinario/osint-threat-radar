@@ -7,6 +7,7 @@ from typing import Dict, List, Optional
 from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
 from sgp4.api import Satrec, jday
+from sgp4.omm import initialize as initialize_omm
 
 from app.collectors.celestrak_satellites import TLECache
 from app.collectors.earth_intel_collector import fetch_earth_intel_events
@@ -242,6 +243,15 @@ def _empty_satellite_response(group: str, limit: int, error: str) -> Dict:
     }
 
 
+def _satrec_from_catalog_item(item: Dict) -> Satrec:
+    if item.get("source_format") == "omm_json" and item.get("omm"):
+        sat = Satrec()
+        initialize_omm(sat, item["omm"])
+        return sat
+
+    return Satrec.twoline2rv(item["line1"], item["line2"])
+
+
 @app.get("/satellites")
 def satellites(
     group: str = Query("stations"),
@@ -252,7 +262,7 @@ def satellites(
     limit: int = Query(default=1500, ge=1, le=20000),
 ) -> Dict:
     try:
-        tles = tle_cache.get(group=group)
+        catalog = tle_cache.get(group=group)
     except Exception as exc:
         return _empty_satellite_response(group, limit, f"celestrak_error_{type(exc).__name__}")
 
@@ -267,20 +277,22 @@ def satellites(
     )
 
     has_bbox = None not in (lamin, lamax, lomin, lomax)
-    total_available = len(tles)
+    total_available = len(catalog)
     items: List[Dict] = []
     total_visible = 0
+    skipped = 0
 
     # Without a viewport filter, avoid propagating very large constellations
     # just to discard most records later. This keeps Starlink queries small
     # and predictable while still reporting the total catalog size.
-    iterable = tles if has_bbox else tles[:limit]
+    iterable = catalog if has_bbox else catalog[:limit]
 
-    for tle in iterable:
+    for item in iterable:
         try:
-            sat = Satrec.twoline2rv(tle["line1"], tle["line2"])
+            sat = _satrec_from_catalog_item(item)
             error_code, position, velocity = sat.sgp4(jd, fr)
             if error_code != 0 or position is None:
+                skipped += 1
                 continue
 
             lat, lon, alt_km = eci_to_geodetic_simple(position[0], position[1], position[2])
@@ -297,15 +309,17 @@ def satellites(
 
             items.append(
                 {
-                    "name": tle["name"],
-                    "norad_id": sat.satnum,
+                    "name": item["name"],
+                    "norad_id": int(item.get("norad_id") or sat.satnum),
                     "lat": lat,
                     "lon": lon,
                     "alt_km": alt_km,
                     "speed_kms": speed_kms,
+                    "source_format": item.get("source_format", "tle"),
                 }
             )
         except Exception:
+            skipped += 1
             continue
 
     if not has_bbox:
@@ -319,6 +333,7 @@ def satellites(
         "total_available": total_available,
         "truncated": total_visible > len(items),
         "limit": limit,
+        "skipped": skipped,
         "error": None,
         "items": items,
     }
