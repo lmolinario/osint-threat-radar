@@ -1,10 +1,9 @@
 {
-  "generated_at": "2026-06-23T23:50:02.300733+00:00",
+  "generated_at": "2026-06-24T01:48:13.179037+00:00",
   "providers": {
     "celestrak_gps-ops": {
-      "estimated_objects": 32,
-      "line_count": 96,
-      "ok": true,
+      "error": "ReadTimeout",
+      "ok": false,
       "path": "celestrak/gps-ops.tle"
     },
     "celestrak_starlink": {
@@ -14,9 +13,8 @@
       "path": "celestrak/starlink.tle"
     },
     "celestrak_stations": {
-      "estimated_objects": 24,
-      "line_count": 72,
-      "ok": true,
+      "error": "ReadTimeout",
+      "ok": false,
       "path": "celestrak/stations.tle"
     },
     "opensky_italy": {
