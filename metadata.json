@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-03T16:12:52.765834+00:00",
+  "generated_at": "2026-07-03T17:47:00.658831+00:00",
   "providers": {
     "celestrak_gps-ops": {
       "estimated_objects": 32,
@@ -20,8 +20,9 @@
       "path": "celestrak/stations.tle"
     },
     "opensky_italy": {
-      "error": "ConnectTimeout",
-      "ok": false,
+      "count": 667,
+      "ok": true,
+      "opensky_time": 1783100815,
       "path": "aircraft/italy.geojson"
     }
   },
