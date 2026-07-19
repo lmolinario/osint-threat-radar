@@ -1,16 +1,14 @@
 {
-  "generated_at": "2026-07-18T23:02:58.709363+00:00",
+  "generated_at": "2026-07-19T00:00:33.872083+00:00",
   "providers": {
     "celestrak_gps-ops": {
-      "estimated_objects": 32,
-      "line_count": 96,
-      "ok": true,
+      "error": "ReadTimeout",
+      "ok": false,
       "path": "celestrak/gps-ops.tle"
     },
     "celestrak_starlink": {
-      "estimated_objects": 10783,
-      "line_count": 32349,
-      "ok": true,
+      "error": "ReadTimeout",
+      "ok": false,
       "path": "celestrak/starlink.tle"
     },
     "celestrak_stations": {
