@@ -1,16 +1,14 @@
 {
-  "generated_at": "2026-08-16T11:48:28.577883+00:00",
+  "generated_at": "2026-08-16T12:00:49.260301+00:00",
   "providers": {
     "celestrak_gps-ops": {
-      "estimated_objects": 32,
-      "line_count": 96,
-      "ok": true,
+      "error": "ReadTimeout",
+      "ok": false,
       "path": "celestrak/gps-ops.tle"
     },
     "celestrak_starlink": {
-      "estimated_objects": 10751,
-      "line_count": 32253,
-      "ok": true,
+      "error": "ReadTimeout",
+      "ok": false,
       "path": "celestrak/starlink.tle"
     },
     "celestrak_stations": {
@@ -20,9 +18,9 @@
       "path": "celestrak/stations.tle"
     },
     "opensky_italy": {
-      "count": 927,
+      "count": 921,
       "ok": true,
-      "opensky_time": 1786880905,
+      "opensky_time": 1786881646,
       "path": "aircraft/italy.geojson"
     }
   },
