@@ -5,33 +5,33 @@
     "lomax": 19.0,
     "lomin": 6.0
   },
-  "count": 103,
+  "count": 169,
   "error": null,
   "features": [
     {
       "geometry": {
         "coordinates": [
-          16.6134,
-          47.4243
+          8.2925,
+          45.0608
         ],
         "type": "Point"
       },
-      "id": "4bc8d6",
+      "id": "511194",
       "properties": {
         "baro_altitude": 11277.6,
-        "callsign": "PGT90ET",
+        "callsign": "MBU5AW",
         "category": 0,
-        "geo_altitude": 11742.42,
-        "icao24": "4bc8d6",
-        "last_contact": 1787625968,
+        "geo_altitude": 11704.32,
+        "icao24": "511194",
+        "last_contact": 1787628795,
         "on_ground": false,
-        "origin_country": "Turkey",
+        "origin_country": "Estonia",
         "position_source": 0,
         "spi": false,
-        "squawk": "6416",
-        "time_position": 1787625968,
-        "true_track": 117.42,
-        "velocity": 261.38,
+        "squawk": "6667",
+        "time_position": 1787628795,
+        "true_track": 207.77,
+        "velocity": 208.72,
         "vertical_rate": 0
       },
       "type": "Feature"
@@ -39,83 +39,55 @@
     {
       "geometry": {
         "coordinates": [
-          18.6913,
-          38.1304
+          11.3836,
+          42.6697
         ],
         "type": "Point"
       },
-      "id": "46b83a",
+      "id": "440202",
       "properties": {
-        "baro_altitude": 11269.98,
-        "callsign": "AEE3EM",
+        "baro_altitude": 6225.54,
+        "callsign": "TAY9VX",
         "category": 0,
-        "geo_altitude": 11932.92,
-        "icao24": "46b83a",
-        "last_contact": 1787625967,
+        "geo_altitude": 6583.68,
+        "icao24": "440202",
+        "last_contact": 1787628795,
         "on_ground": false,
-        "origin_country": "Greece",
+        "origin_country": "Austria",
         "position_source": 0,
         "spi": false,
-        "squawk": "1266",
-        "time_position": 1787625967,
-        "true_track": 96.69,
-        "velocity": 251.73,
-        "vertical_rate": 0
+        "squawk": "1000",
+        "time_position": 1787628795,
+        "true_track": 151.13,
+        "velocity": 212.06,
+        "vertical_rate": -12.35
       },
       "type": "Feature"
     },
     {
       "geometry": {
         "coordinates": [
-          18.1624,
-          47.8522
+          18.4811,
+          43.7589
         ],
         "type": "Point"
       },
-      "id": "4bc8ca",
+      "id": "471f9a",
       "properties": {
-        "baro_altitude": 10683.24,
-        "callsign": "PGT7287",
+        "baro_altitude": 10355.58,
+        "callsign": "WZZ95CH",
         "category": 0,
-        "geo_altitude": 11094.72,
-        "icao24": "4bc8ca",
-        "last_contact": 1787625968,
+        "geo_altitude": 10881.36,
+        "icao24": "471f9a",
+        "last_contact": 1787628795,
         "on_ground": false,
-        "origin_country": "Turkey",
+        "origin_country": "Hungary",
         "position_source": 0,
         "spi": false,
-        "squawk": "1414",
-        "time_position": 1787625967,
-        "true_track": 127.34,
-        "velocity": 251.06,
-        "vertical_rate": 0
-      },
-      "type": "Feature"
-    },
-    {
-      "geometry": {
-        "coordinates": [
-          18.4164,
-          38.5395
-        ],
-        "type": "Point"
-      },
-      "id": "46b831",
-      "properties": {
-        "baro_altitude": 10660.38,
-        "callsign": "AEE9PM",
-        "category": 0,
-        "geo_altitude": 11308.08,
-        "icao24": "46b831",
-        "last_contact": 1787625959,
-        "on_ground": false,
-        "origin_country": "Greece",
-        "position_source": 0,
-        "spi": false,
-        "squawk": "1267",
-        "time_position": 1787625906,
-        "true_track": 92.73,
-        "velocity": 248.76,
+        "squawk": "2241",
+        "time_position": 1787628795,
+        "true_track": 281.87,
+        "velocity": 207.64,
         "vertical_rate": -0.33
       },
       "type": "Feature"
@@ -123,27 +95,55 @@
     {
       "geometry": {
         "coordinates": [
-          7.5656,
-          47.7689
+          8.7183,
+          45.6233
         ],
         "type": "Point"
       },
-      "id": "440202",
+      "id": "471f66",
+      "properties": {
+        "baro_altitude": null,
+        "callsign": "WMT8HM",
+        "category": 0,
+        "geo_altitude": null,
+        "icao24": "471f66",
+        "last_contact": 1787628782,
+        "on_ground": true,
+        "origin_country": "Hungary",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "0437",
+        "time_position": 1787628782,
+        "true_track": 78.75,
+        "velocity": 0,
+        "vertical_rate": null
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          6.8312,
+          46.3408
+        ],
+        "type": "Point"
+      },
+      "id": "34310d",
       "properties": {
         "baro_altitude": 11277.6,
-        "callsign": "TAY9VX",
+        "callsign": "BCS1684",
         "category": 0,
-        "geo_altitude": 11643.36,
-        "icao24": "440202",
-        "last_contact": 1787625968,
+        "geo_altitude": 11658.6,
+        "icao24": "34310d",
+        "last_contact": 1787628795,
         "on_ground": false,
-        "origin_country": "Austria",
+        "origin_country": "Spain",
         "position_source": 0,
         "spi": false,
         "squawk": "1000",
-        "time_position": 1787625967,
-        "true_track": 155.26,
-        "velocity": 216.37,
+        "time_position": 1787628794,
+        "true_track": 215.79,
+        "velocity": 213.74,
         "vertical_rate": 0
       },
       "type": "Feature"
@@ -151,8 +151,120 @@
     {
       "geometry": {
         "coordinates": [
-          7.5063,
-          40.5175
+          18.0581,
+          44.4443
+        ],
+        "type": "Point"
+      },
+      "id": "471f64",
+      "properties": {
+        "baro_altitude": 10965.18,
+        "callsign": "WMT924",
+        "category": 0,
+        "geo_altitude": 11483.34,
+        "icao24": "471f64",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "Hungary",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "7351",
+        "time_position": 1787628794,
+        "true_track": 271.18,
+        "velocity": 200.16,
+        "vertical_rate": -0.33
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          15.8713,
+          42.7202
+        ],
+        "type": "Point"
+      },
+      "id": "471f70",
+      "properties": {
+        "baro_altitude": 10347.96,
+        "callsign": "WZZ7G",
+        "category": 0,
+        "geo_altitude": 10888.98,
+        "icao24": "471f70",
+        "last_contact": 1787628775,
+        "on_ground": false,
+        "origin_country": "Hungary",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "7346",
+        "time_position": 1787628754,
+        "true_track": 259.76,
+        "velocity": 216.95,
+        "vertical_rate": 0.98
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          15.9939,
+          44.1451
+        ],
+        "type": "Point"
+      },
+      "id": "471f5d",
+      "properties": {
+        "baro_altitude": 10972.8,
+        "callsign": "WMT1041",
+        "category": 0,
+        "geo_altitude": 11513.82,
+        "icao24": "471f5d",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "Hungary",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "0511",
+        "time_position": 1787628795,
+        "true_track": 255.39,
+        "velocity": 199.89,
+        "vertical_rate": 0
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          17.8097,
+          46.0641
+        ],
+        "type": "Point"
+      },
+      "id": "471f55",
+      "properties": {
+        "baro_altitude": 10988.04,
+        "callsign": "WMT5899",
+        "category": 0,
+        "geo_altitude": 11468.1,
+        "icao24": "471f55",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "Hungary",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "1000",
+        "time_position": 1787628795,
+        "true_track": 258.66,
+        "velocity": 206.73,
+        "vertical_rate": 0
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          13.302,
+          45.0087
         ],
         "type": "Point"
       },
@@ -161,17 +273,45 @@
         "baro_altitude": 10980.42,
         "callsign": "WZZ1JS",
         "category": 0,
-        "geo_altitude": 11574.78,
+        "geo_altitude": 11506.2,
         "icao24": "471f3d",
-        "last_contact": 1787625968,
+        "last_contact": 1787628795,
         "on_ground": false,
         "origin_country": "Hungary",
         "position_source": 0,
         "spi": false,
         "squawk": "1000",
-        "time_position": 1787625968,
-        "true_track": 66.4,
-        "velocity": 267.23,
+        "time_position": 1787628795,
+        "true_track": 39.97,
+        "velocity": 253.07,
+        "vertical_rate": -0.33
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          12.8622,
+          40.8015
+        ],
+        "type": "Point"
+      },
+      "id": "4bb470",
+      "properties": {
+        "baro_altitude": 10980.42,
+        "callsign": "MNB546",
+        "category": 0,
+        "geo_altitude": 11582.4,
+        "icao24": "4bb470",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "Turkey",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "2350",
+        "time_position": 1787628795,
+        "true_track": 272.39,
+        "velocity": 221.92,
         "vertical_rate": 0
       },
       "type": "Feature"
@@ -179,55 +319,27 @@
     {
       "geometry": {
         "coordinates": [
-          13.3046,
-          41.9295
+          18.5187,
+          47.0031
         ],
         "type": "Point"
       },
-      "id": "471f02",
+      "id": "4bb46f",
       "properties": {
-        "baro_altitude": 11597.64,
-        "callsign": "WMT4RQ",
+        "baro_altitude": 12496.8,
+        "callsign": "MNB601",
         "category": 0,
-        "geo_altitude": 12199.62,
-        "icao24": "471f02",
-        "last_contact": 1787625968,
+        "geo_altitude": 12938.76,
+        "icao24": "4bb46f",
+        "last_contact": 1787628795,
         "on_ground": false,
-        "origin_country": "Hungary",
+        "origin_country": "Turkey",
         "position_source": 0,
         "spi": false,
-        "squawk": "1253",
-        "time_position": 1787625968,
-        "true_track": 79.9,
-        "velocity": 243.5,
-        "vertical_rate": 0.33
-      },
-      "type": "Feature"
-    },
-    {
-      "geometry": {
-        "coordinates": [
-          9.016,
-          46.7553
-        ],
-        "type": "Point"
-      },
-      "id": "3c4b26",
-      "properties": {
-        "baro_altitude": 11582.4,
-        "callsign": "DLH573",
-        "category": 0,
-        "geo_altitude": 12016.74,
-        "icao24": "3c4b26",
-        "last_contact": 1787625968,
-        "on_ground": false,
-        "origin_country": "Germany",
-        "position_source": 0,
-        "spi": false,
-        "squawk": "1000",
-        "time_position": 1787625968,
-        "true_track": 9.66,
-        "velocity": 276.05,
+        "squawk": "7650",
+        "time_position": 1787628795,
+        "true_track": 123.44,
+        "velocity": 265.1,
         "vertical_rate": 0
       },
       "type": "Feature"
@@ -235,139 +347,55 @@
     {
       "geometry": {
         "coordinates": [
-          10.57,
-          42.6617
+          16.8676,
+          40.2144
         ],
         "type": "Point"
       },
-      "id": "8015a7",
+      "id": "738052",
       "properties": {
-        "baro_altitude": 9913.62,
-        "callsign": "AIC191",
+        "baro_altitude": 10530.84,
+        "callsign": "ELY321",
         "category": 0,
-        "geo_altitude": 10431.78,
-        "icao24": "8015a7",
-        "last_contact": 1787625968,
+        "geo_altitude": 11125.2,
+        "icao24": "738052",
+        "last_contact": 1787628795,
         "on_ground": false,
-        "origin_country": "India",
+        "origin_country": "Israel",
         "position_source": 0,
         "spi": false,
-        "squawk": "1201",
-        "time_position": 1787625968,
-        "true_track": 316.8,
-        "velocity": 231.47,
-        "vertical_rate": 3.9
+        "squawk": null,
+        "time_position": 1787628795,
+        "true_track": 299.3,
+        "velocity": 207.07,
+        "vertical_rate": 4.88
       },
       "type": "Feature"
     },
     {
       "geometry": {
         "coordinates": [
-          17.4019,
-          47.7779
+          18.6785,
+          43.6337
         ],
         "type": "Point"
       },
-      "id": "44007c",
+      "id": "440039",
       "properties": {
-        "baro_altitude": 2926.08,
-        "callsign": "AUA8",
+        "baro_altitude": 10363.2,
+        "callsign": "AUA78VE",
         "category": 0,
-        "geo_altitude": 3101.34,
-        "icao24": "44007c",
-        "last_contact": 1787625968,
+        "geo_altitude": 10896.6,
+        "icao24": "440039",
+        "last_contact": 1787628795,
         "on_ground": false,
         "origin_country": "Austria",
         "position_source": 0,
         "spi": false,
-        "squawk": "2360",
-        "time_position": 1787625968,
-        "true_track": 299.68,
-        "velocity": 181.79,
-        "vertical_rate": -13.98
-      },
-      "type": "Feature"
-    },
-    {
-      "geometry": {
-        "coordinates": [
-          17.5752,
-          43.9894
-        ],
-        "type": "Point"
-      },
-      "id": "3c4a0f",
-      "properties": {
-        "baro_altitude": 11574.78,
-        "callsign": "DLH591",
-        "category": 0,
-        "geo_altitude": 12146.28,
-        "icao24": "3c4a0f",
-        "last_contact": 1787625967,
-        "on_ground": false,
-        "origin_country": "Germany",
-        "position_source": 0,
-        "spi": false,
-        "squawk": "6625",
-        "time_position": 1787625967,
-        "true_track": 328.56,
-        "velocity": 232.75,
-        "vertical_rate": -0.33
-      },
-      "type": "Feature"
-    },
-    {
-      "geometry": {
-        "coordinates": [
-          17.1448,
-          45.4655
-        ],
-        "type": "Point"
-      },
-      "id": "4891b4",
-      "properties": {
-        "baro_altitude": 10972.8,
-        "callsign": "ENT7132",
-        "category": 0,
-        "geo_altitude": 11468.1,
-        "icao24": "4891b4",
-        "last_contact": 1787625967,
-        "on_ground": false,
-        "origin_country": "Poland",
-        "position_source": 0,
-        "spi": false,
-        "squawk": "6146",
-        "time_position": 1787625967,
-        "true_track": 25.17,
-        "velocity": 227.37,
-        "vertical_rate": -0.33
-      },
-      "type": "Feature"
-    },
-    {
-      "geometry": {
-        "coordinates": [
-          14.816,
-          46.2287
-        ],
-        "type": "Point"
-      },
-      "id": "471d64",
-      "properties": {
-        "baro_altitude": 10363.2,
-        "callsign": "WZZ2498",
-        "category": 0,
-        "geo_altitude": 10835.64,
-        "icao24": "471d64",
-        "last_contact": 1787625968,
-        "on_ground": false,
-        "origin_country": "Hungary",
-        "position_source": 0,
-        "spi": false,
-        "squawk": "1000",
-        "time_position": 1787625967,
-        "true_track": 88.63,
-        "velocity": 257.81,
+        "squawk": "6027",
+        "time_position": 1787628795,
+        "true_track": 328.94,
+        "velocity": 220.39,
         "vertical_rate": 0
       },
       "type": "Feature"
@@ -375,8 +403,36 @@
     {
       "geometry": {
         "coordinates": [
-          10.51,
-          44.5115
+          18.0425,
+          47.2386
+        ],
+        "type": "Point"
+      },
+      "id": "471d5c",
+      "properties": {
+        "baro_altitude": 7627.62,
+        "callsign": "WZZ2MR",
+        "category": 0,
+        "geo_altitude": 7970.52,
+        "icao24": "471d5c",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "Hungary",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "4226",
+        "time_position": 1787628795,
+        "true_track": 265.71,
+        "velocity": 192.43,
+        "vertical_rate": 5.53
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          18.4203,
+          41.9704
         ],
         "type": "Point"
       },
@@ -385,17 +441,17 @@
         "baro_altitude": 11277.6,
         "callsign": "UAE4M",
         "category": 0,
-        "geo_altitude": 11772.9,
+        "geo_altitude": 11871.96,
         "icao24": "896173",
-        "last_contact": 1787625968,
+        "last_contact": 1787628794,
         "on_ground": false,
         "origin_country": "United Arab Emirates",
         "position_source": 0,
         "spi": false,
         "squawk": "0427",
-        "time_position": 1787625968,
-        "true_track": 116.11,
-        "velocity": 258.37,
+        "time_position": 1787628794,
+        "true_track": 100.03,
+        "velocity": 265.91,
         "vertical_rate": 0
       },
       "type": "Feature"
@@ -403,36 +459,36 @@
     {
       "geometry": {
         "coordinates": [
-          8.7257,
-          45.6618
+          8.9713,
+          43.8229
         ],
         "type": "Point"
       },
-      "id": "300a44",
+      "id": "440193",
       "properties": {
-        "baro_altitude": 579.12,
-        "callsign": "LSI376",
+        "baro_altitude": 11887.2,
+        "callsign": "TAY7FO",
         "category": 0,
-        "geo_altitude": 601.98,
-        "icao24": "300a44",
-        "last_contact": 1787625967,
+        "geo_altitude": 12374.88,
+        "icao24": "440193",
+        "last_contact": 1787628795,
         "on_ground": false,
-        "origin_country": "Italy",
+        "origin_country": "Austria",
         "position_source": 0,
         "spi": false,
         "squawk": "1000",
-        "time_position": 1787625967,
-        "true_track": 358.12,
-        "velocity": 94.19,
-        "vertical_rate": 11.38
+        "time_position": 1787628795,
+        "true_track": 135.73,
+        "velocity": 229.19,
+        "vertical_rate": 0
       },
       "type": "Feature"
     },
     {
       "geometry": {
         "coordinates": [
-          6.4641,
-          43.0109
+          13.3838,
+          47.5875
         ],
         "type": "Point"
       },
@@ -441,54 +497,26 @@
         "baro_altitude": 11582.4,
         "callsign": "ENT7004",
         "category": 0,
-        "geo_altitude": 12077.7,
+        "geo_altitude": 12031.98,
         "icao24": "4892c5",
-        "last_contact": 1787625968,
+        "last_contact": 1787628795,
         "on_ground": false,
         "origin_country": "Poland",
         "position_source": 0,
         "spi": false,
         "squawk": "1000",
-        "time_position": 1787625968,
-        "true_track": 50.05,
-        "velocity": 260.38,
-        "vertical_rate": 0
+        "time_position": 1787628795,
+        "true_track": 48.08,
+        "velocity": 271.03,
+        "vertical_rate": -0.33
       },
       "type": "Feature"
     },
     {
       "geometry": {
         "coordinates": [
-          18.6781,
-          43.6565
-        ],
-        "type": "Point"
-      },
-      "id": "4892c9",
-      "properties": {
-        "baro_altitude": 11277.6,
-        "callsign": "ENT7XF",
-        "category": 0,
-        "geo_altitude": 11826.24,
-        "icao24": "4892c9",
-        "last_contact": 1787625966,
-        "on_ground": false,
-        "origin_country": "Poland",
-        "position_source": 0,
-        "spi": false,
-        "squawk": "6037",
-        "time_position": 1787625966,
-        "true_track": 171.84,
-        "velocity": 239.07,
-        "vertical_rate": 0
-      },
-      "type": "Feature"
-    },
-    {
-      "geometry": {
-        "coordinates": [
-          15.7587,
-          45.3314
+          8.3521,
+          46.5715
         ],
         "type": "Point"
       },
@@ -497,45 +525,129 @@
         "baro_altitude": 10972.8,
         "callsign": "TVF31LA",
         "category": 0,
-        "geo_altitude": 11475.72,
+        "geo_altitude": 11361.42,
         "icao24": "39dd05",
-        "last_contact": 1787625968,
+        "last_contact": 1787628795,
         "on_ground": false,
         "origin_country": "France",
         "position_source": 0,
         "spi": false,
-        "squawk": "4133",
-        "time_position": 1787625967,
-        "true_track": 288.11,
-        "velocity": 198.64,
-        "vertical_rate": 0
+        "squawk": "1000",
+        "time_position": 1787628795,
+        "true_track": 278.81,
+        "velocity": 221.77,
+        "vertical_rate": 0.65
       },
       "type": "Feature"
     },
     {
       "geometry": {
         "coordinates": [
-          6.0671,
-          39.5455
+          7.5264,
+          47.5855
+        ],
+        "type": "Point"
+      },
+      "id": "3847ff",
+      "properties": {
+        "baro_altitude": null,
+        "callsign": "M01",
+        "category": 0,
+        "geo_altitude": null,
+        "icao24": "3847ff",
+        "last_contact": 1787628786,
+        "on_ground": true,
+        "origin_country": "France",
+        "position_source": 0,
+        "spi": false,
+        "squawk": null,
+        "time_position": 1787628786,
+        "true_track": 165.94,
+        "velocity": 4.63,
+        "vertical_rate": null
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          12.8217,
+          37.4529
+        ],
+        "type": "Point"
+      },
+      "id": "020121",
+      "properties": {
+        "baro_altitude": 12192,
+        "callsign": "RAM217",
+        "category": 6,
+        "geo_altitude": 12893.04,
+        "icao24": "020121",
+        "last_contact": 1787628796,
+        "on_ground": false,
+        "origin_country": "Morocco",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "2030",
+        "time_position": 1787628795,
+        "true_track": 303.44,
+        "velocity": 225.01,
+        "vertical_rate": -0.33
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          17.7848,
+          43.7906
+        ],
+        "type": "Point"
+      },
+      "id": "896319",
+      "properties": {
+        "baro_altitude": 10637.52,
+        "callsign": "UAE9W",
+        "category": 0,
+        "geo_altitude": 11163.3,
+        "icao24": "896319",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "United Arab Emirates",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "1161",
+        "time_position": 1787628795,
+        "true_track": 296.74,
+        "velocity": 222.94,
+        "vertical_rate": 2.6
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          14.09,
+          37.9048
         ],
         "type": "Point"
       },
       "id": "0200f8",
       "properties": {
-        "baro_altitude": 10972.8,
+        "baro_altitude": 11277.6,
         "callsign": "RAM272C",
         "category": 0,
-        "geo_altitude": 11574.78,
+        "geo_altitude": 11948.16,
         "icao24": "0200f8",
-        "last_contact": 1787625968,
+        "last_contact": 1787628795,
         "on_ground": false,
         "origin_country": "Morocco",
         "position_source": 0,
         "spi": false,
-        "squawk": "1423",
-        "time_position": 1787625967,
-        "true_track": 83.46,
-        "velocity": 266.67,
+        "squawk": "1230",
+        "time_position": 1787628795,
+        "true_track": 111.1,
+        "velocity": 258.62,
         "vertical_rate": 0
       },
       "type": "Feature"
@@ -543,55 +655,279 @@
     {
       "geometry": {
         "coordinates": [
-          11.1186,
-          46.0412
+          17.7745,
+          47.3007
         ],
         "type": "Point"
       },
-      "id": "a49ae3",
+      "id": "780a16",
       "properties": {
-        "baro_altitude": 9593.58,
-        "callsign": "UPS260",
-        "category": 0,
-        "geo_altitude": 10012.68,
-        "icao24": "a49ae3",
-        "last_contact": 1787625968,
+        "baro_altitude": 9753.6,
+        "callsign": "CPA289",
+        "category": 1,
+        "geo_altitude": 10157.46,
+        "icao24": "780a16",
+        "last_contact": 1787628795,
         "on_ground": false,
-        "origin_country": "United States",
+        "origin_country": "China",
         "position_source": 0,
         "spi": false,
-        "squawk": "2520",
-        "time_position": 1787625968,
-        "true_track": 155.75,
-        "velocity": 210.45,
-        "vertical_rate": -10.4
+        "squawk": "5363",
+        "time_position": 1787628795,
+        "true_track": 291.51,
+        "velocity": 224.5,
+        "vertical_rate": 0
       },
       "type": "Feature"
     },
     {
       "geometry": {
         "coordinates": [
-          15.2347,
-          46.8859
+          15.2383,
+          44.836
         ],
         "type": "Point"
       },
-      "id": "8964bd",
+      "id": "3465d8",
       "properties": {
-        "baro_altitude": 11879.58,
-        "callsign": "ETD6HZ",
+        "baro_altitude": 11269.98,
+        "callsign": "VOE1452",
+        "category": 0,
+        "geo_altitude": 11788.14,
+        "icao24": "3465d8",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "Spain",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "0276",
+        "time_position": 1787628795,
+        "true_track": 127.46,
+        "velocity": 249.52,
+        "vertical_rate": 0.98
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          11.1252,
+          45.4203
+        ],
+        "type": "Point"
+      },
+      "id": "aa70b1",
+      "properties": {
+        "baro_altitude": 10668,
+        "callsign": "CKS221",
+        "category": 0,
+        "geo_altitude": 11117.58,
+        "icao24": "aa70b1",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "United States",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "0406",
+        "time_position": 1787628795,
+        "true_track": 93.44,
+        "velocity": 265.42,
+        "vertical_rate": 0
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          18.2289,
+          42.1966
+        ],
+        "type": "Point"
+      },
+      "id": "406890",
+      "properties": {
+        "baro_altitude": 12192,
+        "callsign": "BAW138",
         "category": 6,
-        "geo_altitude": 12359.64,
-        "icao24": "8964bd",
-        "last_contact": 1787625968,
+        "geo_altitude": 12786.36,
+        "icao24": "406890",
+        "last_contact": 1787628794,
+        "on_ground": false,
+        "origin_country": "United Kingdom",
+        "position_source": 0,
+        "spi": true,
+        "squawk": "3534",
+        "time_position": 1787628794,
+        "true_track": 310.71,
+        "velocity": 228.72,
+        "vertical_rate": -0.33
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          7.5272,
+          47.6026
+        ],
+        "type": "Point"
+      },
+      "id": "38dfff",
+      "properties": {
+        "baro_altitude": null,
+        "callsign": "BUS02",
+        "category": 0,
+        "geo_altitude": null,
+        "icao24": "38dfff",
+        "last_contact": 1787628795,
+        "on_ground": true,
+        "origin_country": "France",
+        "position_source": 0,
+        "spi": false,
+        "squawk": null,
+        "time_position": 1787628795,
+        "true_track": 157.5,
+        "velocity": 5.92,
+        "vertical_rate": null
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          8.7369,
+          45.6177
+        ],
+        "type": "Point"
+      },
+      "id": "a03f48",
+      "properties": {
+        "baro_altitude": 243.84,
+        "callsign": "FDX5168",
+        "category": 0,
+        "geo_altitude": 274.32,
+        "icao24": "a03f48",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "United States",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "1000",
+        "time_position": 1787628794,
+        "true_track": 349.06,
+        "velocity": 78.6,
+        "vertical_rate": -1.3
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          12.1156,
+          35.9935
+        ],
+        "type": "Point"
+      },
+      "id": "8964f9",
+      "properties": {
+        "baro_altitude": 10965.18,
+        "callsign": "ETD7LG",
+        "category": 0,
+        "geo_altitude": 11673.84,
+        "icao24": "8964f9",
+        "last_contact": 1787628795,
         "on_ground": false,
         "origin_country": "United Arab Emirates",
         "position_source": 0,
         "spi": false,
-        "squawk": "2217",
-        "time_position": 1787625968,
-        "true_track": 121.61,
-        "velocity": 279.7,
+        "squawk": "2004",
+        "time_position": 1787628795,
+        "true_track": 275.5,
+        "velocity": 241.36,
+        "vertical_rate": -0.33
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          17.2771,
+          36.3857
+        ],
+        "type": "Point"
+      },
+      "id": "8964bf",
+      "properties": {
+        "baro_altitude": 10972.8,
+        "callsign": "ETD3P1",
+        "category": 0,
+        "geo_altitude": 11650.98,
+        "icao24": "8964bf",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "United Arab Emirates",
+        "position_source": 0,
+        "spi": false,
+        "squawk": null,
+        "time_position": 1787628795,
+        "true_track": 288.84,
+        "velocity": 231.01,
+        "vertical_rate": -0.33
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          16.7132,
+          47.1512
+        ],
+        "type": "Point"
+      },
+      "id": "89664c",
+      "properties": {
+        "baro_altitude": 10363.2,
+        "callsign": "ETD72W",
+        "category": 0,
+        "geo_altitude": 10713.72,
+        "icao24": "89664c",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "United Arab Emirates",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "2652",
+        "time_position": 1787628795,
+        "true_track": 308.66,
+        "velocity": 217.41,
+        "vertical_rate": 0
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          16.9318,
+          45.2984
+        ],
+        "type": "Point"
+      },
+      "id": "485f82",
+      "properties": {
+        "baro_altitude": 11574.78,
+        "callsign": "KLM174",
+        "category": 0,
+        "geo_altitude": 12077.7,
+        "icao24": "485f82",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "Kingdom of the Netherlands",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "2027",
+        "time_position": 1787628795,
+        "true_track": 314.16,
+        "velocity": 223.74,
         "vertical_rate": 0.33
       },
       "type": "Feature"
@@ -599,55 +935,83 @@
     {
       "geometry": {
         "coordinates": [
-          17.2062,
-          46.8311
+          18.1364,
+          42.2521
         ],
         "type": "Point"
       },
-      "id": "4b9907",
+      "id": "89653e",
       "properties": {
-        "baro_altitude": 10675.62,
-        "callsign": "FHY1366",
+        "baro_altitude": 10363.2,
+        "callsign": "ETD49D",
         "category": 0,
-        "geo_altitude": 11125.2,
-        "icao24": "4b9907",
-        "last_contact": 1787625968,
-        "on_ground": false,
-        "origin_country": "Turkey",
-        "position_source": 0,
-        "spi": false,
-        "squawk": "7710",
-        "time_position": 1787625968,
-        "true_track": 126.46,
-        "velocity": 259.7,
-        "vertical_rate": 0
-      },
-      "type": "Feature"
-    },
-    {
-      "geometry": {
-        "coordinates": [
-          12.5217,
-          47.9732
-        ],
-        "type": "Point"
-      },
-      "id": "8965f3",
-      "properties": {
-        "baro_altitude": 11879.58,
-        "callsign": "ETD16",
-        "category": 0,
-        "geo_altitude": 12329.16,
-        "icao24": "8965f3",
-        "last_contact": 1787625968,
+        "geo_altitude": 10934.7,
+        "icao24": "89653e",
+        "last_contact": 1787628785,
         "on_ground": false,
         "origin_country": "United Arab Emirates",
         "position_source": 0,
         "spi": false,
-        "squawk": "2266",
-        "time_position": 1787625968,
-        "true_track": 119.52,
-        "velocity": 272.53,
+        "squawk": "6630",
+        "time_position": 1787628785,
+        "true_track": 309.57,
+        "velocity": 238.25,
+        "vertical_rate": -0.33
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          15.5811,
+          35.9908
+        ],
+        "type": "Point"
+      },
+      "id": "89653d",
+      "properties": {
+        "baro_altitude": 10363.2,
+        "callsign": "ETD5H3",
+        "category": 0,
+        "geo_altitude": 11041.38,
+        "icao24": "89653d",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "United Arab Emirates",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "5513",
+        "time_position": 1787628795,
+        "true_track": 280.63,
+        "velocity": 237.11,
+        "vertical_rate": -0.33
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          16.4045,
+          44.1446
+        ],
+        "type": "Point"
+      },
+      "id": "8964a0",
+      "properties": {
+        "baro_altitude": 9753.6,
+        "callsign": "UAE213",
+        "category": 6,
+        "geo_altitude": 10241.28,
+        "icao24": "8964a0",
+        "last_contact": 1787628794,
+        "on_ground": false,
+        "origin_country": "United Arab Emirates",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "0536",
+        "time_position": 1787628794,
+        "true_track": 325.72,
+        "velocity": 234.72,
         "vertical_rate": 0
       },
       "type": "Feature"
@@ -655,8 +1019,36 @@
     {
       "geometry": {
         "coordinates": [
-          7.0143,
-          39.3095
+          17.2341,
+          46.9391
+        ],
+        "type": "Point"
+      },
+      "id": "3c48f0",
+      "properties": {
+        "baro_altitude": 11590.02,
+        "callsign": "LHX1CF",
+        "category": 0,
+        "geo_altitude": 12031.98,
+        "icao24": "3c48f0",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "Germany",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "1000",
+        "time_position": 1787628794,
+        "true_track": 289.05,
+        "velocity": 197.02,
+        "vertical_rate": 0
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          6.5337,
+          45.6302
         ],
         "type": "Point"
       },
@@ -665,26 +1057,26 @@
         "baro_altitude": 11582.4,
         "callsign": "BEL3YG",
         "category": 1,
-        "geo_altitude": 12214.86,
+        "geo_altitude": 12001.5,
         "icao24": "44ccc2",
-        "last_contact": 1787625967,
+        "last_contact": 1787628795,
         "on_ground": false,
         "origin_country": "Belgium",
         "position_source": 0,
         "spi": false,
-        "squawk": null,
-        "time_position": 1787625967,
-        "true_track": 358.94,
-        "velocity": 250.58,
-        "vertical_rate": 0.33
+        "squawk": "1000",
+        "time_position": 1787628795,
+        "true_track": 348.87,
+        "velocity": 250.61,
+        "vertical_rate": 0
       },
       "type": "Feature"
     },
     {
       "geometry": {
         "coordinates": [
-          6.9704,
-          38.4765
+          6.8148,
+          44.6282
         ],
         "type": "Point"
       },
@@ -693,17 +1085,17 @@
         "baro_altitude": 11582.4,
         "callsign": "BEL1NA",
         "category": 0,
-        "geo_altitude": 12222.48,
+        "geo_altitude": 12047.22,
         "icao24": "44ccc6",
-        "last_contact": 1787625967,
+        "last_contact": 1787628795,
         "on_ground": false,
         "origin_country": "Belgium",
         "position_source": 0,
         "spi": false,
-        "squawk": null,
-        "time_position": 1787625967,
-        "true_track": 7.13,
-        "velocity": 244.71,
+        "squawk": "1000",
+        "time_position": 1787628795,
+        "true_track": 354.34,
+        "velocity": 245.04,
         "vertical_rate": 0
       },
       "type": "Feature"
@@ -711,36 +1103,8 @@
     {
       "geometry": {
         "coordinates": [
-          7.0779,
-          42.1077
-        ],
-        "type": "Point"
-      },
-      "id": "44ccc5",
-      "properties": {
-        "baro_altitude": 11582.4,
-        "callsign": "BEL28A",
-        "category": 1,
-        "geo_altitude": 12108.18,
-        "icao24": "44ccc5",
-        "last_contact": 1787625968,
-        "on_ground": false,
-        "origin_country": "Belgium",
-        "position_source": 0,
-        "spi": false,
-        "squawk": "1000",
-        "time_position": 1787625968,
-        "true_track": 355.5,
-        "velocity": 242.54,
-        "vertical_rate": -0.33
-      },
-      "type": "Feature"
-    },
-    {
-      "geometry": {
-        "coordinates": [
-          6.9236,
-          41.313
+          6.2396,
+          47.6145
         ],
         "type": "Point"
       },
@@ -749,17 +1113,17 @@
         "baro_altitude": 11582.4,
         "callsign": "BEL38K",
         "category": 1,
-        "geo_altitude": 12146.28,
+        "geo_altitude": 11955.78,
         "icao24": "44ccc3",
-        "last_contact": 1787625968,
+        "last_contact": 1787628795,
         "on_ground": false,
         "origin_country": "Belgium",
         "position_source": 0,
         "spi": false,
         "squawk": "1000",
-        "time_position": 1787625967,
-        "true_track": 358.35,
-        "velocity": 250.12,
+        "time_position": 1787628795,
+        "true_track": 355.31,
+        "velocity": 251.89,
         "vertical_rate": 0
       },
       "type": "Feature"
@@ -767,8 +1131,148 @@
     {
       "geometry": {
         "coordinates": [
-          16.7479,
-          39.8939
+          12.6381,
+          46.7998
+        ],
+        "type": "Point"
+      },
+      "id": "76cd46",
+      "properties": {
+        "baro_altitude": 10066.02,
+        "callsign": "SIA356",
+        "category": 0,
+        "geo_altitude": 10485.12,
+        "icao24": "76cd46",
+        "last_contact": 1787628796,
+        "on_ground": false,
+        "origin_country": "Singapore",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "2343",
+        "time_position": 1787628796,
+        "true_track": 270.53,
+        "velocity": 222.25,
+        "vertical_rate": -4.88
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          9.6574,
+          39.1468
+        ],
+        "type": "Point"
+      },
+      "id": "0201cd",
+      "properties": {
+        "baro_altitude": 11879.58,
+        "callsign": "RAM246",
+        "category": 0,
+        "geo_altitude": 12534.9,
+        "icao24": "0201cd",
+        "last_contact": 1787628794,
+        "on_ground": false,
+        "origin_country": "Morocco",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "1412",
+        "time_position": 1787628794,
+        "true_track": 112.7,
+        "velocity": 269.33,
+        "vertical_rate": -0.33
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          16.306,
+          46.3423
+        ],
+        "type": "Point"
+      },
+      "id": "040142",
+      "properties": {
+        "baro_altitude": 9144,
+        "callsign": "ETH730",
+        "category": 0,
+        "geo_altitude": 9555.48,
+        "icao24": "040142",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "Ethiopia",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "2062",
+        "time_position": 1787628795,
+        "true_track": 329.77,
+        "velocity": 205.41,
+        "vertical_rate": -0.33
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          12.1598,
+          41.8098
+        ],
+        "type": "Point"
+      },
+      "id": "040123",
+      "properties": {
+        "baro_altitude": 739.14,
+        "callsign": "ETH574",
+        "category": 0,
+        "geo_altitude": 815.34,
+        "icao24": "040123",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "Ethiopia",
+        "position_source": 0,
+        "spi": false,
+        "squawk": null,
+        "time_position": 1787628795,
+        "true_track": 310.37,
+        "velocity": 112.77,
+        "vertical_rate": 12.35
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          15.5413,
+          41.3715
+        ],
+        "type": "Point"
+      },
+      "id": "04012b",
+      "properties": {
+        "baro_altitude": 12192,
+        "callsign": "ETH738",
+        "category": 0,
+        "geo_altitude": 12771.12,
+        "icao24": "04012b",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "Ethiopia",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "2073",
+        "time_position": 1787628795,
+        "true_track": 307.58,
+        "velocity": 233.68,
+        "vertical_rate": 0
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          10.1952,
+          42.6297
         ],
         "type": "Point"
       },
@@ -777,17 +1281,17 @@
         "baro_altitude": 12192,
         "callsign": "ETH726",
         "category": 0,
-        "geo_altitude": 12824.46,
+        "geo_altitude": 12725.4,
         "icao24": "04012a",
-        "last_contact": 1787625968,
+        "last_contact": 1787628795,
         "on_ground": false,
         "origin_country": "Ethiopia",
         "position_source": 0,
         "spi": false,
-        "squawk": null,
-        "time_position": 1787625967,
-        "true_track": 309.32,
-        "velocity": 235.42,
+        "squawk": "6635",
+        "time_position": 1787628795,
+        "true_track": 300.62,
+        "velocity": 234.33,
         "vertical_rate": 0
       },
       "type": "Feature"
@@ -795,8 +1299,36 @@
     {
       "geometry": {
         "coordinates": [
-          14.5213,
-          43.5051
+          15.3233,
+          44.313
+        ],
+        "type": "Point"
+      },
+      "id": "040131",
+      "properties": {
+        "baro_altitude": 12199.62,
+        "callsign": "ETH750",
+        "category": 0,
+        "geo_altitude": 12725.4,
+        "icao24": "040131",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "Ethiopia",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "5502",
+        "time_position": 1787628795,
+        "true_track": 327.44,
+        "velocity": 231.33,
+        "vertical_rate": 0.33
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          9.3522,
+          46.8451
         ],
         "type": "Point"
       },
@@ -805,17 +1337,17 @@
         "baro_altitude": 12192,
         "callsign": "ETH734",
         "category": 0,
-        "geo_altitude": 12763.5,
+        "geo_altitude": 12626.34,
         "icao24": "040134",
-        "last_contact": 1787625967,
+        "last_contact": 1787628795,
         "on_ground": false,
         "origin_country": "Ethiopia",
         "position_source": 0,
         "spi": false,
-        "squawk": "5534",
-        "time_position": 1787625967,
-        "true_track": 306.54,
-        "velocity": 217.72,
+        "squawk": "1000",
+        "time_position": 1787628794,
+        "true_track": 285.93,
+        "velocity": 234.32,
         "vertical_rate": 0
       },
       "type": "Feature"
@@ -823,27 +1355,111 @@
     {
       "geometry": {
         "coordinates": [
-          15.0751,
-          44.3703
+          17.3753,
+          45.2524
         ],
         "type": "Point"
       },
-      "id": "040132",
+      "id": "49d3fa",
       "properties": {
-        "baro_altitude": 12192,
-        "callsign": "ETH706",
+        "baro_altitude": 10668,
+        "callsign": "TVQ6316",
         "category": 0,
-        "geo_altitude": 12725.4,
-        "icao24": "040132",
-        "last_contact": 1787625968,
+        "geo_altitude": 11148.06,
+        "icao24": "49d3fa",
+        "last_contact": 1787628795,
         "on_ground": false,
-        "origin_country": "Ethiopia",
+        "origin_country": "Czech Republic",
         "position_source": 0,
         "spi": false,
-        "squawk": "5531",
-        "time_position": 1787625967,
-        "true_track": 311.84,
-        "velocity": 224.42,
+        "squawk": "4141",
+        "time_position": 1787628795,
+        "true_track": 158.09,
+        "velocity": 246.75,
+        "vertical_rate": 0.33
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          10.8115,
+          35.7487
+        ],
+        "type": "Point"
+      },
+      "id": "49d2ee",
+      "properties": {
+        "baro_altitude": 495.3,
+        "callsign": "TVQ6477",
+        "category": 0,
+        "geo_altitude": 548.64,
+        "icao24": "49d2ee",
+        "last_contact": 1787628623,
+        "on_ground": false,
+        "origin_country": "Czech Republic",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "6176",
+        "time_position": 1787628622,
+        "true_track": 170.77,
+        "velocity": 105.8,
+        "vertical_rate": 6.18
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          17.9192,
+          43.0588
+        ],
+        "type": "Point"
+      },
+      "id": "06a2e7",
+      "properties": {
+        "baro_altitude": 10965.18,
+        "callsign": "QTR6Q",
+        "category": 0,
+        "geo_altitude": 11513.82,
+        "icao24": "06a2e7",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "Qatar",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "5222",
+        "time_position": 1787628794,
+        "true_track": 303.62,
+        "velocity": 221.16,
+        "vertical_rate": 1.3
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          13.9404,
+          36.2306
+        ],
+        "type": "Point"
+      },
+      "id": "06a2ee",
+      "properties": {
+        "baro_altitude": 10355.58,
+        "callsign": "QTR1E",
+        "category": 0,
+        "geo_altitude": 11041.38,
+        "icao24": "06a2ee",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "Qatar",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "6633",
+        "time_position": 1787628795,
+        "true_track": 279.6,
+        "velocity": 246.79,
         "vertical_rate": -0.33
       },
       "type": "Feature"
@@ -851,55 +1467,55 @@
     {
       "geometry": {
         "coordinates": [
-          11.3991,
-          41.9195
+          17.5783,
+          45.0852
         ],
         "type": "Point"
       },
-      "id": "a50370",
+      "id": "06a2eb",
       "properties": {
-        "baro_altitude": 11887.2,
-        "callsign": "DAL240",
+        "baro_altitude": 10972.8,
+        "callsign": "QTR5T",
         "category": 0,
-        "geo_altitude": 12473.94,
-        "icao24": "a50370",
-        "last_contact": 1787625968,
+        "geo_altitude": 11475.72,
+        "icao24": "06a2eb",
+        "last_contact": 1787628795,
         "on_ground": false,
-        "origin_country": "United States",
+        "origin_country": "Qatar",
         "position_source": 0,
         "spi": false,
-        "squawk": "2262",
-        "time_position": 1787625968,
-        "true_track": 125.55,
-        "velocity": 254.82,
-        "vertical_rate": 0
+        "squawk": "2016",
+        "time_position": 1787628794,
+        "true_track": 317.95,
+        "velocity": 218.91,
+        "vertical_rate": -0.33
       },
       "type": "Feature"
     },
     {
       "geometry": {
         "coordinates": [
-          8.574,
-          46.4702
+          16.598,
+          36.6465
         ],
         "type": "Point"
       },
-      "id": "04022c",
+      "id": "06a2ec",
       "properties": {
         "baro_altitude": 12192,
-        "callsign": "ETH3905",
+        "callsign": "QTR5N",
         "category": 0,
-        "geo_altitude": 12618.72,
-        "icao24": "04022c",
-        "last_contact": 1787625968,
+        "geo_altitude": 12923.52,
+        "icao24": "06a2ec",
+        "last_contact": 1787628795,
         "on_ground": false,
-        "origin_country": "Ethiopia",
+        "origin_country": "Qatar",
         "position_source": 0,
         "spi": false,
-        "squawk": "1000",
-        "time_position": 1787625967,
-        "true_track": 347.17,
-        "velocity": 236.37,
+        "squawk": "2074",
+        "time_position": 1787628795,
+        "true_track": 304.94,
+        "velocity": 229.06,
         "vertical_rate": 0
       },
       "type": "Feature"
@@ -907,92 +1523,36 @@
     {
       "geometry": {
         "coordinates": [
-          14.2829,
-          41.2608
+          16.0251,
+          47.1098
         ],
         "type": "Point"
       },
-      "id": "040088",
+      "id": "49d41e",
       "properties": {
-        "baro_altitude": 10027.92,
-        "callsign": "ETH712",
+        "baro_altitude": 10058.4,
+        "callsign": "TVS31R",
         "category": 0,
-        "geo_altitude": 10607.04,
-        "icao24": "040088",
-        "last_contact": 1787625968,
-        "on_ground": false,
-        "origin_country": "Ethiopia",
-        "position_source": 0,
-        "spi": false,
-        "squawk": null,
-        "time_position": 1787625968,
-        "true_track": 293.72,
-        "velocity": 208.47,
-        "vertical_rate": -7.15
-      },
-      "type": "Feature"
-    },
-    {
-      "geometry": {
-        "coordinates": [
-          18.5932,
-          44.151
-        ],
-        "type": "Point"
-      },
-      "id": "49d403",
-      "properties": {
-        "baro_altitude": 10668,
-        "callsign": "TVS7QV",
-        "category": 0,
-        "geo_altitude": 11178.54,
-        "icao24": "49d403",
-        "last_contact": 1787625968,
+        "geo_altitude": 10492.74,
+        "icao24": "49d41e",
+        "last_contact": 1787628795,
         "on_ground": false,
         "origin_country": "Czech Republic",
         "position_source": 0,
         "spi": false,
-        "squawk": "6014",
-        "time_position": 1787625968,
-        "true_track": 171.98,
-        "velocity": 235.87,
-        "vertical_rate": 0
+        "squawk": "1341",
+        "time_position": 1787628795,
+        "true_track": 166.58,
+        "velocity": 241.7,
+        "vertical_rate": 0.33
       },
       "type": "Feature"
     },
     {
       "geometry": {
         "coordinates": [
-          18.0187,
-          47.2684
-        ],
-        "type": "Point"
-      },
-      "id": "49d42b",
-      "properties": {
-        "baro_altitude": 11193.78,
-        "callsign": "TVS2634",
-        "category": 0,
-        "geo_altitude": 11620.5,
-        "icao24": "49d42b",
-        "last_contact": 1787625968,
-        "on_ground": false,
-        "origin_country": "Czech Republic",
-        "position_source": 0,
-        "spi": false,
-        "squawk": "4506",
-        "time_position": 1787625968,
-        "true_track": 132.6,
-        "velocity": 251.58,
-        "vertical_rate": 4.55
-      },
-      "type": "Feature"
-    },
-    {
-      "geometry": {
-        "coordinates": [
-          17.2866,
-          41.8928
+          12.3775,
+          46.4122
         ],
         "type": "Point"
       },
@@ -1001,17 +1561,17 @@
         "baro_altitude": 12192,
         "callsign": "ETH718",
         "category": 0,
-        "geo_altitude": 12793.98,
+        "geo_altitude": 12672.06,
         "icao24": "040101",
-        "last_contact": 1787625967,
+        "last_contact": 1787628795,
         "on_ground": false,
         "origin_country": "Ethiopia",
         "position_source": 0,
         "spi": false,
-        "squawk": null,
-        "time_position": 1787625967,
-        "true_track": 321.4,
-        "velocity": 228.41,
+        "squawk": "6501",
+        "time_position": 1787628794,
+        "true_track": 303.94,
+        "velocity": 227.58,
         "vertical_rate": -0.33
       },
       "type": "Feature"
@@ -1019,55 +1579,55 @@
     {
       "geometry": {
         "coordinates": [
-          7.531,
-          47.5998
+          9.3865,
+          47.4309
         ],
         "type": "Point"
       },
-      "id": "384dff",
+      "id": "4b32ff",
       "properties": {
-        "baro_altitude": null,
-        "callsign": "M04",
+        "baro_altitude": 693.42,
+        "callsign": "RGA07",
         "category": 0,
-        "geo_altitude": null,
-        "icao24": "384dff",
-        "last_contact": 1787625705,
-        "on_ground": true,
-        "origin_country": "France",
+        "geo_altitude": 746.76,
+        "icao24": "4b32ff",
+        "last_contact": 1787628561,
+        "on_ground": false,
+        "origin_country": "Switzerland",
         "position_source": 0,
         "spi": false,
-        "squawk": null,
-        "time_position": 1787625704,
-        "true_track": 39.38,
-        "velocity": 1.29,
-        "vertical_rate": null
+        "squawk": "7100",
+        "time_position": 1787628561,
+        "true_track": 106.99,
+        "velocity": 19.37,
+        "vertical_rate": -3.9
       },
       "type": "Feature"
     },
     {
       "geometry": {
         "coordinates": [
-          6.4307,
-          37.2388
+          13.9216,
+          47.018
         ],
         "type": "Point"
       },
-      "id": "406d4c",
+      "id": "39bdb9",
       "properties": {
-        "baro_altitude": 12192,
-        "callsign": "VIR450",
-        "category": 6,
-        "geo_altitude": 12862.56,
-        "icao24": "406d4c",
-        "last_contact": 1787625962,
+        "baro_altitude": 10363.2,
+        "callsign": "AFR1391",
+        "category": 0,
+        "geo_altitude": 10789.92,
+        "icao24": "39bdb9",
+        "last_contact": 1787628795,
         "on_ground": false,
-        "origin_country": "United Kingdom",
+        "origin_country": "France",
         "position_source": 0,
         "spi": false,
-        "squawk": null,
-        "time_position": 1787625962,
-        "true_track": 351.24,
-        "velocity": 249.85,
+        "squawk": "6521",
+        "time_position": 1787628795,
+        "true_track": 299.16,
+        "velocity": 198.52,
         "vertical_rate": 0
       },
       "type": "Feature"
@@ -1075,27 +1635,27 @@
     {
       "geometry": {
         "coordinates": [
-          8.8756,
-          46.8633
+          10.2275,
+          45.7102
         ],
         "type": "Point"
       },
-      "id": "49d328",
+      "id": "49d327",
       "properties": {
-        "baro_altitude": 11277.6,
-        "callsign": "EWG8LZ",
+        "baro_altitude": 11887.2,
+        "callsign": "TVS2000",
         "category": 0,
-        "geo_altitude": 11681.46,
-        "icao24": "49d328",
-        "last_contact": 1787625968,
+        "geo_altitude": 12336.78,
+        "icao24": "49d327",
+        "last_contact": 1787628795,
         "on_ground": false,
         "origin_country": "Czech Republic",
         "position_source": 0,
         "spi": false,
-        "squawk": "7521",
-        "time_position": 1787625968,
-        "true_track": 351.09,
-        "velocity": 245.78,
+        "squawk": "1331",
+        "time_position": 1787628795,
+        "true_track": 230.76,
+        "velocity": 199.26,
         "vertical_rate": 0
       },
       "type": "Feature"
@@ -1103,36 +1663,36 @@
     {
       "geometry": {
         "coordinates": [
-          14.6412,
-          40.9617
+          9.306,
+          44.9392
         ],
         "type": "Point"
       },
       "id": "040261",
       "properties": {
-        "baro_altitude": 12192,
+        "baro_altitude": 3931.92,
         "callsign": "ETH736",
         "category": 0,
-        "geo_altitude": 12801.6,
+        "geo_altitude": 4107.18,
         "icao24": "040261",
-        "last_contact": 1787625968,
+        "last_contact": 1787628795,
         "on_ground": false,
         "origin_country": "Ethiopia",
         "position_source": 0,
         "spi": false,
-        "squawk": null,
-        "time_position": 1787625967,
-        "true_track": 306.08,
-        "velocity": 232.34,
-        "vertical_rate": -0.33
+        "squawk": "2055",
+        "time_position": 1787628795,
+        "true_track": 320.3,
+        "velocity": 137.73,
+        "vertical_rate": -9.43
       },
       "type": "Feature"
     },
     {
       "geometry": {
         "coordinates": [
-          17.9035,
-          42.4815
+          12.827,
+          46.6795
         ],
         "type": "Point"
       },
@@ -1141,17 +1701,17 @@
         "baro_altitude": 10972.8,
         "callsign": "ETH3731",
         "category": 0,
-        "geo_altitude": 11536.68,
+        "geo_altitude": 11437.62,
         "icao24": "040248",
-        "last_contact": 1787625957,
+        "last_contact": 1787628796,
         "on_ground": false,
         "origin_country": "Ethiopia",
         "position_source": 0,
         "spi": false,
-        "squawk": "7743",
-        "time_position": 1787625957,
+        "squawk": "4167",
+        "time_position": 1787628795,
         "true_track": 315.09,
-        "velocity": 220.81,
+        "velocity": 227.35,
         "vertical_rate": 0
       },
       "type": "Feature"
@@ -1159,27 +1719,27 @@
     {
       "geometry": {
         "coordinates": [
-          17.5898,
-          44.9588
+          18.195,
+          47.4693
         ],
         "type": "Point"
       },
-      "id": "744826",
+      "id": "4408ff",
       "properties": {
-        "baro_altitude": 10965.18,
-        "callsign": "RJA157",
-        "category": 0,
-        "geo_altitude": 11468.1,
-        "icao24": "744826",
-        "last_contact": 1787625968,
+        "baro_altitude": 10363.2,
+        "callsign": "TAY400",
+        "category": 1,
+        "geo_altitude": 10736.58,
+        "icao24": "4408ff",
+        "last_contact": 1787628795,
         "on_ground": false,
-        "origin_country": "Jordan",
+        "origin_country": "Austria",
         "position_source": 0,
         "spi": false,
-        "squawk": "5605",
-        "time_position": 1787625968,
-        "true_track": 316.3,
-        "velocity": 192.85,
+        "squawk": "3412",
+        "time_position": 1787628795,
+        "true_track": 296.74,
+        "velocity": 225.24,
         "vertical_rate": 0
       },
       "type": "Feature"
@@ -1187,8 +1747,64 @@
     {
       "geometry": {
         "coordinates": [
-          10.8551,
-          42.0917
+          8.7244,
+          45.6162
+        ],
+        "type": "Point"
+      },
+      "id": "31d7ad",
+      "properties": {
+        "baro_altitude": null,
+        "callsign": "MIKE9",
+        "category": 0,
+        "geo_altitude": null,
+        "icao24": "31d7ad",
+        "last_contact": 1787628794,
+        "on_ground": true,
+        "origin_country": "Italy",
+        "position_source": 0,
+        "spi": false,
+        "squawk": null,
+        "time_position": 1787628794,
+        "true_track": 165.94,
+        "velocity": 9.26,
+        "vertical_rate": null
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          13.726,
+          47.5728
+        ],
+        "type": "Point"
+      },
+      "id": "49d26c",
+      "properties": {
+        "baro_altitude": 10668,
+        "callsign": "TVS2148",
+        "category": 0,
+        "geo_altitude": 11102.34,
+        "icao24": "49d26c",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "Czech Republic",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "2277",
+        "time_position": 1787628795,
+        "true_track": 232.51,
+        "velocity": 200.34,
+        "vertical_rate": -0.33
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          18.9342,
+          39.8271
         ],
         "type": "Point"
       },
@@ -1197,17 +1813,17 @@
         "baro_altitude": 11887.2,
         "callsign": "DAL202",
         "category": 0,
-        "geo_altitude": 12466.32,
+        "geo_altitude": 12534.9,
         "icao24": "a50725",
-        "last_contact": 1787625967,
+        "last_contact": 1787628795,
         "on_ground": false,
         "origin_country": "United States",
         "position_source": 0,
         "spi": false,
         "squawk": "2264",
-        "time_position": 1787625967,
-        "true_track": 128.97,
-        "velocity": 252.76,
+        "time_position": 1787628795,
+        "true_track": 114.81,
+        "velocity": 263.55,
         "vertical_rate": 0
       },
       "type": "Feature"
@@ -1215,167 +1831,167 @@
     {
       "geometry": {
         "coordinates": [
-          13.319,
-          45.1338
+          12.2583,
+          41.8537
         ],
         "type": "Point"
       },
       "id": "a4972c",
       "properties": {
-        "baro_altitude": 11277.6,
+        "baro_altitude": 68.58,
         "callsign": "UPS266",
         "category": 0,
-        "geo_altitude": 11765.28,
+        "geo_altitude": 121.92,
         "icao24": "a4972c",
-        "last_contact": 1787625968,
+        "last_contact": 1787628575,
         "on_ground": false,
         "origin_country": "United States",
         "position_source": 0,
         "spi": false,
         "squawk": "2534",
-        "time_position": 1787625968,
-        "true_track": 224.8,
-        "velocity": 205.17,
-        "vertical_rate": 0
+        "time_position": 1787628558,
+        "true_track": 162.35,
+        "velocity": 71.26,
+        "vertical_rate": -4.55
       },
       "type": "Feature"
     },
     {
       "geometry": {
         "coordinates": [
-          17.2648,
-          41.0198
-        ],
-        "type": "Point"
-      },
-      "id": "3420c6",
-      "properties": {
-        "baro_altitude": 12496.8,
-        "callsign": "BCS8UM",
-        "category": 0,
-        "geo_altitude": 13159.74,
-        "icao24": "3420c6",
-        "last_contact": 1787625968,
-        "on_ground": false,
-        "origin_country": "Spain",
-        "position_source": 0,
-        "spi": false,
-        "squawk": "0460",
-        "time_position": 1787625968,
-        "true_track": 131.69,
-        "velocity": 245.95,
-        "vertical_rate": 0
-      },
-      "type": "Feature"
-    },
-    {
-      "geometry": {
-        "coordinates": [
-          7.6241,
-          41.9795
+          13.5118,
+          47.0375
         ],
         "type": "Point"
       },
       "id": "48e95b",
       "properties": {
-        "baro_altitude": 11567.16,
+        "baro_altitude": 11582.4,
         "callsign": "LOT6608",
         "category": 0,
-        "geo_altitude": 12100.56,
+        "geo_altitude": 12039.6,
         "icao24": "48e95b",
-        "last_contact": 1787625968,
+        "last_contact": 1787628796,
         "on_ground": false,
         "origin_country": "Poland",
         "position_source": 0,
         "spi": false,
-        "squawk": "5302",
-        "time_position": 1787625968,
-        "true_track": 34.53,
-        "velocity": 252.29,
-        "vertical_rate": 3.58
+        "squawk": "1000",
+        "time_position": 1787628796,
+        "true_track": 62.44,
+        "velocity": 265.77,
+        "vertical_rate": -0.33
       },
       "type": "Feature"
     },
     {
       "geometry": {
         "coordinates": [
-          9.5335,
-          45.5348
+          11.995,
+          44.2785
         ],
         "type": "Point"
       },
-      "id": "440614",
+      "id": "abcf7f",
       "properties": {
-        "baro_altitude": 4008.12,
-        "callsign": "EJU91BN",
+        "baro_altitude": 9448.8,
+        "callsign": "GTI563",
         "category": 0,
-        "geo_altitude": 4183.38,
-        "icao24": "440614",
-        "last_contact": 1787625968,
+        "geo_altitude": 9913.62,
+        "icao24": "abcf7f",
+        "last_contact": 1787628795,
         "on_ground": false,
-        "origin_country": "Austria",
+        "origin_country": "United States",
         "position_source": 0,
         "spi": false,
-        "squawk": "6027",
-        "time_position": 1787625967,
-        "true_track": 250.85,
-        "velocity": 181.89,
-        "vertical_rate": -13.33
+        "squawk": "0402",
+        "time_position": 1787628795,
+        "true_track": 121.19,
+        "velocity": 265.21,
+        "vertical_rate": 0
       },
       "type": "Feature"
     },
     {
       "geometry": {
         "coordinates": [
-          13.6912,
-          45.7115
+          8.7246,
+          45.6473
         ],
         "type": "Point"
       },
       "id": "440612",
       "properties": {
-        "baro_altitude": 10972.8,
+        "baro_altitude": null,
         "callsign": "EJU48FL",
         "category": 0,
-        "geo_altitude": 11460.48,
+        "geo_altitude": null,
         "icao24": "440612",
-        "last_contact": 1787625968,
-        "on_ground": false,
+        "last_contact": 1787628671,
+        "on_ground": true,
         "origin_country": "Austria",
         "position_source": 0,
         "spi": false,
         "squawk": "2053",
-        "time_position": 1787625967,
-        "true_track": 316.08,
-        "velocity": 212.11,
-        "vertical_rate": 0
+        "time_position": 1787628670,
+        "true_track": 258.75,
+        "velocity": 0.32,
+        "vertical_rate": null
       },
       "type": "Feature"
     },
     {
       "geometry": {
         "coordinates": [
-          6.2925,
-          38.0788
+          17.242,
+          47.8488
         ],
         "type": "Point"
       },
-      "id": "3949e4",
+      "id": "440608",
       "properties": {
-        "baro_altitude": 11582.4,
-        "callsign": "AFR989",
+        "baro_altitude": 2819.4,
+        "callsign": "AUA76K",
         "category": 0,
-        "geo_altitude": 12222.48,
-        "icao24": "3949e4",
-        "last_contact": 1787625968,
+        "geo_altitude": 2987.04,
+        "icao24": "440608",
+        "last_contact": 1787628795,
         "on_ground": false,
-        "origin_country": "France",
+        "origin_country": "Austria",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "4321",
+        "time_position": 1787628795,
+        "true_track": 314.45,
+        "velocity": 151.33,
+        "vertical_rate": -9.1
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          16.7003,
+          35.8137
+        ],
+        "type": "Point"
+      },
+      "id": "06a07a",
+      "properties": {
+        "baro_altitude": 9753.6,
+        "callsign": "QTR72P",
+        "category": 1,
+        "geo_altitude": 10393.68,
+        "icao24": "06a07a",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "Qatar",
         "position_source": 0,
         "spi": false,
         "squawk": null,
-        "time_position": 1787625968,
-        "true_track": 350.16,
-        "velocity": 246.96,
+        "time_position": 1787628795,
+        "true_track": 281.26,
+        "velocity": 247.59,
         "vertical_rate": 0
       },
       "type": "Feature"
@@ -1383,27 +1999,83 @@
     {
       "geometry": {
         "coordinates": [
-          15.6888,
-          47.1693
+          15.7942,
+          42.0354
         ],
         "type": "Point"
       },
-      "id": "3949f9",
+      "id": "3949f0",
       "properties": {
-        "baro_altitude": 10972.8,
-        "callsign": "AFR283",
+        "baro_altitude": 11582.4,
+        "callsign": "AFR217",
         "category": 0,
-        "geo_altitude": 11430,
-        "icao24": "3949f9",
-        "last_contact": 1787625967,
+        "geo_altitude": 12192,
+        "icao24": "3949f0",
+        "last_contact": 1787628795,
         "on_ground": false,
         "origin_country": "France",
         "position_source": 0,
         "spi": false,
-        "squawk": "3236",
-        "time_position": 1787625967,
-        "true_track": 295.27,
-        "velocity": 213.33,
+        "squawk": "2036",
+        "time_position": 1787628795,
+        "true_track": 308.54,
+        "velocity": 222.95,
+        "vertical_rate": 0.65
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          17.714,
+          46.1586
+        ],
+        "type": "Point"
+      },
+      "id": "49d13f",
+      "properties": {
+        "baro_altitude": 10218.42,
+        "callsign": "TVL5434",
+        "category": 0,
+        "geo_altitude": 10645.14,
+        "icao24": "49d13f",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "Czech Republic",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "4222",
+        "time_position": 1787628795,
+        "true_track": 207.52,
+        "velocity": 234.93,
+        "vertical_rate": 4.88
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          18.2706,
+          47.4911
+        ],
+        "type": "Point"
+      },
+      "id": "407cd1",
+      "properties": {
+        "baro_altitude": 11582.4,
+        "callsign": "BAW142",
+        "category": 0,
+        "geo_altitude": 12001.5,
+        "icao24": "407cd1",
+        "last_contact": 1787628796,
+        "on_ground": false,
+        "origin_country": "United Kingdom",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "2654",
+        "time_position": 1787628795,
+        "true_track": 293.75,
+        "velocity": 210.77,
         "vertical_rate": 0
       },
       "type": "Feature"
@@ -1411,8 +2083,92 @@
     {
       "geometry": {
         "coordinates": [
-          17.7855,
-          43.182
+          12.4183,
+          45.5687
+        ],
+        "type": "Point"
+      },
+      "id": "407ea1",
+      "properties": {
+        "baro_altitude": 11285.22,
+        "callsign": "DHK956",
+        "category": 0,
+        "geo_altitude": 11757.66,
+        "icao24": "407ea1",
+        "last_contact": 1787628796,
+        "on_ground": false,
+        "origin_country": "United Kingdom",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "0107",
+        "time_position": 1787628795,
+        "true_track": 145.07,
+        "velocity": 230.91,
+        "vertical_rate": -0.33
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          17.8896,
+          47.1923
+        ],
+        "type": "Point"
+      },
+      "id": "49d034",
+      "properties": {
+        "baro_altitude": 10668,
+        "callsign": "TVS2284",
+        "category": 0,
+        "geo_altitude": 11087.1,
+        "icao24": "49d034",
+        "last_contact": 1787628796,
+        "on_ground": false,
+        "origin_country": "Czech Republic",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "4516",
+        "time_position": 1787628795,
+        "true_track": 138.76,
+        "velocity": 266.12,
+        "vertical_rate": -0.33
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          8.7207,
+          45.609
+        ],
+        "type": "Point"
+      },
+      "id": "440409",
+      "properties": {
+        "baro_altitude": null,
+        "callsign": "BCS2219",
+        "category": 0,
+        "geo_altitude": null,
+        "icao24": "440409",
+        "last_contact": 1787628795,
+        "on_ground": true,
+        "origin_country": "Austria",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "5224",
+        "time_position": 1787628795,
+        "true_track": 258.75,
+        "velocity": 0.77,
+        "vertical_rate": null
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          11.1862,
+          46.3159
         ],
         "type": "Point"
       },
@@ -1421,166 +2177,138 @@
         "baro_altitude": 10972.8,
         "callsign": "QTR74G",
         "category": 0,
-        "geo_altitude": 11529.06,
+        "geo_altitude": 11422.38,
         "icao24": "06a1bf",
-        "last_contact": 1787625968,
+        "last_contact": 1787628795,
         "on_ground": false,
         "origin_country": "Qatar",
         "position_source": 0,
         "spi": false,
         "squawk": "1167",
-        "time_position": 1787625968,
-        "true_track": 304.75,
-        "velocity": 222.91,
-        "vertical_rate": 0
+        "time_position": 1787628795,
+        "true_track": 308.3,
+        "velocity": 243.2,
+        "vertical_rate": -0.33
       },
       "type": "Feature"
     },
     {
       "geometry": {
         "coordinates": [
-          18.7048,
-          47.3547
+          18.285,
+          44.4617
         ],
         "type": "Point"
       },
-      "id": "407af3",
+      "id": "4bb869",
       "properties": {
-        "baro_altitude": 12192,
-        "callsign": "BAW32",
+        "baro_altitude": 11277.6,
+        "callsign": "PGT15NN",
         "category": 0,
-        "geo_altitude": 12618.72,
-        "icao24": "407af3",
-        "last_contact": 1787625968,
+        "geo_altitude": 11803.38,
+        "icao24": "4bb869",
+        "last_contact": 1787628795,
         "on_ground": false,
-        "origin_country": "United Kingdom",
+        "origin_country": "Turkey",
         "position_source": 0,
         "spi": false,
-        "squawk": "3244",
-        "time_position": 1787625967,
-        "true_track": 294.69,
-        "velocity": 231.57,
-        "vertical_rate": 0
+        "squawk": "7664",
+        "time_position": 1787628794,
+        "true_track": 129.93,
+        "velocity": 263.67,
+        "vertical_rate": 0.33
       },
       "type": "Feature"
     },
     {
       "geometry": {
         "coordinates": [
-          9.1221,
-          47.1257
+          14.1287,
+          44.9306
         ],
         "type": "Point"
       },
-      "id": "45ce4d",
+      "id": "06a149",
       "properties": {
-        "baro_altitude": 9898.38,
-        "callsign": "SRR6498",
+        "baro_altitude": 12656.82,
+        "callsign": "QTR38P",
         "category": 0,
-        "geo_altitude": 10264.14,
-        "icao24": "45ce4d",
-        "last_contact": 1787625968,
-        "on_ground": false,
-        "origin_country": "Denmark",
-        "position_source": 0,
-        "spi": false,
-        "squawk": "0136",
-        "time_position": 1787625967,
-        "true_track": 164.44,
-        "velocity": 230.16,
-        "vertical_rate": -6.83
-      },
-      "type": "Feature"
-    },
-    {
-      "geometry": {
-        "coordinates": [
-          16.0465,
-          38.1116
-        ],
-        "type": "Point"
-      },
-      "id": "46b8aa",
-      "properties": {
-        "baro_altitude": 11871.96,
-        "callsign": "AEE3LP",
-        "category": 0,
-        "geo_altitude": 12565.38,
-        "icao24": "46b8aa",
-        "last_contact": 1787625968,
-        "on_ground": false,
-        "origin_country": "Greece",
-        "position_source": 0,
-        "spi": false,
-        "squawk": "2234",
-        "time_position": 1787625968,
-        "true_track": 79.11,
-        "velocity": 250.42,
-        "vertical_rate": 0
-      },
-      "type": "Feature"
-    },
-    {
-      "geometry": {
-        "coordinates": [
-          18.2859,
-          46.3239
-        ],
-        "type": "Point"
-      },
-      "id": "06a13b",
-      "properties": {
-        "baro_altitude": 10363.2,
-        "callsign": "QTR6T",
-        "category": 0,
-        "geo_altitude": 10805.16,
-        "icao24": "06a13b",
-        "last_contact": 1787625968,
+        "geo_altitude": 13129.26,
+        "icao24": "06a149",
+        "last_contact": 1787628795,
         "on_ground": false,
         "origin_country": "Qatar",
         "position_source": 0,
         "spi": false,
-        "squawk": "3222",
-        "time_position": 1787625968,
-        "true_track": 309.82,
-        "velocity": 225.73,
-        "vertical_rate": 0
+        "squawk": "7350",
+        "time_position": 1787628794,
+        "true_track": 321.76,
+        "velocity": 231.88,
+        "vertical_rate": 3.9
       },
       "type": "Feature"
     },
     {
       "geometry": {
         "coordinates": [
-          11.7131,
-          47.6183
+          16.4167,
+          45.1852
         ],
         "type": "Point"
       },
-      "id": "407d44",
+      "id": "06a14b",
       "properties": {
-        "baro_altitude": 10965.18,
-        "callsign": "WUK26NJ",
-        "category": 0,
-        "geo_altitude": 11399.52,
-        "icao24": "407d44",
-        "last_contact": 1787625968,
+        "baro_altitude": 10972.8,
+        "callsign": "QTR36L",
+        "category": 6,
+        "geo_altitude": 11468.1,
+        "icao24": "06a14b",
+        "last_contact": 1787628795,
         "on_ground": false,
-        "origin_country": "United Kingdom",
+        "origin_country": "Qatar",
         "position_source": 0,
         "spi": false,
-        "squawk": "0503",
-        "time_position": 1787625967,
-        "true_track": 307.39,
-        "velocity": 216.9,
-        "vertical_rate": 0
+        "squawk": "2221",
+        "time_position": 1787628795,
+        "true_track": 308.56,
+        "velocity": 220.38,
+        "vertical_rate": 0.65
       },
       "type": "Feature"
     },
     {
       "geometry": {
         "coordinates": [
-          18.3393,
-          35.5442
+          16.3302,
+          43.6251
+        ],
+        "type": "Point"
+      },
+      "id": "06a0a5",
+      "properties": {
+        "baro_altitude": 12184.38,
+        "callsign": "QTR195",
+        "category": 0,
+        "geo_altitude": 12763.5,
+        "icao24": "06a0a5",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "Qatar",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "2056",
+        "time_position": 1787628794,
+        "true_track": 336.04,
+        "velocity": 233.07,
+        "vertical_rate": -0.33
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          11.2725,
+          36.5644
         ],
         "type": "Point"
       },
@@ -1589,17 +2317,17 @@
         "baro_altitude": 12192,
         "callsign": "QTR343",
         "category": 0,
-        "geo_altitude": 12954,
+        "geo_altitude": 12923.52,
         "icao24": "06a0b9",
-        "last_contact": 1787625967,
+        "last_contact": 1787628795,
         "on_ground": false,
         "origin_country": "Qatar",
         "position_source": 0,
         "spi": false,
-        "squawk": null,
-        "time_position": 1787625967,
-        "true_track": 282.06,
-        "velocity": 238.83,
+        "squawk": "2006",
+        "time_position": 1787628795,
+        "true_track": 278,
+        "velocity": 221.83,
         "vertical_rate": -0.33
       },
       "type": "Feature"
@@ -1607,27 +2335,55 @@
     {
       "geometry": {
         "coordinates": [
-          16.8753,
-          47.5653
+          12.5307,
+          41.7732
         ],
         "type": "Point"
       },
-      "id": "06a0de",
+      "id": "06a0e7",
       "properties": {
-        "baro_altitude": 10668,
-        "callsign": "QTR8171",
+        "baro_altitude": 11582.4,
+        "callsign": "QTR24V",
         "category": 0,
-        "geo_altitude": 11094.72,
-        "icao24": "06a0de",
-        "last_contact": 1787625967,
+        "geo_altitude": 12169.14,
+        "icao24": "06a0e7",
+        "last_contact": 1787628795,
         "on_ground": false,
         "origin_country": "Qatar",
         "position_source": 0,
         "spi": false,
-        "squawk": "2251",
-        "time_position": 1787625967,
-        "true_track": 118.32,
-        "velocity": 277.59,
+        "squawk": "2007",
+        "time_position": 1787628795,
+        "true_track": 285.3,
+        "velocity": 232.01,
+        "vertical_rate": -0.33
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          17.2362,
+          47.7972
+        ],
+        "type": "Point"
+      },
+      "id": "885177",
+      "properties": {
+        "baro_altitude": 10972.8,
+        "callsign": "THA930",
+        "category": 0,
+        "geo_altitude": 11399.52,
+        "icao24": "885177",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "Thailand",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "1000",
+        "time_position": 1787628795,
+        "true_track": 293.6,
+        "velocity": 213.33,
         "vertical_rate": 0
       },
       "type": "Feature"
@@ -1635,223 +2391,111 @@
     {
       "geometry": {
         "coordinates": [
-          14.1562,
-          47.3508
+          6.4872,
+          44.3665
         ],
         "type": "Point"
       },
-      "id": "3c6676",
+      "id": "e49404",
       "properties": {
-        "baro_altitude": 8945.88,
-        "callsign": "DLH1743",
+        "baro_altitude": 10248.9,
+        "callsign": "PRGVI",
         "category": 0,
-        "geo_altitude": 9334.5,
-        "icao24": "3c6676",
-        "last_contact": 1787625968,
+        "geo_altitude": 10683.24,
+        "icao24": "e49404",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "Brazil",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "1000",
+        "time_position": 1787628795,
+        "true_track": 26.51,
+        "velocity": 232.83,
+        "vertical_rate": -4.23
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          18.5741,
+          46.6676
+        ],
+        "type": "Point"
+      },
+      "id": "3c65ab",
+      "properties": {
+        "baro_altitude": 12192,
+        "callsign": "DLH763",
+        "category": 0,
+        "geo_altitude": 12649.2,
+        "icao24": "3c65ab",
+        "last_contact": 1787628795,
         "on_ground": false,
         "origin_country": "Germany",
         "position_source": 0,
         "spi": false,
-        "squawk": "3223",
-        "time_position": 1787625968,
-        "true_track": 304.28,
-        "velocity": 209.18,
-        "vertical_rate": -5.2
+        "squawk": "3220",
+        "time_position": 1787628795,
+        "true_track": 288.23,
+        "velocity": 222.06,
+        "vertical_rate": -0.33
       },
       "type": "Feature"
     },
     {
       "geometry": {
         "coordinates": [
-          15.8325,
-          46.6034
+          13.612,
+          47.4584
         ],
         "type": "Point"
       },
-      "id": "3c65d1",
+      "id": "4b1885",
+      "properties": {
+        "baro_altitude": 10363.2,
+        "callsign": "SWR155",
+        "category": 1,
+        "geo_altitude": 10797.54,
+        "icao24": "4b1885",
+        "last_contact": 1787628796,
+        "on_ground": false,
+        "origin_country": "Switzerland",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "3247",
+        "time_position": 1787628795,
+        "true_track": 278.64,
+        "velocity": 205.54,
+        "vertical_rate": -0.33
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          13.8567,
+          47.2875
+        ],
+        "type": "Point"
+      },
+      "id": "4b1880",
       "properties": {
         "baro_altitude": 10972.8,
-        "callsign": "DLH2647",
+        "callsign": "SWR147",
         "category": 0,
-        "geo_altitude": 11445.24,
-        "icao24": "3c65d1",
-        "last_contact": 1787625968,
+        "geo_altitude": 11422.38,
+        "icao24": "4b1880",
+        "last_contact": 1787628796,
         "on_ground": false,
-        "origin_country": "Germany",
+        "origin_country": "Switzerland",
         "position_source": 0,
         "spi": false,
-        "squawk": "3230",
-        "time_position": 1787625968,
-        "true_track": 304.77,
-        "velocity": 196.65,
-        "vertical_rate": 0
-      },
-      "type": "Feature"
-    },
-    {
-      "geometry": {
-        "coordinates": [
-          9.7668,
-          47.2735
-        ],
-        "type": "Point"
-      },
-      "id": "408051",
-      "properties": {
-        "baro_altitude": 11582.4,
-        "callsign": "EZY63MD",
-        "category": 0,
-        "geo_altitude": 12009.12,
-        "icao24": "408051",
-        "last_contact": 1787625968,
-        "on_ground": false,
-        "origin_country": "United Kingdom",
-        "position_source": 0,
-        "spi": false,
-        "squawk": "5252",
-        "time_position": 1787625968,
-        "true_track": 298.91,
-        "velocity": 219.21,
-        "vertical_rate": 0
-      },
-      "type": "Feature"
-    },
-    {
-      "geometry": {
-        "coordinates": [
-          6.355,
-          37.8141
-        ],
-        "type": "Point"
-      },
-      "id": "408092",
-      "properties": {
-        "baro_altitude": 12184.38,
-        "callsign": "BAW64",
-        "category": 0,
-        "geo_altitude": 12862.56,
-        "icao24": "408092",
-        "last_contact": 1787625965,
-        "on_ground": false,
-        "origin_country": "United Kingdom",
-        "position_source": 0,
-        "spi": false,
-        "squawk": null,
-        "time_position": 1787625965,
-        "true_track": 349.99,
-        "velocity": 248.66,
-        "vertical_rate": -0.65
-      },
-      "type": "Feature"
-    },
-    {
-      "geometry": {
-        "coordinates": [
-          13.3204,
-          37.0847
-        ],
-        "type": "Point"
-      },
-      "id": "02a1a5",
-      "properties": {
-        "baro_altitude": 10972.8,
-        "callsign": "LBT691",
-        "category": 0,
-        "geo_altitude": 11658.6,
-        "icao24": "02a1a5",
-        "last_contact": 1787625967,
-        "on_ground": false,
-        "origin_country": "Tunisia",
-        "position_source": 0,
-        "spi": false,
-        "squawk": "2334",
-        "time_position": 1787625967,
-        "true_track": 252.92,
-        "velocity": 213.66,
-        "vertical_rate": 0
-      },
-      "type": "Feature"
-    },
-    {
-      "geometry": {
-        "coordinates": [
-          13.2491,
-          38.8402
-        ],
-        "type": "Point"
-      },
-      "id": "02a1a6",
-      "properties": {
-        "baro_altitude": 11567.16,
-        "callsign": "LBT7614",
-        "category": 0,
-        "geo_altitude": 12237.72,
-        "icao24": "02a1a6",
-        "last_contact": 1787625968,
-        "on_ground": false,
-        "origin_country": "Tunisia",
-        "position_source": 0,
-        "spi": false,
-        "squawk": "6170",
-        "time_position": 1787625968,
-        "true_track": 18.71,
-        "velocity": 238.98,
-        "vertical_rate": 0
-      },
-      "type": "Feature"
-    },
-    {
-      "geometry": {
-        "coordinates": [
-          9.3536,
-          39.3493
-        ],
-        "type": "Point"
-      },
-      "id": "02a1a9",
-      "properties": {
-        "baro_altitude": 11041.38,
-        "callsign": "LBT553",
-        "category": 0,
-        "geo_altitude": 11666.22,
-        "icao24": "02a1a9",
-        "last_contact": 1787625968,
-        "on_ground": false,
-        "origin_country": "Tunisia",
-        "position_source": 0,
-        "spi": false,
-        "squawk": "1242",
-        "time_position": 1787625968,
-        "true_track": 150.64,
-        "velocity": 236.1,
-        "vertical_rate": -4.88
-      },
-      "type": "Feature"
-    },
-    {
-      "geometry": {
-        "coordinates": [
-          9.864,
-          47.3695
-        ],
-        "type": "Point"
-      },
-      "id": "40825f",
-      "properties": {
-        "baro_altitude": 10972.8,
-        "callsign": "EXS96PS",
-        "category": 0,
-        "geo_altitude": 11407.14,
-        "icao24": "40825f",
-        "last_contact": 1787625968,
-        "on_ground": false,
-        "origin_country": "United Kingdom",
-        "position_source": 0,
-        "spi": false,
-        "squawk": "1162",
-        "time_position": 1787625968,
-        "true_track": 302.79,
-        "velocity": 227.03,
+        "squawk": "3205",
+        "time_position": 1787628795,
+        "true_track": 282.17,
+        "velocity": 207.35,
         "vertical_rate": 0.33
       },
       "type": "Feature"
@@ -1859,8 +2503,260 @@
     {
       "geometry": {
         "coordinates": [
-          6.7532,
-          37.2385
+          17.1205,
+          46.8329
+        ],
+        "type": "Point"
+      },
+      "id": "4b1881",
+      "properties": {
+        "baro_altitude": 12192,
+        "callsign": "SWR2647",
+        "category": 1,
+        "geo_altitude": 12649.2,
+        "icao24": "4b1881",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "Switzerland",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "3207",
+        "time_position": 1787628795,
+        "true_track": 285.48,
+        "velocity": 208.18,
+        "vertical_rate": 0
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          17.902,
+          42.5793
+        ],
+        "type": "Point"
+      },
+      "id": "3c65cf",
+      "properties": {
+        "baro_altitude": 11582.4,
+        "callsign": "DLH587",
+        "category": 0,
+        "geo_altitude": 12176.76,
+        "icao24": "3c65cf",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "Germany",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "3700",
+        "time_position": 1787628795,
+        "true_track": 321.25,
+        "velocity": 210.42,
+        "vertical_rate": -0.33
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          18.7129,
+          42.7655
+        ],
+        "type": "Point"
+      },
+      "id": "440cab",
+      "properties": {
+        "baro_altitude": 11887.2,
+        "callsign": "AUA835",
+        "category": 0,
+        "geo_altitude": 12473.94,
+        "icao24": "440cab",
+        "last_contact": 1787628794,
+        "on_ground": false,
+        "origin_country": "Austria",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "7101",
+        "time_position": 1787628794,
+        "true_track": 167.42,
+        "velocity": 231.4,
+        "vertical_rate": 0
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          15.8131,
+          47.3107
+        ],
+        "type": "Point"
+      },
+      "id": "3c6715",
+      "properties": {
+        "baro_altitude": 12192,
+        "callsign": "DLH727",
+        "category": 0,
+        "geo_altitude": 12633.96,
+        "icao24": "3c6715",
+        "last_contact": 1787628796,
+        "on_ground": false,
+        "origin_country": "Germany",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "3275",
+        "time_position": 1787628796,
+        "true_track": 292.79,
+        "velocity": 220.42,
+        "vertical_rate": 0
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          15.8592,
+          44.2806
+        ],
+        "type": "Point"
+      },
+      "id": "02a1a6",
+      "properties": {
+        "baro_altitude": 11582.4,
+        "callsign": "LBT7614",
+        "category": 0,
+        "geo_altitude": 12115.8,
+        "icao24": "02a1a6",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "Tunisia",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "6170",
+        "time_position": 1787628795,
+        "true_track": 21.23,
+        "velocity": 230.14,
+        "vertical_rate": -0.33
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          11.466,
+          37.755
+        ],
+        "type": "Point"
+      },
+      "id": "02a1a3",
+      "properties": {
+        "baro_altitude": 10972.8,
+        "callsign": "LBT742",
+        "category": 0,
+        "geo_altitude": 11643.36,
+        "icao24": "02a1a3",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "Tunisia",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "6141",
+        "time_position": 1787628793,
+        "true_track": 359.88,
+        "velocity": 236.64,
+        "vertical_rate": 0
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          8.5638,
+          47.4438
+        ],
+        "type": "Point"
+      },
+      "id": "4b5da7",
+      "properties": {
+        "baro_altitude": null,
+        "callsign": "TE26",
+        "category": 0,
+        "geo_altitude": null,
+        "icao24": "4b5da7",
+        "last_contact": 1787628788,
+        "on_ground": true,
+        "origin_country": "Switzerland",
+        "position_source": 0,
+        "spi": false,
+        "squawk": null,
+        "time_position": 1787628788,
+        "true_track": 135,
+        "velocity": 5.92,
+        "vertical_rate": null
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          11.7675,
+          47.3203
+        ],
+        "type": "Point"
+      },
+      "id": "348049",
+      "properties": {
+        "baro_altitude": 10073.64,
+        "callsign": "BCS7510",
+        "category": 0,
+        "geo_altitude": 10477.5,
+        "icao24": "348049",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "Spain",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "1000",
+        "time_position": 1787628795,
+        "true_track": 182.36,
+        "velocity": 212.65,
+        "vertical_rate": -0.33
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          7.1149,
+          40.5056
+        ],
+        "type": "Point"
+      },
+      "id": "3c6564",
+      "properties": {
+        "baro_altitude": 11582.4,
+        "callsign": "OCN133",
+        "category": 1,
+        "geo_altitude": 12161.52,
+        "icao24": "3c6564",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "Germany",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "1000",
+        "time_position": 1787628795,
+        "true_track": 3.53,
+        "velocity": 242.25,
+        "vertical_rate": 0
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          9.2167,
+          43.6878
         ],
         "type": "Point"
       },
@@ -1869,17 +2765,17 @@
         "baro_altitude": 12192,
         "callsign": "OCN143Y",
         "category": 0,
-        "geo_altitude": 12877.8,
+        "geo_altitude": 12694.92,
         "icao24": "3c6563",
-        "last_contact": 1787625882,
+        "last_contact": 1787628795,
         "on_ground": false,
         "origin_country": "Germany",
         "position_source": 0,
         "spi": false,
-        "squawk": null,
-        "time_position": 1787625882,
-        "true_track": 7.1,
-        "velocity": 245.73,
+        "squawk": "1000",
+        "time_position": 1787628795,
+        "true_track": 24.58,
+        "velocity": 272.1,
         "vertical_rate": 0
       },
       "type": "Feature"
@@ -1887,27 +2783,55 @@
     {
       "geometry": {
         "coordinates": [
-          17.5457,
-          38.9367
+          8.5521,
+          47.4636
+        ],
+        "type": "Point"
+      },
+      "id": "4b5daa",
+      "properties": {
+        "baro_altitude": null,
+        "callsign": "ATL786",
+        "category": 0,
+        "geo_altitude": null,
+        "icao24": "4b5daa",
+        "last_contact": 1787628733,
+        "on_ground": true,
+        "origin_country": "Switzerland",
+        "position_source": 0,
+        "spi": false,
+        "squawk": null,
+        "time_position": 1787628733,
+        "true_track": 247.5,
+        "velocity": 2.31,
+        "vertical_rate": null
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          11.1718,
+          37.1479
         ],
         "type": "Point"
       },
       "id": "0a004b",
       "properties": {
         "baro_altitude": 10363.2,
-        "callsign": "DH3023",
+        "callsign": "DAH3023",
         "category": 0,
-        "geo_altitude": 10988.04,
+        "geo_altitude": 11026.14,
         "icao24": "0a004b",
-        "last_contact": 1787625968,
+        "last_contact": 1787628795,
         "on_ground": false,
         "origin_country": "Algeria",
         "position_source": 0,
         "spi": false,
         "squawk": "2325",
-        "time_position": 1787625968,
-        "true_track": 252.04,
-        "velocity": 216.86,
+        "time_position": 1787628795,
+        "true_track": 252.65,
+        "velocity": 213.96,
         "vertical_rate": 0
       },
       "type": "Feature"
@@ -1915,36 +2839,64 @@
     {
       "geometry": {
         "coordinates": [
-          15.2422,
-          44.2633
+          7.7,
+          47.8321
         ],
         "type": "Point"
       },
-      "id": "3c64b1",
+      "id": "3c7984",
       "properties": {
-        "baro_altitude": 10370.82,
-        "callsign": "DLH691",
+        "baro_altitude": 10660.38,
+        "callsign": "CFG9FV",
         "category": 0,
-        "geo_altitude": 10904.22,
-        "icao24": "3c64b1",
-        "last_contact": 1787625968,
+        "geo_altitude": 11033.76,
+        "icao24": "3c7984",
+        "last_contact": 1787628795,
         "on_ground": false,
         "origin_country": "Germany",
         "position_source": 0,
         "spi": false,
-        "squawk": "2035",
-        "time_position": 1787625968,
-        "true_track": 311.95,
-        "velocity": 218.57,
-        "vertical_rate": 0
+        "squawk": "1000",
+        "time_position": 1787628795,
+        "true_track": 198.48,
+        "velocity": 217.51,
+        "vertical_rate": 0.33
       },
       "type": "Feature"
     },
     {
       "geometry": {
         "coordinates": [
-          8.545,
-          47.468
+          8.559,
+          47.4499
+        ],
+        "type": "Point"
+      },
+      "id": "4b5d9c",
+      "properties": {
+        "baro_altitude": null,
+        "callsign": "TE782",
+        "category": 0,
+        "geo_altitude": null,
+        "icao24": "4b5d9c",
+        "last_contact": 1787628788,
+        "on_ground": true,
+        "origin_country": "Switzerland",
+        "position_source": 0,
+        "spi": false,
+        "squawk": null,
+        "time_position": 1787628788,
+        "true_track": 281.25,
+        "velocity": 6.43,
+        "vertical_rate": null
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          8.5536,
+          47.4627
         ],
         "type": "Point"
       },
@@ -1955,15 +2907,15 @@
         "category": 0,
         "geo_altitude": null,
         "icao24": "4b5d6f",
-        "last_contact": 1787625968,
+        "last_contact": 1787628795,
         "on_ground": true,
         "origin_country": "Switzerland",
         "position_source": 0,
         "spi": false,
         "squawk": null,
-        "time_position": 1787625968,
-        "true_track": 126.56,
-        "velocity": 4.37,
+        "time_position": 1787628795,
+        "true_track": 272.81,
+        "velocity": 4.12,
         "vertical_rate": null
       },
       "type": "Feature"
@@ -1971,55 +2923,27 @@
     {
       "geometry": {
         "coordinates": [
-          9.9161,
-          45.6292
+          8.5517,
+          47.4618
         ],
         "type": "Point"
       },
-      "id": "4ca9a1",
-      "properties": {
-        "baro_altitude": 982.98,
-        "callsign": "NOS1086",
-        "category": 0,
-        "geo_altitude": 1043.94,
-        "icao24": "4ca9a1",
-        "last_contact": 1787625968,
-        "on_ground": false,
-        "origin_country": "Ireland",
-        "position_source": 0,
-        "spi": false,
-        "squawk": "1000",
-        "time_position": 1787625968,
-        "true_track": 277.65,
-        "velocity": 112.12,
-        "vertical_rate": -2.93
-      },
-      "type": "Feature"
-    },
-    {
-      "geometry": {
-        "coordinates": [
-          8.5474,
-          47.463
-        ],
-        "type": "Point"
-      },
-      "id": "4b5c36",
+      "id": "4b5d98",
       "properties": {
         "baro_altitude": null,
-        "callsign": "URSULA3",
+        "callsign": "ATL779",
         "category": 0,
         "geo_altitude": null,
-        "icao24": "4b5c36",
-        "last_contact": 1787625962,
+        "icao24": "4b5d98",
+        "last_contact": 1787628515,
         "on_ground": true,
         "origin_country": "Switzerland",
         "position_source": 0,
         "spi": false,
         "squawk": null,
-        "time_position": 1787625961,
-        "true_track": 306.56,
-        "velocity": 0,
+        "time_position": 1787628515,
+        "true_track": 19.69,
+        "velocity": 0.06,
         "vertical_rate": null
       },
       "type": "Feature"
@@ -2027,55 +2951,27 @@
     {
       "geometry": {
         "coordinates": [
-          8.5487,
-          47.4604
+          9.8478,
+          36.1621
         ],
         "type": "Point"
       },
-      "id": "4b5c27",
+      "id": "4951d6",
       "properties": {
-        "baro_altitude": null,
-        "callsign": "EUGEN11",
+        "baro_altitude": 10386.06,
+        "callsign": "TAP9004",
         "category": 0,
-        "geo_altitude": null,
-        "icao24": "4b5c27",
-        "last_contact": 1787625967,
-        "on_ground": true,
-        "origin_country": "Switzerland",
-        "position_source": 0,
-        "spi": false,
-        "squawk": null,
-        "time_position": 1787625967,
-        "true_track": 14.06,
-        "velocity": 6.43,
-        "vertical_rate": null
-      },
-      "type": "Feature"
-    },
-    {
-      "geometry": {
-        "coordinates": [
-          6.2971,
-          46.15
-        ],
-        "type": "Point"
-      },
-      "id": "7810b8",
-      "properties": {
-        "baro_altitude": 10965.18,
-        "callsign": "CCA898",
-        "category": 0,
-        "geo_altitude": 11346.18,
-        "icao24": "7810b8",
-        "last_contact": 1787625967,
+        "geo_altitude": 11079.48,
+        "icao24": "4951d6",
+        "last_contact": 1787628744,
         "on_ground": false,
-        "origin_country": "China",
+        "origin_country": "Portugal",
         "position_source": 0,
         "spi": false,
-        "squawk": "2320",
-        "time_position": 1787625967,
-        "true_track": 44.75,
-        "velocity": 255,
+        "squawk": null,
+        "time_position": 1787628520,
+        "true_track": 342.1,
+        "velocity": 227.6,
         "vertical_rate": 0
       },
       "type": "Feature"
@@ -2083,55 +2979,27 @@
     {
       "geometry": {
         "coordinates": [
-          17.9271,
-          47.9159
+          6.317,
+          47.8047
         ],
         "type": "Point"
       },
-      "id": "49d5d6",
+      "id": "440bcb",
       "properties": {
-        "baro_altitude": 10668,
-        "callsign": "TVS7EJ",
+        "baro_altitude": 5928.36,
+        "callsign": "BCS30A",
         "category": 0,
-        "geo_altitude": 11056.62,
-        "icao24": "49d5d6",
-        "last_contact": 1787625968,
+        "geo_altitude": 6149.34,
+        "icao24": "440bcb",
+        "last_contact": 1787628795,
         "on_ground": false,
-        "origin_country": "Czech Republic",
+        "origin_country": "Austria",
         "position_source": 0,
         "spi": false,
-        "squawk": "1417",
-        "time_position": 1787625968,
-        "true_track": 144.44,
-        "velocity": 252.97,
-        "vertical_rate": 0
-      },
-      "type": "Feature"
-    },
-    {
-      "geometry": {
-        "coordinates": [
-          10.4889,
-          35.9798
-        ],
-        "type": "Point"
-      },
-      "id": "02a192",
-      "properties": {
-        "baro_altitude": 1684.02,
-        "callsign": null,
-        "category": 0,
-        "geo_altitude": 1828.8,
-        "icao24": "02a192",
-        "last_contact": 1787625687,
-        "on_ground": false,
-        "origin_country": "Tunisia",
-        "position_source": 0,
-        "spi": false,
-        "squawk": null,
-        "time_position": 1787625548,
-        "true_track": 162.91,
-        "velocity": 124.32,
+        "squawk": "6310",
+        "time_position": 1787628795,
+        "true_track": 90.86,
+        "velocity": 205.29,
         "vertical_rate": -4.88
       },
       "type": "Feature"
@@ -2139,83 +3007,139 @@
     {
       "geometry": {
         "coordinates": [
-          18.9644,
-          46.3181
+          8.5563,
+          47.446
         ],
         "type": "Point"
       },
-      "id": "4bcdef",
+      "id": "4b5c1a",
       "properties": {
-        "baro_altitude": 10972.8,
-        "callsign": "SXS8ER",
+        "baro_altitude": null,
+        "callsign": "GUSTI2",
         "category": 0,
-        "geo_altitude": 11437.62,
-        "icao24": "4bcdef",
-        "last_contact": 1787625968,
-        "on_ground": false,
-        "origin_country": "Turkey",
+        "geo_altitude": null,
+        "icao24": "4b5c1a",
+        "last_contact": 1787628794,
+        "on_ground": true,
+        "origin_country": "Switzerland",
         "position_source": 0,
         "spi": false,
-        "squawk": "2644",
-        "time_position": 1787625968,
-        "true_track": 320.85,
-        "velocity": 206.97,
-        "vertical_rate": 0
+        "squawk": null,
+        "time_position": 1787628794,
+        "true_track": 154.69,
+        "velocity": 12.35,
+        "vertical_rate": null
       },
       "type": "Feature"
     },
     {
       "geometry": {
         "coordinates": [
-          8.9343,
-          45.3644
+          8.5526,
+          47.4461
         ],
         "type": "Point"
       },
-      "id": "3c1baf",
+      "id": "4b5c59",
       "properties": {
-        "baro_altitude": 1897.38,
-        "callsign": "BCS6GA",
-        "category": 1,
-        "geo_altitude": 1988.82,
-        "icao24": "3c1baf",
-        "last_contact": 1787625967,
+        "baro_altitude": null,
+        "callsign": "FLORI265",
+        "category": 0,
+        "geo_altitude": null,
+        "icao24": "4b5c59",
+        "last_contact": 1787628795,
+        "on_ground": true,
+        "origin_country": "Switzerland",
+        "position_source": 0,
+        "spi": false,
+        "squawk": null,
+        "time_position": 1787628299,
+        "true_track": 306.56,
+        "velocity": 0.32,
+        "vertical_rate": null
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          8.7187,
+          45.6366
+        ],
+        "type": "Point"
+      },
+      "id": "440bbe",
+      "properties": {
+        "baro_altitude": null,
+        "callsign": "BCS138",
+        "category": 0,
+        "geo_altitude": null,
+        "icao24": "440bbe",
+        "last_contact": 1787628795,
+        "on_ground": true,
+        "origin_country": "Austria",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "1000",
+        "time_position": 1787628795,
+        "true_track": 168.75,
+        "velocity": 9.77,
+        "vertical_rate": null
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          8.5736,
+          47.4536
+        ],
+        "type": "Point"
+      },
+      "id": "4b5c6d",
+      "properties": {
+        "baro_altitude": null,
+        "callsign": "ZEBRA4",
+        "category": 0,
+        "geo_altitude": null,
+        "icao24": "4b5c6d",
+        "last_contact": 1787628792,
+        "on_ground": true,
+        "origin_country": "Switzerland",
+        "position_source": 0,
+        "spi": false,
+        "squawk": null,
+        "time_position": 1787628792,
+        "true_track": 112.5,
+        "velocity": 1.54,
+        "vertical_rate": null
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          12.1071,
+          47.8981
+        ],
+        "type": "Point"
+      },
+      "id": "3c7438",
+      "properties": {
+        "baro_altitude": 11277.6,
+        "callsign": "TUI76M",
+        "category": 0,
+        "geo_altitude": 11704.32,
+        "icao24": "3c7438",
+        "last_contact": 1787628796,
         "on_ground": false,
         "origin_country": "Germany",
         "position_source": 0,
         "spi": false,
-        "squawk": "1000",
-        "time_position": 1787625967,
-        "true_track": 205.8,
-        "velocity": 120.57,
-        "vertical_rate": -7.48
-      },
-      "type": "Feature"
-    },
-    {
-      "geometry": {
-        "coordinates": [
-          17.9488,
-          47.8781
-        ],
-        "type": "Point"
-      },
-      "id": "4bcdb5",
-      "properties": {
-        "baro_altitude": 11277.6,
-        "callsign": "SXS5FR",
-        "category": 0,
-        "geo_altitude": 11696.7,
-        "icao24": "4bcdb5",
-        "last_contact": 1787625968,
-        "on_ground": false,
-        "origin_country": "Turkey",
-        "position_source": 0,
-        "spi": false,
-        "squawk": "7635",
-        "time_position": 1787625968,
-        "true_track": 147.66,
-        "velocity": 242.34,
+        "squawk": "7712",
+        "time_position": 1787628795,
+        "true_track": 132.83,
+        "velocity": 239.89,
         "vertical_rate": 0.33
       },
       "type": "Feature"
@@ -2223,27 +3147,139 @@
     {
       "geometry": {
         "coordinates": [
-          15.4911,
-          46.2773
+          14.3423,
+          47.8248
         ],
         "type": "Point"
       },
-      "id": "4bccae",
+      "id": "3c7422",
       "properties": {
-        "baro_altitude": 11277.6,
-        "callsign": "SXS3WE",
+        "baro_altitude": 11887.2,
+        "callsign": "TUI8XD",
         "category": 0,
-        "geo_altitude": 11750.04,
-        "icao24": "4bccae",
-        "last_contact": 1787625968,
+        "geo_altitude": 12329.16,
+        "icao24": "3c7422",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "Germany",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "7613",
+        "time_position": 1787628795,
+        "true_track": 148.77,
+        "velocity": 246.07,
+        "vertical_rate": 0
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          18.8555,
+          46.7383
+        ],
+        "type": "Point"
+      },
+      "id": "49d5ef",
+      "properties": {
+        "baro_altitude": 10668,
+        "callsign": "TVS3PR",
+        "category": 0,
+        "geo_altitude": 11102.34,
+        "icao24": "49d5ef",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "Czech Republic",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "4515",
+        "time_position": 1787628795,
+        "true_track": 133.34,
+        "velocity": 251.83,
+        "vertical_rate": 0
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          14.8244,
+          47.4776
+        ],
+        "type": "Point"
+      },
+      "id": "4bceb5",
+      "properties": {
+        "baro_altitude": 9989.82,
+        "callsign": "SXS4YR",
+        "category": 0,
+        "geo_altitude": 10416.54,
+        "icao24": "4bceb5",
+        "last_contact": 1787628795,
         "on_ground": false,
         "origin_country": "Turkey",
         "position_source": 0,
         "spi": false,
-        "squawk": "7651",
-        "time_position": 1787625968,
-        "true_track": 130.55,
-        "velocity": 253.22,
+        "squawk": "2650",
+        "time_position": 1787628794,
+        "true_track": 296.18,
+        "velocity": 202.92,
+        "vertical_rate": -4.88
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          18.228,
+          46.3305
+        ],
+        "type": "Point"
+      },
+      "id": "4bcdba",
+      "properties": {
+        "baro_altitude": 11582.4,
+        "callsign": "SXS1XP",
+        "category": 0,
+        "geo_altitude": 12054.84,
+        "icao24": "4bcdba",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "Turkey",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "3217",
+        "time_position": 1787628795,
+        "true_track": 309.03,
+        "velocity": 188.73,
+        "vertical_rate": 0
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          18.792,
+          46.0102
+        ],
+        "type": "Point"
+      },
+      "id": "4bcde3",
+      "properties": {
+        "baro_altitude": 10972.8,
+        "callsign": "SXS4UV",
+        "category": 0,
+        "geo_altitude": 11430,
+        "icao24": "4bcde3",
+        "last_contact": 1787628796,
+        "on_ground": false,
+        "origin_country": "Turkey",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "4502",
+        "time_position": 1787628795,
+        "true_track": 309.41,
+        "velocity": 201.76,
         "vertical_rate": -0.33
       },
       "type": "Feature"
@@ -2251,55 +3287,279 @@
     {
       "geometry": {
         "coordinates": [
-          15.7274,
-          47.7169
+          9.1609,
+          47.6237
         ],
         "type": "Point"
       },
-      "id": "8880e1",
+      "id": "781346",
+      "properties": {
+        "baro_altitude": 11536.68,
+        "callsign": "CCA949",
+        "category": 0,
+        "geo_altitude": 11803.38,
+        "icao24": "781346",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "China",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "6004",
+        "time_position": 1787628795,
+        "true_track": 197.23,
+        "velocity": 217.06,
+        "vertical_rate": -4.88
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          7.6749,
+          40.6619
+        ],
+        "type": "Point"
+      },
+      "id": "ac9923",
+      "properties": {
+        "baro_altitude": 11582.4,
+        "callsign": "UAL124",
+        "category": 0,
+        "geo_altitude": 12184.38,
+        "icao24": "ac9923",
+        "last_contact": 1787628794,
+        "on_ground": false,
+        "origin_country": "United States",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "5271",
+        "time_position": 1787628794,
+        "true_track": 98.71,
+        "velocity": 278.44,
+        "vertical_rate": 0.33
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          17.435,
+          47.3638
+        ],
+        "type": "Point"
+      },
+      "id": "4bcda4",
+      "properties": {
+        "baro_altitude": 11887.2,
+        "callsign": "SXS2RJ",
+        "category": 0,
+        "geo_altitude": 12336.78,
+        "icao24": "4bcda4",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "Turkey",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "7633",
+        "time_position": 1787628795,
+        "true_track": 143.77,
+        "velocity": 248.08,
+        "vertical_rate": 0
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          17.021,
+          47.7457
+        ],
+        "type": "Point"
+      },
+      "id": "4bcda2",
+      "properties": {
+        "baro_altitude": 11887.2,
+        "callsign": "SXS84K",
+        "category": 0,
+        "geo_altitude": 12336.78,
+        "icao24": "4bcda2",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "Turkey",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "7610",
+        "time_position": 1787628795,
+        "true_track": 144.73,
+        "velocity": 247.65,
+        "vertical_rate": 0
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          17.6379,
+          44.8087
+        ],
+        "type": "Point"
+      },
+      "id": "4bccba",
+      "properties": {
+        "baro_altitude": 10972.8,
+        "callsign": "SXS7KP",
+        "category": 0,
+        "geo_altitude": 11475.72,
+        "icao24": "4bccba",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "Turkey",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "5314",
+        "time_position": 1787628795,
+        "true_track": 314.68,
+        "velocity": 193.89,
+        "vertical_rate": 0.33
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          16.4987,
+          46.8946
+        ],
+        "type": "Point"
+      },
+      "id": "4bce08",
+      "properties": {
+        "baro_altitude": 10972.8,
+        "callsign": "SXS4SB",
+        "category": 0,
+        "geo_altitude": 11422.38,
+        "icao24": "4bce08",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "Turkey",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "3257",
+        "time_position": 1787628795,
+        "true_track": 298.86,
+        "velocity": 195.02,
+        "vertical_rate": 0.33
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          17.4433,
+          45.2511
+        ],
+        "type": "Point"
+      },
+      "id": "8940ca",
+      "properties": {
+        "baro_altitude": 10363.2,
+        "callsign": "GFA87S",
+        "category": 0,
+        "geo_altitude": 10858.5,
+        "icao24": "8940ca",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "Bahrain",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "5401",
+        "time_position": 1787628795,
+        "true_track": 319.99,
+        "velocity": 204.85,
+        "vertical_rate": 0
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          15.7997,
+          43.8771
+        ],
+        "type": "Point"
+      },
+      "id": "8940c9",
+      "properties": {
+        "baro_altitude": 9745.98,
+        "callsign": "GFA029",
+        "category": 0,
+        "geo_altitude": 10248.9,
+        "icao24": "8940c9",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "Bahrain",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "1335",
+        "time_position": 1787628794,
+        "true_track": 337.85,
+        "velocity": 221.06,
+        "vertical_rate": 0.33
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          17.9825,
+          47.5792
+        ],
+        "type": "Point"
+      },
+      "id": "76cda4",
       "properties": {
         "baro_altitude": 12192,
-        "callsign": "HVN37",
+        "callsign": "SIA304",
+        "category": 0,
+        "geo_altitude": 12687.3,
+        "icao24": "76cda4",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "Singapore",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "3271",
+        "time_position": 1787628795,
+        "true_track": 293.88,
+        "velocity": 221.11,
+        "vertical_rate": -0.33
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          18.2758,
+          47.0517
+        ],
+        "type": "Point"
+      },
+      "id": "8940a1",
+      "properties": {
+        "baro_altitude": 12192,
+        "callsign": "GFA007",
         "category": 0,
         "geo_altitude": 12633.96,
-        "icao24": "8880e1",
-        "last_contact": 1787625968,
+        "icao24": "8940a1",
+        "last_contact": 1787628795,
         "on_ground": false,
-        "origin_country": "Viet Nam",
+        "origin_country": "Bahrain",
         "position_source": 0,
         "spi": false,
-        "squawk": "3234",
-        "time_position": 1787625967,
-        "true_track": 295.83,
-        "velocity": 214.9,
-        "vertical_rate": -0.33
-      },
-      "type": "Feature"
-    },
-    {
-      "geometry": {
-        "coordinates": [
-          13.1506,
-          47.697
-        ],
-        "type": "Point"
-      },
-      "id": "4bce1a",
-      "properties": {
-        "baro_altitude": 11277.6,
-        "callsign": "SXS3BV",
-        "category": 0,
-        "geo_altitude": 11704.32,
-        "icao24": "4bce1a",
-        "last_contact": 1787625968,
-        "on_ground": false,
-        "origin_country": "Turkey",
-        "position_source": 0,
-        "spi": false,
-        "squawk": "7642",
-        "time_position": 1787625968,
-        "true_track": 131.11,
-        "velocity": 246.48,
+        "squawk": "3274",
+        "time_position": 1787628795,
+        "true_track": 296.86,
+        "velocity": 224.32,
         "vertical_rate": 0
       },
       "type": "Feature"
@@ -2307,55 +3567,55 @@
     {
       "geometry": {
         "coordinates": [
-          7.5222,
-          47.607
+          11.5966,
+          46.5426
         ],
         "type": "Point"
       },
-      "id": "389dff",
+      "id": "8940a5",
       "properties": {
-        "baro_altitude": null,
-        "callsign": "COBRA02",
+        "baro_altitude": 9753.6,
+        "callsign": "BCS7916",
         "category": 0,
-        "geo_altitude": null,
-        "icao24": "389dff",
-        "last_contact": 1787625968,
-        "on_ground": true,
-        "origin_country": "France",
+        "geo_altitude": 10157.46,
+        "icao24": "8940a5",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "Bahrain",
         "position_source": 0,
         "spi": false,
-        "squawk": null,
-        "time_position": 1787625968,
-        "true_track": 334.69,
-        "velocity": 5.4,
-        "vertical_rate": null
+        "squawk": "1000",
+        "time_position": 1787628795,
+        "true_track": 189.67,
+        "velocity": 211.35,
+        "vertical_rate": 0.98
       },
       "type": "Feature"
     },
     {
       "geometry": {
         "coordinates": [
-          18.355,
-          42.9348
+          16.297,
+          47.5519
         ],
         "type": "Point"
       },
-      "id": "01023c",
+      "id": "8940a4",
       "properties": {
-        "baro_altitude": 10675.62,
-        "callsign": "MSC2913",
+        "baro_altitude": 10363.2,
+        "callsign": "GFA17J",
         "category": 0,
-        "geo_altitude": 11231.88,
-        "icao24": "01023c",
-        "last_contact": 1787625967,
+        "geo_altitude": 10789.92,
+        "icao24": "8940a4",
+        "last_contact": 1787628795,
         "on_ground": false,
-        "origin_country": "Egypt",
+        "origin_country": "Bahrain",
         "position_source": 0,
         "spi": false,
-        "squawk": "2514",
-        "time_position": 1787625966,
-        "true_track": 140.65,
-        "velocity": 258.8,
+        "squawk": "3274",
+        "time_position": 1787628795,
+        "true_track": 295.1,
+        "velocity": 207.36,
         "vertical_rate": 0
       },
       "type": "Feature"
@@ -2363,139 +3623,279 @@
     {
       "geometry": {
         "coordinates": [
-          17.34,
-          35.8241
+          13.5883,
+          35.8685
         ],
         "type": "Point"
       },
-      "id": "010245",
+      "id": "3473d3",
       "properties": {
-        "baro_altitude": 10675.62,
-        "callsign": "MSR862",
+        "baro_altitude": 10972.8,
+        "callsign": "SVA2500",
         "category": 0,
-        "geo_altitude": 11376.66,
-        "icao24": "010245",
-        "last_contact": 1787625968,
-        "on_ground": false,
-        "origin_country": "Egypt",
-        "position_source": 0,
-        "spi": false,
-        "squawk": "4111",
-        "time_position": 1787625967,
-        "true_track": 94.48,
-        "velocity": 256.98,
-        "vertical_rate": -0.33
-      },
-      "type": "Feature"
-    },
-    {
-      "geometry": {
-        "coordinates": [
-          18,
-          48
-        ],
-        "type": "Point"
-      },
-      "id": "01025c",
-      "properties": {
-        "baro_altitude": 11285.22,
-        "callsign": "MSC781",
-        "category": 0,
-        "geo_altitude": 11536.68,
-        "icao24": "01025c",
-        "last_contact": 1787625966,
-        "on_ground": false,
-        "origin_country": "Egypt",
-        "position_source": 0,
-        "spi": false,
-        "squawk": "4245",
-        "time_position": 1787623839,
-        "true_track": 317.81,
-        "velocity": 0.77,
-        "vertical_rate": null
-      },
-      "type": "Feature"
-    },
-    {
-      "geometry": {
-        "coordinates": [
-          6.4771,
-          43.3463
-        ],
-        "type": "Point"
-      },
-      "id": "347303",
-      "properties": {
-        "baro_altitude": 7490.46,
-        "callsign": "SWT5781",
-        "category": 0,
-        "geo_altitude": 7848.6,
-        "icao24": "347303",
-        "last_contact": 1787625968,
+        "geo_altitude": 11666.22,
+        "icao24": "3473d3",
+        "last_contact": 1787628795,
         "on_ground": false,
         "origin_country": "Spain",
         "position_source": 0,
         "spi": false,
-        "squawk": "1000",
-        "time_position": 1787625968,
-        "true_track": 99.33,
-        "velocity": 222.09,
-        "vertical_rate": 13
+        "squawk": "5524",
+        "time_position": 1787628795,
+        "true_track": 276.38,
+        "velocity": 222.07,
+        "vertical_rate": 0
       },
       "type": "Feature"
     },
     {
       "geometry": {
         "coordinates": [
-          9.0969,
-          40.4693
+          16.6865,
+          41.3826
+        ],
+        "type": "Point"
+      },
+      "id": "01026b",
+      "properties": {
+        "baro_altitude": 10957.56,
+        "callsign": "NIA2492",
+        "category": 0,
+        "geo_altitude": 11544.3,
+        "icao24": "01026b",
+        "last_contact": 1787628793,
+        "on_ground": false,
+        "origin_country": "Egypt",
+        "position_source": 0,
+        "spi": false,
+        "squawk": null,
+        "time_position": 1787628793,
+        "true_track": 318.89,
+        "velocity": 214.39,
+        "vertical_rate": 0
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          17.9708,
+          45.4062
+        ],
+        "type": "Point"
+      },
+      "id": "485e2f",
+      "properties": {
+        "baro_altitude": 11582.4,
+        "callsign": "KLM569",
+        "category": 0,
+        "geo_altitude": 12092.94,
+        "icao24": "485e2f",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "Kingdom of the Netherlands",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "5526",
+        "time_position": 1787628795,
+        "true_track": 315.88,
+        "velocity": 213.56,
+        "vertical_rate": 0
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          17.5844,
+          47.3358
+        ],
+        "type": "Point"
+      },
+      "id": "76cef5",
+      "properties": {
+        "baro_altitude": 10972.8,
+        "callsign": "SIA26",
+        "category": 0,
+        "geo_altitude": 11414.76,
+        "icao24": "76cef5",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "Singapore",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "3226",
+        "time_position": 1787628795,
+        "true_track": 292.83,
+        "velocity": 208.19,
+        "vertical_rate": 0.33
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          9.7766,
+          45.3794
+        ],
+        "type": "Point"
+      },
+      "id": "39a208",
+      "properties": {
+        "baro_altitude": 7581.9,
+        "callsign": "FPO6LQ",
+        "category": 0,
+        "geo_altitude": 7932.42,
+        "icao24": "39a208",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "France",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "1000",
+        "time_position": 1787628795,
+        "true_track": 146.73,
+        "velocity": 216.6,
+        "vertical_rate": -16.26
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          12.1135,
+          45.3304
+        ],
+        "type": "Point"
+      },
+      "id": "39a202",
+      "properties": {
+        "baro_altitude": 1112.52,
+        "callsign": "FPO3JU",
+        "category": 0,
+        "geo_altitude": 1181.1,
+        "icao24": "39a202",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "France",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "1000",
+        "time_position": 1787628795,
+        "true_track": 89.06,
+        "velocity": 126.06,
+        "vertical_rate": -2.6
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          17.6485,
+          45.5183
+        ],
+        "type": "Point"
+      },
+      "id": "a071ec",
+      "properties": {
+        "baro_altitude": 11894.82,
+        "callsign": "FDX6238",
+        "category": 0,
+        "geo_altitude": 12397.74,
+        "icao24": "a071ec",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "United States",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "0672",
+        "time_position": 1787628795,
+        "true_track": 116.61,
+        "velocity": 265.27,
+        "vertical_rate": 0
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          18.31,
+          46.2842
+        ],
+        "type": "Point"
+      },
+      "id": "424b9b",
+      "properties": {
+        "baro_altitude": 10340.34,
+        "callsign": "MDVJJ",
+        "category": 0,
+        "geo_altitude": 10789.92,
+        "icao24": "424b9b",
+        "last_contact": 1787628796,
+        "on_ground": false,
+        "origin_country": "United Kingdom",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "5213",
+        "time_position": 1787628795,
+        "true_track": 129.13,
+        "velocity": 284.5,
+        "vertical_rate": -7.15
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          9.0946,
+          46.3994
         ],
         "type": "Point"
       },
       "id": "4d23a4",
       "properties": {
-        "baro_altitude": 10965.18,
+        "baro_altitude": 9768.84,
         "callsign": "EWG2981",
         "category": 0,
-        "geo_altitude": 11574.78,
+        "geo_altitude": 10142.22,
         "icao24": "4d23a4",
-        "last_contact": 1787625968,
+        "last_contact": 1787628795,
         "on_ground": false,
         "origin_country": "Malta",
         "position_source": 0,
         "spi": false,
-        "squawk": "6130",
-        "time_position": 1787625968,
-        "true_track": 346.06,
-        "velocity": 219.97,
-        "vertical_rate": -0.33
+        "squawk": "2771",
+        "time_position": 1787628795,
+        "true_track": 5.13,
+        "velocity": 224.17,
+        "vertical_rate": 0.33
       },
       "type": "Feature"
     },
     {
       "geometry": {
         "coordinates": [
-          8.5629,
-          47.329
+          10.2005,
+          45.5855
         ],
         "type": "Point"
       },
-      "id": "39b225",
+      "id": "4d2407",
       "properties": {
-        "baro_altitude": 10363.2,
-        "callsign": "CMA575",
+        "baro_altitude": 11277.6,
+        "callsign": "EWG31G",
         "category": 0,
-        "geo_altitude": 10744.2,
-        "icao24": "39b225",
-        "last_contact": 1787625968,
+        "geo_altitude": 11742.42,
+        "icao24": "4d2407",
+        "last_contact": 1787628795,
         "on_ground": false,
-        "origin_country": "France",
+        "origin_country": "Malta",
         "position_source": 0,
         "spi": false,
-        "squawk": "3276",
-        "time_position": 1787625967,
-        "true_track": 289.85,
-        "velocity": 249.96,
+        "squawk": "6666",
+        "time_position": 1787628795,
+        "true_track": 207.09,
+        "velocity": 201.09,
         "vertical_rate": 0
       },
       "type": "Feature"
@@ -2503,36 +3903,92 @@
     {
       "geometry": {
         "coordinates": [
-          8.5608,
-          47.7844
+          7.03,
+          43.7764
         ],
         "type": "Point"
       },
-      "id": "4d240f",
+      "id": "4cadc6",
       "properties": {
-        "baro_altitude": 10668,
-        "callsign": "EWG53L",
+        "baro_altitude": 11887.2,
+        "callsign": "ITY609",
         "category": 0,
-        "geo_altitude": 11064.24,
-        "icao24": "4d240f",
-        "last_contact": 1787625968,
+        "geo_altitude": 12367.26,
+        "icao24": "4cadc6",
+        "last_contact": 1787628795,
         "on_ground": false,
-        "origin_country": "Malta",
+        "origin_country": "Ireland",
         "position_source": 0,
         "spi": false,
-        "squawk": "6653",
-        "time_position": 1787625968,
-        "true_track": 218.79,
-        "velocity": 211.86,
-        "vertical_rate": 5.2
+        "squawk": "5225",
+        "time_position": 1787628795,
+        "true_track": 123.09,
+        "velocity": 259.12,
+        "vertical_rate": 0
       },
       "type": "Feature"
     },
     {
       "geometry": {
         "coordinates": [
-          7.1192,
-          40.243
+          8.8029,
+          40.1794
+        ],
+        "type": "Point"
+      },
+      "id": "4cadc7",
+      "properties": {
+        "baro_altitude": 12192,
+        "callsign": "ITY673",
+        "category": 0,
+        "geo_altitude": 12816.84,
+        "icao24": "4cadc7",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "Ireland",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "1000",
+        "time_position": 1787628795,
+        "true_track": 60.97,
+        "velocity": 261.83,
+        "vertical_rate": -0.33
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          8.159,
+          40.1028
+        ],
+        "type": "Point"
+      },
+      "id": "4cadfb",
+      "properties": {
+        "baro_altitude": 12192,
+        "callsign": "ITY675",
+        "category": 0,
+        "geo_altitude": 12793.98,
+        "icao24": "4cadfb",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "Ireland",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "1000",
+        "time_position": 1787628795,
+        "true_track": 63.92,
+        "velocity": 271.49,
+        "vertical_rate": 0
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          6.3009,
+          46.6646
         ],
         "type": "Point"
       },
@@ -2541,17 +3997,17 @@
         "baro_altitude": 10972.8,
         "callsign": "ABD2601",
         "category": 0,
-        "geo_altitude": 11529.06,
+        "geo_altitude": 11315.7,
         "icao24": "4d243e",
-        "last_contact": 1787625967,
+        "last_contact": 1787628795,
         "on_ground": false,
         "origin_country": "Malta",
         "position_source": 0,
         "spi": false,
         "squawk": "1000",
-        "time_position": 1787625967,
-        "true_track": 3.17,
-        "velocity": 260.71,
+        "time_position": 1787628795,
+        "true_track": 345.15,
+        "velocity": 254.93,
         "vertical_rate": 0
       },
       "type": "Feature"
@@ -2559,83 +4015,27 @@
     {
       "geometry": {
         "coordinates": [
-          8.8288,
-          38.4751
+          16.3533,
+          43.3935
         ],
         "type": "Point"
       },
-      "id": "4cae19",
+      "id": "4cadf5",
       "properties": {
-        "baro_altitude": 10728.96,
-        "callsign": "ITY853",
+        "baro_altitude": 11582.4,
+        "callsign": "RYR5575",
         "category": 0,
-        "geo_altitude": 11376.66,
-        "icao24": "4cae19",
-        "last_contact": 1787625968,
+        "geo_altitude": 12138.66,
+        "icao24": "4cadf5",
+        "last_contact": 1787628794,
         "on_ground": false,
         "origin_country": "Ireland",
         "position_source": 0,
         "spi": false,
-        "squawk": "5433",
-        "time_position": 1787625967,
-        "true_track": 37.93,
-        "velocity": 256.96,
-        "vertical_rate": 3.9
-      },
-      "type": "Feature"
-    },
-    {
-      "geometry": {
-        "coordinates": [
-          16.7571,
-          47.6566
-        ],
-        "type": "Point"
-      },
-      "id": "4d2352",
-      "properties": {
-        "baro_altitude": 10972.8,
-        "callsign": "CAI5D",
-        "category": 0,
-        "geo_altitude": 11391.9,
-        "icao24": "4d2352",
-        "last_contact": 1787625967,
-        "on_ground": false,
-        "origin_country": "Malta",
-        "position_source": 0,
-        "spi": false,
-        "squawk": "3252",
-        "time_position": 1787625967,
-        "true_track": 299.58,
-        "velocity": 201.13,
-        "vertical_rate": -0.33
-      },
-      "type": "Feature"
-    },
-    {
-      "geometry": {
-        "coordinates": [
-          17.3021,
-          47.7545
-        ],
-        "type": "Point"
-      },
-      "id": "4d239b",
-      "properties": {
-        "baro_altitude": 11590.02,
-        "callsign": "CAI346",
-        "category": 0,
-        "geo_altitude": 12009.12,
-        "icao24": "4d239b",
-        "last_contact": 1787625968,
-        "on_ground": false,
-        "origin_country": "Malta",
-        "position_source": 0,
-        "spi": false,
-        "squawk": "3251",
-        "time_position": 1787625968,
-        "true_track": 301.48,
-        "velocity": 196.05,
+        "squawk": "3704",
+        "time_position": 1787628791,
+        "true_track": 335.51,
+        "velocity": 203.51,
         "vertical_rate": 0.33
       },
       "type": "Feature"
@@ -2643,8 +4043,260 @@
     {
       "geometry": {
         "coordinates": [
-          18.5328,
-          41.9827
+          17.5153,
+          46.8999
+        ],
+        "type": "Point"
+      },
+      "id": "4d2491",
+      "properties": {
+        "baro_altitude": 10363.2,
+        "callsign": "WZZ8686",
+        "category": 0,
+        "geo_altitude": 10805.16,
+        "icao24": "4d2491",
+        "last_contact": 1787628796,
+        "on_ground": false,
+        "origin_country": "Malta",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "1000",
+        "time_position": 1787628795,
+        "true_track": 287.24,
+        "velocity": 203.07,
+        "vertical_rate": 0
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          7.6745,
+          47.722
+        ],
+        "type": "Point"
+      },
+      "id": "4cae23",
+      "properties": {
+        "baro_altitude": 9456.42,
+        "callsign": "BCS24J",
+        "category": 0,
+        "geo_altitude": 9829.8,
+        "icao24": "4cae23",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "Ireland",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "1000",
+        "time_position": 1787628795,
+        "true_track": 221.71,
+        "velocity": 221.9,
+        "vertical_rate": -0.33
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          8.7356,
+          45.789
+        ],
+        "type": "Point"
+      },
+      "id": "4cae87",
+      "properties": {
+        "baro_altitude": 4297.68,
+        "callsign": "ABR7XP",
+        "category": 0,
+        "geo_altitude": 4442.46,
+        "icao24": "4cae87",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "Ireland",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "1000",
+        "time_position": 1787628795,
+        "true_track": 141.14,
+        "velocity": 136.1,
+        "vertical_rate": -6.18
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          12.4449,
+          38.9138
+        ],
+        "type": "Point"
+      },
+      "id": "4cacf1",
+      "properties": {
+        "baro_altitude": 11277.6,
+        "callsign": "GTR1604",
+        "category": 0,
+        "geo_altitude": 11932.92,
+        "icao24": "4cacf1",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "Ireland",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "1270",
+        "time_position": 1787628795,
+        "true_track": 118.13,
+        "velocity": 261.91,
+        "vertical_rate": 0
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          16.9396,
+          45.0731
+        ],
+        "type": "Point"
+      },
+      "id": "3c56ea",
+      "properties": {
+        "baro_altitude": 11277.6,
+        "callsign": "EWG2GR",
+        "category": 0,
+        "geo_altitude": 11803.38,
+        "icao24": "3c56ea",
+        "last_contact": 1787628796,
+        "on_ground": false,
+        "origin_country": "Germany",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "6424",
+        "time_position": 1787628796,
+        "true_track": 135.25,
+        "velocity": 253.55,
+        "vertical_rate": 0
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          16.0782,
+          46.1643
+        ],
+        "type": "Point"
+      },
+      "id": "4d232c",
+      "properties": {
+        "baro_altitude": 11277.6,
+        "callsign": "CXI33MY",
+        "category": 0,
+        "geo_altitude": 11750.04,
+        "icao24": "4d232c",
+        "last_contact": 1787628796,
+        "on_ground": false,
+        "origin_country": "Malta",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "0523",
+        "time_position": 1787628795,
+        "true_track": 148.69,
+        "velocity": 250.48,
+        "vertical_rate": -0.33
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          15.9382,
+          36.1195
+        ],
+        "type": "Point"
+      },
+      "id": "4d2340",
+      "properties": {
+        "baro_altitude": 10980.42,
+        "callsign": "DAH3031",
+        "category": 0,
+        "geo_altitude": 11673.84,
+        "icao24": "4d2340",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "Malta",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "2331",
+        "time_position": 1787628795,
+        "true_track": 274.95,
+        "velocity": 220.49,
+        "vertical_rate": -0.33
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          9.2822,
+          45.4532
+        ],
+        "type": "Point"
+      },
+      "id": "4cad5a",
+      "properties": {
+        "baro_altitude": null,
+        "callsign": "ITY8011",
+        "category": 0,
+        "geo_altitude": null,
+        "icao24": "4cad5a",
+        "last_contact": 1787628792,
+        "on_ground": true,
+        "origin_country": "Ireland",
+        "position_source": 0,
+        "spi": false,
+        "squawk": null,
+        "time_position": 1787628792,
+        "true_track": 118.12,
+        "velocity": 0,
+        "vertical_rate": null
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          9.5979,
+          40.6535
+        ],
+        "type": "Point"
+      },
+      "id": "4cad49",
+      "properties": {
+        "baro_altitude": 12192,
+        "callsign": "ITY681",
+        "category": 0,
+        "geo_altitude": 12786.36,
+        "icao24": "4cad49",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "Ireland",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "1000",
+        "time_position": 1787628795,
+        "true_track": 65.56,
+        "velocity": 273.51,
+        "vertical_rate": 0.33
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          11.5385,
+          44.6718
         ],
         "type": "Point"
       },
@@ -2653,73 +4305,17 @@
         "baro_altitude": 13106.4,
         "callsign": "VJT850",
         "category": 0,
-        "geo_altitude": 13708.38,
+        "geo_altitude": 13616.94,
         "icao24": "4d20ec",
-        "last_contact": 1787625967,
+        "last_contact": 1787628795,
         "on_ground": false,
         "origin_country": "Malta",
         "position_source": 0,
         "spi": false,
         "squawk": "2054",
-        "time_position": 1787625966,
-        "true_track": 300.04,
-        "velocity": 224.04,
-        "vertical_rate": 0.33
-      },
-      "type": "Feature"
-    },
-    {
-      "geometry": {
-        "coordinates": [
-          13.1865,
-          35.9044
-        ],
-        "type": "Point"
-      },
-      "id": "710010",
-      "properties": {
-        "baro_altitude": 12192,
-        "callsign": "RXI543",
-        "category": 0,
-        "geo_altitude": 12946.38,
-        "icao24": "710010",
-        "last_contact": 1787625968,
-        "on_ground": false,
-        "origin_country": "Saudi Arabia",
-        "position_source": 0,
-        "spi": false,
-        "squawk": "2005",
-        "time_position": 1787625968,
-        "true_track": 276.19,
-        "velocity": 224.06,
-        "vertical_rate": -0.33
-      },
-      "type": "Feature"
-    },
-    {
-      "geometry": {
-        "coordinates": [
-          7.9061,
-          42.9484
-        ],
-        "type": "Point"
-      },
-      "id": "3c55c5",
-      "properties": {
-        "baro_altitude": 11871.96,
-        "callsign": "EWG36N",
-        "category": 0,
-        "geo_altitude": 12420.6,
-        "icao24": "3c55c5",
-        "last_contact": 1787625968,
-        "on_ground": false,
-        "origin_country": "Germany",
-        "position_source": 0,
-        "spi": false,
-        "squawk": "1000",
-        "time_position": 1787625968,
-        "true_track": 336.98,
-        "velocity": 234.2,
+        "time_position": 1787628795,
+        "true_track": 289.68,
+        "velocity": 224.55,
         "vertical_rate": 0
       },
       "type": "Feature"
@@ -2727,111 +4323,55 @@
     {
       "geometry": {
         "coordinates": [
-          14.0842,
-          36.2186
+          14.4751,
+          35.8535
         ],
         "type": "Point"
       },
-      "id": "4cabf8",
+      "id": "4d20ea",
       "properties": {
-        "baro_altitude": 6217.92,
-        "callsign": "WSA9714",
+        "baro_altitude": null,
+        "callsign": "AS2633",
         "category": 0,
-        "geo_altitude": 6675.12,
-        "icao24": "4cabf8",
-        "last_contact": 1787625968,
-        "on_ground": false,
-        "origin_country": "Ireland",
+        "geo_altitude": null,
+        "icao24": "4d20ea",
+        "last_contact": 1787628709,
+        "on_ground": true,
+        "origin_country": "Malta",
         "position_source": 0,
         "spi": false,
-        "squawk": "6575",
-        "time_position": 1787625968,
-        "true_track": 323.13,
-        "velocity": 185.2,
-        "vertical_rate": 15.93
+        "squawk": null,
+        "time_position": 1787628699,
+        "true_track": 343.12,
+        "velocity": 0,
+        "vertical_rate": null
       },
       "type": "Feature"
     },
     {
       "geometry": {
         "coordinates": [
-          13.8752,
-          47.5344
+          14.0521,
+          46.5298
         ],
         "type": "Point"
       },
-      "id": "4b19f5",
+      "id": "347191",
       "properties": {
-        "baro_altitude": 9144,
-        "callsign": "CFG4104",
+        "baro_altitude": 11277.6,
+        "callsign": "BCS7552",
         "category": 0,
-        "geo_altitude": 9509.76,
-        "icao24": "4b19f5",
-        "last_contact": 1787625968,
+        "geo_altitude": 11757.66,
+        "icao24": "347191",
+        "last_contact": 1787628795,
         "on_ground": false,
-        "origin_country": "Switzerland",
+        "origin_country": "Spain",
         "position_source": 0,
         "spi": false,
-        "squawk": "2065",
-        "time_position": 1787625968,
-        "true_track": 316.69,
-        "velocity": 221.99,
-        "vertical_rate": 0.33
-      },
-      "type": "Feature"
-    },
-    {
-      "geometry": {
-        "coordinates": [
-          9.9638,
-          43.5828
-        ],
-        "type": "Point"
-      },
-      "id": "4cac36",
-      "properties": {
-        "baro_altitude": 11003.28,
-        "callsign": "NOS1586",
-        "category": 0,
-        "geo_altitude": 11521.44,
-        "icao24": "4cac36",
-        "last_contact": 1787625968,
-        "on_ground": false,
-        "origin_country": "Ireland",
-        "position_source": 0,
-        "spi": false,
-        "squawk": "1000",
-        "time_position": 1787625967,
-        "true_track": 335.39,
-        "velocity": 235.96,
-        "vertical_rate": -4.88
-      },
-      "type": "Feature"
-    },
-    {
-      "geometry": {
-        "coordinates": [
-          11.1168,
-          43.2781
-        ],
-        "type": "Point"
-      },
-      "id": "710130",
-      "properties": {
-        "baro_altitude": 12184.38,
-        "callsign": "SVA131",
-        "category": 0,
-        "geo_altitude": 12733.02,
-        "icao24": "710130",
-        "last_contact": 1787625968,
-        "on_ground": false,
-        "origin_country": "Saudi Arabia",
-        "position_source": 0,
-        "spi": false,
-        "squawk": "2063",
-        "time_position": 1787625968,
-        "true_track": 314.28,
-        "velocity": 230.65,
+        "squawk": "6427",
+        "time_position": 1787628795,
+        "true_track": 137.88,
+        "velocity": 231.65,
         "vertical_rate": -0.33
       },
       "type": "Feature"
@@ -2839,8 +4379,204 @@
     {
       "geometry": {
         "coordinates": [
-          16.5859,
-          40.424
+          6.5262,
+          36.5286
+        ],
+        "type": "Point"
+      },
+      "id": "710010",
+      "properties": {
+        "baro_altitude": 12184.38,
+        "callsign": "RXI543",
+        "category": 0,
+        "geo_altitude": 12893.04,
+        "icao24": "710010",
+        "last_contact": 1787628724,
+        "on_ground": false,
+        "origin_country": "Saudi Arabia",
+        "position_source": 0,
+        "spi": false,
+        "squawk": null,
+        "time_position": 1787628724,
+        "true_track": 274.49,
+        "velocity": 216.73,
+        "vertical_rate": 0
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          12.8632,
+          41.4941
+        ],
+        "type": "Point"
+      },
+      "id": "4cabf8",
+      "properties": {
+        "baro_altitude": 5532.12,
+        "callsign": "MSA9714",
+        "category": 0,
+        "geo_altitude": 5890.26,
+        "icao24": "4cabf8",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "Ireland",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "6575",
+        "time_position": 1787628795,
+        "true_track": 323.63,
+        "velocity": 176.98,
+        "vertical_rate": -13
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          17.5882,
+          46.5549
+        ],
+        "type": "Point"
+      },
+      "id": "493287",
+      "properties": {
+        "baro_altitude": 12092.94,
+        "callsign": "NJE702E",
+        "category": 0,
+        "geo_altitude": 12565.38,
+        "icao24": "493287",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "Portugal",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "6036",
+        "time_position": 1787628795,
+        "true_track": 153.56,
+        "velocity": 213.73,
+        "vertical_rate": 6.83
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          15.2453,
+          44.8836
+        ],
+        "type": "Point"
+      },
+      "id": "39c423",
+      "properties": {
+        "baro_altitude": 11582.4,
+        "callsign": "AFR551",
+        "category": 0,
+        "geo_altitude": 12108.18,
+        "icao24": "39c423",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "France",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "5536",
+        "time_position": 1787628795,
+        "true_track": 332.81,
+        "velocity": 230.77,
+        "vertical_rate": 0
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          15.2148,
+          46.1563
+        ],
+        "type": "Point"
+      },
+      "id": "4cac66",
+      "properties": {
+        "baro_altitude": 11277.6,
+        "callsign": "ABR140",
+        "category": 0,
+        "geo_altitude": 11772.9,
+        "icao24": "4cac66",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "Ireland",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "7655",
+        "time_position": 1787628795,
+        "true_track": 137.52,
+        "velocity": 248.33,
+        "vertical_rate": 0
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          17.1882,
+          42.9022
+        ],
+        "type": "Point"
+      },
+      "id": "04c11b",
+      "properties": {
+        "baro_altitude": 12184.38,
+        "callsign": "KQA108",
+        "category": 0,
+        "geo_altitude": 12793.98,
+        "icao24": "04c11b",
+        "last_contact": 1787628794,
+        "on_ground": false,
+        "origin_country": "Kenya",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "2011",
+        "time_position": 1787628794,
+        "true_track": 314.01,
+        "velocity": 231.75,
+        "vertical_rate": -0.33
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          17.0583,
+          43.0508
+        ],
+        "type": "Point"
+      },
+      "id": "710102",
+      "properties": {
+        "baro_altitude": 10363.2,
+        "callsign": "SVA923",
+        "category": 0,
+        "geo_altitude": 10881.36,
+        "icao24": "710102",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "Saudi Arabia",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "2044",
+        "time_position": 1787628795,
+        "true_track": 313.3,
+        "velocity": 220.54,
+        "vertical_rate": 0
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          10.5128,
+          42.9646
         ],
         "type": "Point"
       },
@@ -2849,17 +4585,17 @@
         "baro_altitude": 11582.4,
         "callsign": "CRL959",
         "category": 0,
-        "geo_altitude": 12214.86,
+        "geo_altitude": 12123.42,
         "icao24": "39e5c4",
-        "last_contact": 1787625968,
+        "last_contact": 1787628795,
         "on_ground": false,
         "origin_country": "France",
         "position_source": 0,
-        "spi": true,
+        "spi": false,
         "squawk": "6624",
-        "time_position": 1787625968,
-        "true_track": 311.64,
-        "velocity": 223.74,
+        "time_position": 1787628795,
+        "true_track": 322.32,
+        "velocity": 233.99,
         "vertical_rate": 0
       },
       "type": "Feature"
@@ -2867,8 +4603,36 @@
     {
       "geometry": {
         "coordinates": [
-          6.8205,
-          37.2683
+          11.3616,
+          45.8912
+        ],
+        "type": "Point"
+      },
+      "id": "4d208f",
+      "properties": {
+        "baro_altitude": 10447.02,
+        "callsign": "WMT5GC",
+        "category": 0,
+        "geo_altitude": 10896.6,
+        "icao24": "4d208f",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "Malta",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "1000",
+        "time_position": 1787628795,
+        "true_track": 78.86,
+        "velocity": 242.24,
+        "vertical_rate": 6.18
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          8.3856,
+          43.7764
         ],
         "type": "Point"
       },
@@ -2877,24 +4641,108 @@
         "baro_altitude": 11582.4,
         "callsign": "SWR283",
         "category": 1,
-        "geo_altitude": 12252.96,
+        "geo_altitude": 12062.46,
         "icao24": "4b18fd",
-        "last_contact": 1787625899,
+        "last_contact": 1787628795,
         "on_ground": false,
         "origin_country": "Switzerland",
         "position_source": 0,
         "spi": false,
-        "squawk": null,
-        "time_position": 1787625899,
-        "true_track": 5.47,
-        "velocity": 248.06,
-        "vertical_rate": 0.65
+        "squawk": "1000",
+        "time_position": 1787628795,
+        "true_track": 8.24,
+        "velocity": 258.35,
+        "vertical_rate": -0.33
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          15.454,
+          44.1972
+        ],
+        "type": "Point"
+      },
+      "id": "7100b3",
+      "properties": {
+        "baro_altitude": 10972.8,
+        "callsign": "SVA143",
+        "category": 0,
+        "geo_altitude": 11506.2,
+        "icao24": "7100b3",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "Saudi Arabia",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "5533",
+        "time_position": 1787628793,
+        "true_track": 359.63,
+        "velocity": 241.79,
+        "vertical_rate": 0
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          13.615,
+          47.3378
+        ],
+        "type": "Point"
+      },
+      "id": "4b1920",
+      "properties": {
+        "baro_altitude": 9753.6,
+        "callsign": "SWR177",
+        "category": 0,
+        "geo_altitude": 10172.7,
+        "icao24": "4b1920",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "Switzerland",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "1000",
+        "time_position": 1787628795,
+        "true_track": 280.96,
+        "velocity": 232.66,
+        "vertical_rate": 0
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          13.416,
+          47.3689
+        ],
+        "type": "Point"
+      },
+      "id": "4b1918",
+      "properties": {
+        "baro_altitude": 10363.2,
+        "callsign": "SWR139",
+        "category": 0,
+        "geo_altitude": 10789.92,
+        "icao24": "4b1918",
+        "last_contact": 1787628795,
+        "on_ground": false,
+        "origin_country": "Switzerland",
+        "position_source": 0,
+        "spi": false,
+        "squawk": "3254",
+        "time_position": 1787628795,
+        "true_track": 280.41,
+        "velocity": 224.91,
+        "vertical_rate": 0
       },
       "type": "Feature"
     }
   ],
-  "generated_at": "2026-08-25T02:46:09.641733+00:00",
-  "opensky_time": 1787625968,
+  "generated_at": "2026-08-25T03:33:21.558317+00:00",
+  "opensky_time": 1787628796,
   "source": "github_actions_provider_cache",
   "stale": false,
   "type": "FeatureCollection"
