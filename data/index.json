@@ -1,14 +1,6 @@
 {
   "snapshots": [
     {
-      "generated_at": "2026-08-12T10:30:48.524155+00:00",
-      "files": [
-        "data/history/2026-08-12/aircraft_italy_103048.geojson",
-        "data/history/2026-08-12/satellites_active_tle_103048.json",
-        "data/history/2026-08-12/events_103048.json"
-      ]
-    },
-    {
       "generated_at": "2026-08-12T11:25:08.457157+00:00",
       "files": [
         "data/history/2026-08-12/aircraft_italy_112508.geojson",
@@ -3999,9 +3991,17 @@
         "data/history/2026-08-25/satellites_active_tle_071329.json",
         "data/history/2026-08-25/events_071329.json"
       ]
+    },
+    {
+      "generated_at": "2026-08-25T08:02:27.965125+00:00",
+      "files": [
+        "data/history/2026-08-25/aircraft_italy_080227.geojson",
+        "data/history/2026-08-25/satellites_active_tle_080227.json",
+        "data/history/2026-08-25/events_080227.json"
+      ]
     }
   ],
-  "last_update": "2026-08-25T07:13:29.718325+00:00",
+  "last_update": "2026-08-25T08:02:27.965125+00:00",
   "latest": {
     "aircraft_italy": "data/latest/aircraft_italy.geojson",
     "satellites_active_tle": "data/latest/satellites_active_tle.json",
