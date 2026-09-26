@@ -50,7 +50,7 @@ Administrative refresh endpoints are not publicly accessible.
 
 Provider cache:
 - local T340 container
-- refresh interval: 5 minutes
+- local check interval: 5 minutes; CelesTrak external refresh: minimum 125 minutes
 - data directory: runtime/provider-cache
 
 Snapshot collector:

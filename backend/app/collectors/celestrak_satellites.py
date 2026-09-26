@@ -21,7 +21,7 @@ HEADERS = {
 CACHE_DIR = Path(__file__).resolve().parents[2] / ".cache" / "celestrak"
 NOT_UPDATED_MARKER = "has not updated since your last successful"
 CELESTRAK_TIMEOUT = int(os.getenv("CELESTRAK_TIMEOUT", "8"))
-ERROR_BACKOFF_SECONDS = int(os.getenv("CELESTRAK_ERROR_BACKOFF_SECONDS", "120"))
+ERROR_BACKOFF_SECONDS = int(os.getenv("CELESTRAK_ERROR_BACKOFF_SECONDS", "7500"))
 
 
 class CelesTrakNotModifiedNoCache(RuntimeError):
@@ -88,6 +88,18 @@ def _get_with_text_cache(group: str, fmt: str, timeout: int) -> str:
     params = {"GROUP": group, "FORMAT": fmt.upper()}
     cache_path = _cache_path(group, fmt)
     error_path = _error_path(group, fmt)
+
+    # Use the central T340 provider cache first for TLE data.
+    # Public API requests must not trigger repeated CelesTrak
+    # downloads from multiple processes.
+    if fmt.lower() == "tle":
+        provider_cached = _fallback_tle_from_provider_cache(
+            group,
+            cache_path,
+        )
+
+        if provider_cached:
+            return provider_cached
 
     recent_error = _recent_error(error_path)
     if recent_error and cache_path.exists():

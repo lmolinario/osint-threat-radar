@@ -37,6 +37,7 @@ HISTORY_DIR = DATA_DIR / "history"
 
 REQUEST_TIMEOUT_SECONDS = 25
 RETENTION_DAYS = 14
+SATELLITE_REFRESH_SECONDS = 7500  # 125 minutes
 
 
 @dataclass(frozen=True)
@@ -161,29 +162,144 @@ def collect_aircraft_italy(generated_at: str) -> dict[str, Any]:
     }
 
 
-def collect_satellite_tle(generated_at: str) -> dict[str, Any]:
-    """Collect selected active satellite GP/TLE lines from CelesTrak."""
+def _seconds_since_iso(value: str | None) -> int | None:
+    if not value:
+        return None
 
-    url = "https://celestrak.org/NORAD/elements/gp.php?GROUP=active&FORMAT=tle"
+    try:
+        dt = datetime.fromisoformat(value.replace("Z", "+00:00"))
+
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=timezone.utc)
+
+        return max(
+            0,
+            int(
+                (
+                    datetime.now(timezone.utc) - dt
+                ).total_seconds()
+            ),
+        )
+
+    except (TypeError, ValueError):
+        return None
+
+
+def _load_cached_satellites() -> dict[str, Any] | None:
+    path = LATEST_DIR / "satellites_active_tle.json"
+
+    if not path.exists():
+        return None
+
+    try:
+        data = json.loads(
+            path.read_text(encoding="utf-8")
+        )
+
+        if not isinstance(data, dict):
+            return None
+
+        if int(data.get("count", 0) or 0) <= 0:
+            return None
+
+        if not data.get("satellites"):
+            return None
+
+        return data
+
+    except Exception:
+        return None
+
+
+def collect_satellite_tle(generated_at: str) -> dict[str, Any]:
+    """
+    Collect Active satellite data from CelesTrak.
+
+    The last successful dataset is reused locally between
+    provider update windows to avoid excessive requests.
+    """
+
+    url = (
+        "https://celestrak.org/NORAD/elements/"
+        "gp.php?GROUP=active&FORMAT=tle"
+    )
+
+    cached = _load_cached_satellites()
+
+    if cached is not None:
+        reference = (
+            cached.get("last_attempt_at")
+            or cached.get("generated_at")
+        )
+
+        age = _seconds_since_iso(reference)
+
+        if age is not None and age < SATELLITE_REFRESH_SECONDS:
+            result = dict(cached)
+
+            result["cache_reused"] = True
+            result["cache_age_seconds"] = age
+            result["served_at"] = generated_at
+
+            print(
+                "[satellites] using local Active cache "
+                f"age={age}s "
+                f"count={result.get('count')}"
+            )
+
+            return result
 
     try:
         text = request_text(url)
+
     except requests.RequestException as exc:
+
+        if cached is not None:
+            result = dict(cached)
+
+            result["stale"] = True
+            result["cache_reused"] = True
+            result["error"] = exc.__class__.__name__
+            result["last_attempt_at"] = generated_at
+            result["served_at"] = generated_at
+
+            print(
+                "[satellites] provider unavailable; "
+                f"preserving cached "
+                f"count={result.get('count')} "
+                f"error={exc.__class__.__name__}"
+            )
+
+            return result
+
         return {
             "source": "celestrak",
             "dataset": "satellites_active_tle",
             "generated_at": generated_at,
+            "last_attempt_at": generated_at,
             "count": 0,
             "error": exc.__class__.__name__,
+            "stale": True,
             "satellites": [],
         }
 
-    lines = [line.strip() for line in text.splitlines() if line.strip()]
+    lines = [
+        line.strip()
+        for line in text.splitlines()
+        if line.strip()
+    ]
+
     satellites: list[dict[str, Any]] = []
 
     for index in range(0, len(lines) - 2, 3):
-        name, line1, line2 = lines[index], lines[index + 1], lines[index + 2]
-        if not line1.startswith("1 ") or not line2.startswith("2 "):
+        name = lines[index]
+        line1 = lines[index + 1]
+        line2 = lines[index + 2]
+
+        if not line1.startswith("1 "):
+            continue
+
+        if not line2.startswith("2 "):
             continue
 
         satellites.append(
@@ -199,7 +315,11 @@ def collect_satellite_tle(generated_at: str) -> dict[str, Any]:
         "source": "celestrak",
         "dataset": "satellites_active_tle",
         "generated_at": generated_at,
+        "last_attempt_at": generated_at,
         "count": len(satellites),
+        "error": None,
+        "stale": False,
+        "cache_reused": False,
         "satellites": satellites,
     }
 

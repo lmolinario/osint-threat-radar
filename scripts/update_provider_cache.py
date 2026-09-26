@@ -21,6 +21,7 @@ import argparse
 import hashlib
 import json
 import sys
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Tuple
@@ -35,6 +36,7 @@ CELESTRAK_GP_URL = "https://celestrak.org/NORAD/elements/gp.php"
 # (min_lat, max_lat, min_lon, max_lon)
 ITALY_BBOX: Tuple[float, float, float, float] = (35.0, 48.0, 6.0, 19.0)
 CELESTRAK_GROUPS = ("stations", "gps-ops", "starlink")
+CELESTRAK_REFRESH_SECONDS = 7500  # 125 minutes
 
 
 def utc_now_iso() -> str:
@@ -181,25 +183,147 @@ def update_cache(out_dir: Path, timeout: int) -> Dict[str, Any]:
         print(f"[error] OpenSky Italy: {type(exc).__name__}: {exc}", file=sys.stderr)
 
     for group in CELESTRAK_GROUPS:
-        try:
-            tle_text = fetch_celestrak_tle(group=group, timeout=timeout)
-            line_count = len([line for line in tle_text.splitlines() if line.strip()])
+        cache_path = (
+            out_dir
+            / "celestrak"
+            / f"{group}.tle"
+        )
+
+        cache_age = None
+
+        if cache_path.exists():
+            cache_age = max(
+                0,
+                int(
+                    time.time()
+                    - cache_path.stat().st_mtime
+                ),
+            )
+
+        if (
+            cache_path.exists()
+            and cache_age is not None
+            and cache_age < CELESTRAK_REFRESH_SECONDS
+        ):
+            tle_text = cache_path.read_text(
+                encoding="utf-8"
+            )
+
+            line_count = len(
+                [
+                    line
+                    for line in tle_text.splitlines()
+                    if line.strip()
+                ]
+            )
+
             object_count = line_count // 3
-            write_text(out_dir / "celestrak" / f"{group}.tle", tle_text)
-            metadata["providers"][f"celestrak_{group}"] = {
+
+            metadata["providers"][
+                f"celestrak_{group}"
+            ] = {
                 "ok": True,
+                "cached": True,
+                "cache_age_seconds": cache_age,
                 "line_count": line_count,
                 "estimated_objects": object_count,
                 "path": f"celestrak/{group}.tle",
             }
-            print(f"[ok] CelesTrak group={group} estimated_objects={object_count}")
-        except Exception as exc:
-            metadata["providers"][f"celestrak_{group}"] = {
-                "ok": False,
-                "error": type(exc).__name__,
+
+            print(
+                f"[cache] CelesTrak group={group} "
+                f"age={cache_age}s "
+                f"estimated_objects={object_count}"
+            )
+
+            continue
+
+        try:
+            tle_text = fetch_celestrak_tle(
+                group=group,
+                timeout=timeout,
+            )
+
+            line_count = len(
+                [
+                    line
+                    for line in tle_text.splitlines()
+                    if line.strip()
+                ]
+            )
+
+            object_count = line_count // 3
+
+            write_text(
+                cache_path,
+                tle_text,
+            )
+
+            metadata["providers"][
+                f"celestrak_{group}"
+            ] = {
+                "ok": True,
+                "cached": False,
+                "line_count": line_count,
+                "estimated_objects": object_count,
                 "path": f"celestrak/{group}.tle",
             }
-            print(f"[error] CelesTrak group={group}: {type(exc).__name__}: {exc}", file=sys.stderr)
+
+            print(
+                f"[ok] CelesTrak group={group} "
+                f"estimated_objects={object_count}"
+            )
+
+        except Exception as exc:
+            error_name = type(exc).__name__
+
+            if cache_path.exists():
+                tle_text = cache_path.read_text(
+                    encoding="utf-8"
+                )
+
+                line_count = len(
+                    [
+                        line
+                        for line in tle_text.splitlines()
+                        if line.strip()
+                    ]
+                )
+
+                object_count = line_count // 3
+
+                metadata["providers"][
+                    f"celestrak_{group}"
+                ] = {
+                    "ok": True,
+                    "cached": True,
+                    "stale": True,
+                    "error": error_name,
+                    "line_count": line_count,
+                    "estimated_objects": object_count,
+                    "path": f"celestrak/{group}.tle",
+                }
+
+                print(
+                    f"[cache] CelesTrak group={group} "
+                    f"preserving existing cache "
+                    f"after error={error_name}"
+                )
+
+            else:
+                metadata["providers"][
+                    f"celestrak_{group}"
+                ] = {
+                    "ok": False,
+                    "error": error_name,
+                    "path": f"celestrak/{group}.tle",
+                }
+
+                print(
+                    f"[error] CelesTrak group={group}: "
+                    f"{error_name}: {exc}",
+                    file=sys.stderr,
+                )
 
     write_json(out_dir / "metadata.json", metadata)
     return metadata

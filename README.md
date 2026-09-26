@@ -27,7 +27,7 @@ data/index.json                           # Snapshot index
 Production automation runs on the Dell PowerEdge T340:
 
 - FastAPI and its internal event schedulers run in Docker;
-- the provider fallback cache is refreshed locally every 5 minutes;
+- the provider cache is checked locally every 5 minutes; CelesTrak external downloads are limited to at least 125 minutes;
 - JSON/GeoJSON snapshots are generated locally every 15 minutes;
 - GitHub Actions scheduled collectors are disabled;
 - GitHub remains the canonical source-code repository;
