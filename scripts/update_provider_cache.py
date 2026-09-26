@@ -4,8 +4,8 @@
 """
 update_provider_cache.py
 
-Fetches external live-provider data from GitHub Actions and writes a small
-static cache that the Render backend can use when direct provider egress fails.
+Fetches external live-provider data on the self-hosted T340 and writes a small
+static cache used when direct provider access temporarily fails.
 
 Outputs:
 - provider-cache/metadata.json
@@ -28,7 +28,7 @@ from typing import Any, Dict, Iterable, List, Optional, Tuple
 import requests
 
 
-USER_AGENT = "OSINT-Threat-Radar-Provider-Cache/0.1 (+https://www.dfaas.it)"
+USER_AGENT = "OSINT-Threat-Radar-T340-Provider-Cache/1.0 (+https://lmolinario.github.io/tools/osint-threat-radar/)"
 OPENSKY_STATES_URL = "https://opensky-network.org/api/states/all"
 CELESTRAK_GP_URL = "https://celestrak.org/NORAD/elements/gp.php"
 
@@ -134,7 +134,7 @@ def fetch_aircraft_italy(timeout: int) -> Dict[str, Any]:
         "count": len(features),
         "error": None,
         "stale": False,
-        "source": "github_actions_provider_cache",
+        "source": "t340_provider_cache",
         "features": features,
     }
 
@@ -158,7 +158,7 @@ def update_cache(out_dir: Path, timeout: int) -> Dict[str, Any]:
     ensure_dir(out_dir)
     metadata: Dict[str, Any] = {
         "generated_at": utc_now_iso(),
-        "source": "github_actions_provider_cache",
+        "source": "t340_provider_cache",
         "providers": {},
     }
 

@@ -52,8 +52,8 @@ def fetch_cached_aircraft_italy() -> Optional[Dict[str, Any]]:
 
     data = dict(data)
     data["fallback"] = True
-    data["fallback_source"] = "github_actions_provider_cache"
-    data["error"] = "opensky_live_unavailable_using_github_actions_cache"
+    data["fallback_source"] = "t340_provider_cache"
+    data["error"] = "opensky_live_unavailable_using_t340_cache"
     data["stale"] = True
     return data
 

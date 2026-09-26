@@ -2,7 +2,7 @@
 
 Global OSINT radar platform that aggregates open-source data into lightweight geospatial intelligence snapshots.
 
-The repository currently includes an automated GitHub Actions collector that periodically gathers public data and stores it under `data/` as JSON/GeoJSON files.
+Production collection runs on the self-hosted Dell PowerEdge T340. GitHub remains the source-code repository, while runtime data and provider caches are generated locally.
 
 ## Current collectors
 
@@ -24,21 +24,14 @@ data/index.json                           # Snapshot index
 
 ## Automation
 
-The workflow runs every 15 minutes using GitHub Actions cron:
+Production automation runs on the Dell PowerEdge T340:
 
-```yaml
-- cron: "7/15 * * * *"
-```
-
-It can also be started manually from the **Actions** tab using `workflow_dispatch`.
-
-Each run:
-
-1. checks out the repository;
-2. installs Python dependencies;
-3. runs `scripts/collect_osint_data.py`;
-4. updates `data/latest/` and `data/history/`;
-5. commits only when data changed.
+- FastAPI and its internal event schedulers run in Docker;
+- the provider fallback cache is refreshed locally every 5 minutes;
+- JSON/GeoJSON snapshots are generated locally every 15 minutes;
+- GitHub Actions scheduled collectors are disabled;
+- GitHub remains the canonical source-code repository;
+- the public frontend is served by GitHub Pages.
 
 ## Local run
 

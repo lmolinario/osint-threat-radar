@@ -15,7 +15,7 @@ DEFAULT_GROUP = "stations"
 CELESTRAK_GP_URL = "https://celestrak.org/NORAD/elements/gp.php"
 
 HEADERS = {
-    "User-Agent": "OSINT-Threat-Radar/0.1 (+https://www.dfaas.it)",
+    "User-Agent": "OSINT-Threat-Radar-T340/1.0 (+https://lmolinario.github.io/tools/osint-threat-radar/)",
 }
 
 CACHE_DIR = Path(__file__).resolve().parents[2] / ".cache" / "celestrak"
@@ -75,12 +75,12 @@ def _recent_error(path: Path) -> Optional[str]:
     return None
 
 
-def _fallback_tle_from_github_actions(group: str, cache_path: Path) -> Optional[str]:
+def _fallback_tle_from_provider_cache(group: str, cache_path: Path) -> Optional[str]:
     text = fetch_cached_celestrak_tle(group)
     if not text:
         return None
     _write_text_cache(cache_path, text)
-    print(f"[celestrak] using GitHub Actions provider cache group={group}")
+    print(f"[celestrak] using local provider cache group={group}")
     return text
 
 
@@ -94,7 +94,7 @@ def _get_with_text_cache(group: str, fmt: str, timeout: int) -> str:
         print(f"[celestrak] using local cache after recent error group={group} fmt={fmt} error={recent_error}")
         return _read_text_cache(cache_path)
     if recent_error and not cache_path.exists() and fmt.lower() == "tle":
-        fallback = _fallback_tle_from_github_actions(group, cache_path)
+        fallback = _fallback_tle_from_provider_cache(group, cache_path)
         if fallback:
             return fallback
     if recent_error and not cache_path.exists():
@@ -127,7 +127,7 @@ def _get_with_text_cache(group: str, fmt: str, timeout: int) -> str:
             return _read_text_cache(cache_path)
 
         if fmt.lower() == "tle":
-            fallback = _fallback_tle_from_github_actions(group, cache_path)
+            fallback = _fallback_tle_from_provider_cache(group, cache_path)
             if fallback:
                 return fallback
 
@@ -163,7 +163,7 @@ def parse_tle_triplets(tle_text: str, source_format: str = "tle") -> List[Dict[s
                     "name": name,
                     "line1": line1,
                     "line2": line2,
-                    "source_format": "github_actions_cache_tle" if source_format == "tle" else source_format,
+                    "source_format": "provider_cache_tle" if source_format == "tle" else source_format,
                 }
             )
             i += 3
@@ -228,7 +228,7 @@ class TLECache:
             if cached is not None:
                 print(f"[celestrak] serving memory cache group={group} after recent error={recent_error.get('error')}")
                 return cached
-            # Try GitHub Actions cache through the normal fetch path before failing.
+            # Try the local provider cache through the normal fetch path before failing.
 
         try:
             data = fetch_celestrak_catalog(group=group)

@@ -4,7 +4,7 @@
 """
 Collect open-source geospatial intelligence data and store it as small JSON snapshots.
 
-The script is designed for GitHub Actions:
+The script is designed for scheduled execution on the self-hosted T340:
 - fetches aircraft state vectors over Italy from OpenSky;
 - fetches public satellite TLE/GP data from CelesTrak;
 - fetches selected public RSS/Atom feeds;
@@ -13,7 +13,7 @@ The script is designed for GitHub Actions:
 - applies simple retention to avoid uncontrolled repository growth.
 
 No secret is required for the default collectors. Optional API-specific collectors can be
-added later through GitHub Actions secrets.
+added later through local environment variables or Docker secrets.
 """
 
 from __future__ import annotations

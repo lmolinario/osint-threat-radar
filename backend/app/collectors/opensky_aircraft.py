@@ -16,7 +16,7 @@ OPENSKY_TOKEN_URL = (
     "protocol/openid-connect/token"
 )
 
-# Render-friendly defaults: avoid frequent provider calls and unbounded memory growth.
+# Self-hosted defaults: avoid frequent provider calls and unbounded memory growth.
 TTL_OK = int(os.getenv("OPENSKY_CACHE_TTL_OK", "60"))
 TTL_ERROR = int(os.getenv("OPENSKY_CACHE_TTL_ERROR", "180"))
 OPENSKY_TIMEOUT = float(os.getenv("OPENSKY_TIMEOUT", "8"))
@@ -156,7 +156,7 @@ def _get_oauth_token() -> Optional[str]:
 
 def _build_headers() -> Dict[str, str]:
     headers: Dict[str, str] = {
-        "User-Agent": "OSINT-Threat-Radar/0.1 (+https://www.dfaas.it)",
+        "User-Agent": "OSINT-Threat-Radar-T340/1.0 (+https://lmolinario.github.io/tools/osint-threat-radar/)",
     }
     token = _get_oauth_token()
     if token:
