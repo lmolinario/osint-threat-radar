@@ -55,3 +55,18 @@ This avoids uncontrolled repository growth while preserving a lightweight OSINT 
 ## Notes
 
 This repository is intended as a public MVP/prototype. Git is suitable for small JSON/GeoJSON snapshots, not for high-volume telemetry storage. If data volume grows, the next step should be PostgreSQL/Supabase, object storage, or a dedicated time-series database.
+
+## Legacy Render deployment
+
+The previous Render deployment has been permanently decommissioned after the production migration to the Dell PowerEdge T340.
+
+Current production architecture:
+
+- frontend: GitHub Pages
+- public API ingress: Tailscale Funnel
+- gateway: local Nginx
+- backend: Dell PowerEdge T340
+- collectors: Dell PowerEdge T340
+- runtime cache and snapshots: local T340 storage
+- backup: existing `/opt/docker` backup strategy
+

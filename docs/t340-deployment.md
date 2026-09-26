@@ -67,3 +67,18 @@ Scheduled production data collection is executed on the T340 rather than GitHub 
 ## Backup
 
 The deployment resides under /opt/docker and is included in the existing server backup strategy.
+
+## Legacy Render deployment
+
+The previous Render deployment has been permanently decommissioned after the production migration to the Dell PowerEdge T340.
+
+Current production architecture:
+
+- frontend: GitHub Pages
+- public API ingress: Tailscale Funnel
+- gateway: local Nginx
+- backend: Dell PowerEdge T340
+- collectors: Dell PowerEdge T340
+- runtime cache and snapshots: local T340 storage
+- backup: existing `/opt/docker` backup strategy
+
