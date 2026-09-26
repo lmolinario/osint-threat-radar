@@ -3,6 +3,14 @@ import "leaflet/dist/leaflet.css";
 
 const API_BASE = "https://osint-radar.tail8a2be3.ts.net";
 
+const CARTO_API_KEY =
+  (import.meta.env.VITE_CARTO_API_KEY || "").trim();
+
+if (!CARTO_API_KEY) {
+  throw new Error("VITE_CARTO_API_KEY is required");
+}
+
+
 function api(path) {
   return `${API_BASE}${path}`;
 }
@@ -28,9 +36,14 @@ const map = L.map("map", {
 
 L.control.zoom({ position: "topright" }).addTo(map);
 
-L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
-  maxZoom: 19,
-  attribution: "&copy; OpenStreetMap contributors &copy; CARTO",
+const CARTO_TILE_URL =
+  `https://{s}.basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}{r}.png?key=${encodeURIComponent(CARTO_API_KEY)}`;
+
+L.tileLayer(CARTO_TILE_URL, {
+  maxZoom: 20,
+  attribution:
+    '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors ' +
+    '&copy; <a href="https://carto.com/attribution/">CARTO</a>',
 }).addTo(map);
 
 const markersLayer = L.layerGroup().addTo(map);
