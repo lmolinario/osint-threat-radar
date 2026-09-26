@@ -15,7 +15,7 @@ CACHE_BASE_URL = os.getenv("PROVIDER_CACHE_BASE_URL", DEFAULT_CACHE_BASE_URL).rs
 CACHE_TIMEOUT = int(os.getenv("PROVIDER_CACHE_TIMEOUT", "6"))
 
 HEADERS = {
-    "User-Agent": "OSINT-Threat-Radar-Render-Fallback/0.1 (+https://www.dfaas.it)",
+    "User-Agent": "OSINT-Threat-Radar-T340/1.0 (+https://lmolinario.github.io/tools/osint-threat-radar/)",
 }
 
 

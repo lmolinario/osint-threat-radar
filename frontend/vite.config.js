@@ -1,7 +1,7 @@
 import { defineConfig } from "vite";
 
 export default defineConfig({
-  base: "/radar/",
+  base: "/tools/osint-threat-radar/radar/",
   server: {
     proxy: {
       "/api": {

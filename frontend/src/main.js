@@ -1,7 +1,7 @@
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
-const API_BASE = "https://osint-threat-radar.onrender.com";
+const API_BASE = "https://osint-radar.tail8a2be3.ts.net";
 
 function api(path) {
   return `${API_BASE}${path}`;
@@ -348,27 +348,13 @@ async function loadEvents() {
 }
 
 async function showEarthIntel() {
-  setStatus("Aggiornamento Earth Intelligence...");
-
-  try {
-    await fetch(api("/refresh/earth-intel"), { method: "POST", cache: "no-store" });
-  } catch (e) {
-    console.warn("Earth intel manual refresh failed, showing cached events", e);
-  }
-
+  setStatus("Caricamento Earth Intelligence dal T340...");
   setEventFilters("", "", "");
   await loadEvents();
 }
 
 async function showMilitaryEvents() {
-  setStatus("Aggiornamento eventi militari OSINT...");
-
-  try {
-    await fetch(api("/refresh/military-events"), { method: "POST", cache: "no-store" });
-  } catch (e) {
-    console.warn("Military OSINT manual refresh failed, showing cached events", e);
-  }
-
+  setStatus("Caricamento eventi militari OSINT dal T340...");
   setEventFilters("military_osint", "", "");
   await loadEvents();
 }

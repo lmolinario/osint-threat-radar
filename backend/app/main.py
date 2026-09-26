@@ -25,10 +25,7 @@ app.add_middleware(
     allow_origins=[
         "http://127.0.0.1:5173",
         "http://localhost:5173",
-        "https://dfaas.it",
-        "https://www.dfaas.it",
         "https://lmolinario.github.io",
-        "https://osint-threat-radar.onrender.com",
     ],
     allow_credentials=True,
     allow_methods=["*"],
